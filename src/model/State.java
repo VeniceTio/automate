@@ -1,6 +1,6 @@
 package model;
 
-public enum Etat {
+public enum State {
     MORT,
     VIVANT
 }

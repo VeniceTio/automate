@@ -4,45 +4,44 @@ import java.util.ArrayList;
 
 public class Grid {
 
-    Etat[][] _grid;
-    CellStrategy _strategie;
-    ExpansionStrategy _expansion;
-    int _taille;
+    ArrayList<State> _grid;
+    Rule<State> _strategy;
+    ExpansionStrategy<Expansion> _expansion;
+    int _size;
 
-    public Grid(int taille, CellStrategy strategie, ExpansionStrategy expansion){
+    public Grid(int taille, Rule strategie, ExpansionStrategy expansion){
         _grid = initGrid(taille);
-        _strategie = strategie;
+        _strategy = strategie;
         _expansion = expansion;
-        _taille = taille;
+        _size = taille;
     }
 
-    public Etat[][] initGrid(int taille){
-        Etat[][] grid = new Etat[taille][taille];
-        for(int i=0; i<taille;i++){
-            for(int k=0;i<taille;i++){
-                grid[i][k] = Etat.MORT;
+    public ArrayList<State> initGrid(int size){
+        ArrayList<State> grid = new ArrayList<State>();
+        for(int i=0; i<size;i++){
+            for(int k=0;i<size;i++){
+                grid.add(State.MORT);
             }
         }
         return grid;
     }
-    public void setState(int x, int y,Etat etat){
-        _grid[x][y] = etat;
+    public void setState(int x, int y, State state){
+        _grid.set((x*_size)+y, state);
     }
-    public ArrayList<Etat> getNeighbors(int x, int y){
-        ArrayList<Etat> Neighbors = new ArrayList<Etat>();
-        //TODO obtenir le nombre de voisin
-        return Neighbors;
+    public ArrayList getNeighbors(int x, int y){
+        return _expansion.getNeighborsState(x,y,_grid);
     }
-    public Etat getNewState(ArrayList<Etat> neighbors,Etat actualState){
-        return _strategie.getNewState(neighbors,actualState);
+    public State getNewState(ArrayList<State> neighbors, State actualState){
+        return _strategy.getNewState(neighbors,actualState);
+
     }
 
     public void clockForward(){
-        Etat previousState;
-        Etat newState;
-        for(int i=0; i<_taille;i++){
-            for(int k=0;i<_taille;i++){
-                previousState = _grid[i][k];
+        State previousState;
+        State newState;
+        for(int i = 0; i< _size; i++){
+            for(int k = 0; i< _size; i++){
+                previousState = _grid.get((i*_size)+k);
                 newState = getNewState(getNeighbors(i,k),previousState);
                 if(newState!=previousState){
                     setState(i,k,newState);
