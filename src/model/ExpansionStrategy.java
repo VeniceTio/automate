@@ -46,6 +46,12 @@ public interface ExpansionStrategy<Expansion extends Enum<?>> {
     void leftSide(int x,int y, ArrayList<State> grid,int size);
     void upSide(int x,int y, ArrayList<State> grid,int size);
     void downSide(int x,int y, ArrayList<State> grid,int size);
-    void middle(int x,int y, ArrayList<State> grid,int size);
+    default void middle(int x,int y, ArrayList<State> grid,int size) {
+        for (int i=y-1;i<y+2;i++){
+            for(int k=x-1;k<x+2;k++){
+                _neighbors.add(grid.get((i*size)+k));
+            }
+        }
+    }
 
 }
