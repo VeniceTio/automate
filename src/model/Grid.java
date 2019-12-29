@@ -20,7 +20,7 @@ public class Grid {
         ArrayList<State> grid = new ArrayList<>();
         for(int i=0; i<_size;i++){
             for(int k=0;i<_size;i++){
-                grid.add(State.MORT);
+                grid.add(State.DEAD);
             }
         }
         return grid;

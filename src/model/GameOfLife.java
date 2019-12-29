@@ -7,18 +7,18 @@ public class GameOfLife implements Rule<State> {
     public State getNewState(ArrayList<State> neighbors, State actualState) {
         int nbLivingCel = 0;
         State nextState = actualState;
-        if(actualState == State.VIVANT){
+        if(actualState == State.ALIVE){
             nbLivingCel--;
         }
         for (int i=0;i<9;i++){
-            if(neighbors.get(i)==State.VIVANT){
+            if(neighbors.get(i)==State.ALIVE){
                 nbLivingCel++;
             }
         }
         if (nbLivingCel<2 || nbLivingCel>3){
-            nextState = State.MORT;
+            nextState = State.DEAD;
         } else if (nbLivingCel==3){
-            nextState = State.VIVANT;
+            nextState = State.ALIVE;
         }
         return nextState;
     }

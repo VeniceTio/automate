@@ -8,19 +8,19 @@ public class Fredkin2 implements Rule<State> {
         int nbLivingCel = 0;
         State nextState = actualState;
         for(int i = 0;i<3;i+=2){
-            if(neighbors.get(i)==State.VIVANT){
+            if(neighbors.get(i)==State.ALIVE){
                 nbLivingCel++;
             }
         }
         for(int i = 6;i<9;i+=2){
-            if(neighbors.get(i)==State.VIVANT){
+            if(neighbors.get(i)==State.ALIVE){
                 nbLivingCel++;
             }
         }
         if(nbLivingCel==1 || nbLivingCel==3){
-            nextState = State.VIVANT;
+            nextState = State.ALIVE;
         }else{
-            nextState = State.MORT;
+            nextState = State.DEAD;
         }
         return nextState;
     }
