@@ -4,5 +4,4 @@ import java.util.ArrayList;
 
 public interface Rule<State> {
     State getNewState(ArrayList<State> neighbors, State actualState);
-    State next(State actualState);
 }
