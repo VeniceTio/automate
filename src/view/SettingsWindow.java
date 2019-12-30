@@ -2,9 +2,18 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class SettingsWindow extends JFrame {
+
+    //All the options for the game
+    private ArrayList<String> gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin 1", "Fredkin 2"));
+    private ArrayList<String> extensionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicity", "Symetry 1", "Symetry 2", "Constant"));
+
     public SettingsWindow() {
         //Settings window
         setTitle("Settings window");
@@ -12,9 +21,6 @@ public class SettingsWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //All the options for the game
-        String[] gameOptions = {"Game of life", "Fredkin 1", "Fredkin 2"};
-        String[] extensionOptions = {"Repetition", "Periodicity", "Symetry 1", "Symetry 2", "Constant"};
 
         //Getting the panel of the window
         JPanel windowsContents = (JPanel) getContentPane();
@@ -26,7 +32,7 @@ public class SettingsWindow extends JFrame {
 
         //The extension of the game
         JLabel extensionLabel = new JLabel("Game's extension : ");
-        JComboBox<String> cboExtensions = new JComboBox<>(extensionOptions);
+        JComboBox<String> cboExtensions = new JComboBox(extensionOptions.toArray());
 
         //The number of turns in the game
         JLabel turnNumLabel = new JLabel("Number of turns : ");
@@ -61,18 +67,54 @@ public class SettingsWindow extends JFrame {
 
         //Settings the contents to the JFrame
         setContentPane(windowsContents);
+
+        for(Component c : getContentPane().getComponents()) {
+            System.out.println(c);
+        }
     }
 
-    private JPanel createPlayerOption(String[] gameOptions) {
-        JPanel playerPanel = new JPanel(new BorderLayout());
+    private JPanel createPlayerOption(ArrayList<String> gameOptions) {
+        JPanel playerPanel = new JPanel(new GridLayout());
 
         JLabel playerLabel = new JLabel("Player n°1 : ");
-        JComboBox<String> cboPlayerOne = new JComboBox<>(gameOptions);
+        JComboBox<String> cboGameOptions  = new JComboBox(gameOptions.toArray());
 
-        playerPanel.add(playerLabel, BorderLayout.WEST);
-        playerPanel.add(cboPlayerOne);
+        //Adding the action listener for each elements
+        cboGameOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                selectedIndexChanged(actionEvent);
+            }
+        });
+
+        playerPanel.add(playerLabel);
+        playerPanel.add(cboGameOptions);
 
         return playerPanel;
+    }
+
+    private void selectedIndexChanged(ActionEvent actionEvent) {
+        JPanel pane = (JPanel) getContentPane().getComponent(6);
+        JComboBox cboSelected = (JComboBox) actionEvent.getSource();
+
+        String gameOptionSelected = (String) cboSelected.getSelectedItem();
+        ArrayList<String> gameOptionsRemaining = new ArrayList<>();
+
+        for(String s : gameOptions) {
+            if(!s.equals(gameOptionSelected)) {
+                gameOptionsRemaining.add(s);
+            }
+        }
+
+        for(Component c : pane.getComponents()) {
+            if((c instanceof JComboBox) && (!c.equals(cboSelected)) ) {
+                JComboBox cbo = (JComboBox) c;
+                cbo.removeAllItems();
+                for(String s : gameOptionsRemaining) {
+                    cbo.addItem(s);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
