@@ -35,6 +35,15 @@ public class Grid {
         return _strategy.getNewState(neighbors,actualState);
 
     }
+    public int countAlive(){
+        int nbCelAlive = 0;
+        for (State state:_grid) {
+            if(state != State.DEAD){
+                nbCelAlive++;
+            }
+        }
+        return nbCelAlive;
+    }
 
     public void clockForward(){
         State previousState;
