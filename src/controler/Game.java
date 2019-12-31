@@ -52,7 +52,7 @@ public class Game {
             case GAMEOFLIFE:
                 autoType = new GameOfLife();
             default:
-                autoType = NULL;
+                autoType = null;
         }
         return autoType;
     }
@@ -65,7 +65,7 @@ public class Game {
             case REPETITION:
                 expansionType = new Repetition();
             default:
-                expansionType = NULL;
+                expansionType = null;
         }
         return expansionType;
     }
