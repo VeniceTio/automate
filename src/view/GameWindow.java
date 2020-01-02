@@ -2,16 +2,21 @@ package view;
 
 import controler.GridController;
 import javafx.scene.layout.GridPane;
-import model.Automaton;
+import model.Grid;
 import model.State;
+import utils.Observer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Random;
 
-public class GameWindow extends JFrame {
-    public class MyButton extends JButton {
+public class GameWindow extends JFrame implements Observer {
+
+    public static class MyButton extends JButton {
         int _index;
         MyButton(int index){
             super();
@@ -22,6 +27,8 @@ public class GameWindow extends JFrame {
     private int _startCell;
     private boolean _init = false;
     private Color[] _players = {Color.BLUE,Color.RED};
+    private ArrayList<MyButton> _cells;
+    private static SecureRandom _rand = new SecureRandom();
     /**
      * Méthode permettant de créer la fenêtre de jeu
      * @param size
@@ -95,6 +102,7 @@ public class GameWindow extends JFrame {
                 }
             });
             gridGame.add(cell, false);
+            _cells.add(cell);
         }
         return gridGame;
     }
@@ -147,6 +155,45 @@ public class GameWindow extends JFrame {
                 GridController.getInstance().setStateGrid(player, button._index, State.DEAD);
             } else{
                 GridController.getInstance().setStateGrid(player, button._index, State.ALIVE);
+            }
+        }
+    }
+    private Color fight(boolean[] player,int nbPlayer){
+        Color newColor = Color.white;
+        int index = -1;
+        int idPlayer = -1;
+        int winner = _rand.nextInt(nbPlayer);
+        for (boolean play:player){
+            idPlayer++;
+            if(play){
+                index++;
+                if(index==winner){
+                    newColor = _players[idPlayer];
+                }
+            }
+        }
+        return newColor;
+    }
+
+    @Override
+    public void update() {
+        int nbCell;
+        boolean[] players = {false,false};
+        MyButton button;
+        GridController GC = GridController.getInstance();
+        for(int i=0;i<_cells.size();i++){
+            button = _cells.get(i);
+            nbCell=-1;
+            for(int j=0;j<_players.length;j++){
+                if (GC.getState(0,i) != State.DEAD){
+                    nbCell++;
+                    players[j] = true;
+                }
+            }
+            if(nbCell!=-1){
+                button.setBackground(Color.white);
+            } else {
+                button.setBackground(fight(players, nbCell));
             }
         }
     }
