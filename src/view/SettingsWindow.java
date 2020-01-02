@@ -9,12 +9,11 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
-    private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicity", "Symetry n°1", "Symetry n°2", "Constant"));
+    private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
 
     public SettingsWindow() {
         //Settings of the settings window
@@ -124,7 +123,6 @@ public class SettingsWindow extends JFrame {
         gbc.gridy = 5;
         settingsContents.add(createTextField(10), gbc);
 
-
         return settingsContents;
     }
 
@@ -140,29 +138,35 @@ public class SettingsWindow extends JFrame {
         JPanel gamesOptionPanel = new JPanel(new GridLayout(numPlayer, 2, 14,10));
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
 
-        for(int i = 1; i <= numPlayer; i++) {
-            gamesOptionPanel.add(createLabel("Player n°" + i + " : "));
+        for(int i = 0; i < numPlayer; i++) {
+            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : "));
             gamesOptionPanel.add(createComboBox(gameOptions.toArray(), actionEvent -> updateGameOptions(actionEvent)));
         }
 
         return gamesOptionPanel;
     }
 
-    private void updateGameOptions(ActionEvent e) { //TODO: problem
+    private String cboDataRetrieving(Component c) {
+        JComboBox cbo = (JComboBox) c;
+        return String.valueOf(cbo.getSelectedItem());
+    }
+
+    private void updateGameOptions(ActionEvent e) {
         JComboBox<String> cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
-        String gameOptionSelected = (String) cboSelected.getSelectedItem();
+        String gameOptionSelected = String.valueOf(cboSelected.getSelectedItem());
 
         if(gameOptionSelected != null) {
             for(Component comp: contents.getComponents()) {
                 if((comp instanceof JComboBox) && (!comp.equals(cboSelected))) {
                     JComboBox<String> cboTemp = (JComboBox) comp;
-                    String optionTemp = (String) cboTemp.getSelectedItem();
+                    String optionTemp = String.valueOf(cboTemp.getSelectedItem());
                     cboTemp.removeAllItems();
 
                     for(String option: _gameOptions) {
-                        if(!option.equals(gameOptionSelected))
+                        if(!option.equals(gameOptionSelected)) {
                             cboTemp.addItem(option);
+                        }
                     }
 
                     cboTemp.setSelectedItem(optionTemp);
@@ -172,14 +176,33 @@ public class SettingsWindow extends JFrame {
         }
     }
 
-    private void confirmSettings() { //TODO
+    private void confirmSettings() {
+        ArrayList<Integer> numericParameters = new ArrayList<>();
+        ArrayList<String> textParameters = new ArrayList<>();
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
-        for(Component c: settingsContents.getComponents()) {
-            if(c instanceof JTextField) {
-                JTextField text = (JTextField) c;
 
+        for(Component comp: settingsContents.getComponents()) {
+            if(comp instanceof JTextField) {
+                JTextField text = (JTextField) comp;
+                int parameter = Integer.parseInt(text.getText());
+                numericParameters.add(parameter);
+            }
+            if(comp instanceof JComboBox) {
+                textParameters.add(cboDataRetrieving(comp));
+            }
+            if(comp instanceof JPanel) {
+                JPanel gameOptionsPanel = (JPanel) comp;
+                for(Component c: gameOptionsPanel.getComponents()) {
+                    if(c instanceof JComboBox) {
+                        textParameters.add(cboDataRetrieving(c));
+                    }
+                }
             }
         }
+        System.out.println(numericParameters);
+        System.out.println(textParameters);
+
+        Facade.initGameWindow(numericParameters, textParameters);
     }
 
     public static void main(String[] args) {

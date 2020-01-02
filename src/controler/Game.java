@@ -16,8 +16,8 @@ public class Game {
         }
         return _instance;
     }
-    public void createGameWindow(int gridSize, Expansion expansion, int turnNum,
-                                 Automaton[] players,int cellNum,int gameSpeed){
+    public void createGameWindow(int gridSize, int gameSpeed, int turnNum, int cellNum,
+                                 Expansion expansion, Automaton[] players){
         _gameSpeed = gameSpeed;
         _maxturn = turnNum;
         GridController GC = GridController.getInstance();
