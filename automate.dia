@@ -4913,7 +4913,7 @@
         <dia:real val="3.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Facade#</dia:string>
+        <dia:string>#view.Facade#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

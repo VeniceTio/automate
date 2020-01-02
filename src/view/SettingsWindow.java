@@ -1,7 +1,5 @@
 package view;
 
-import model.Expansion;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -9,16 +7,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
-    private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicity", "Symetry n°1", "Symetry n°2", "Constant"));
-    //private ArrayList<Expansion> _expansionOptions = new ArrayList<>(Arrays.asList(Expansion.REPETITION, Expansion.PERIODICITY, Expansion.SYMETRY1, Expansion.SYMETRY2, Expansion.CONSTANT));
+    private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
 
     public SettingsWindow() {
         //Settings of the settings window
@@ -50,14 +45,7 @@ public class SettingsWindow extends JFrame {
     }
 
     private JTextField createTextField(int size) {
-        JTextField text = new JTextField(size);
-        text.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-
-            }
-        });
-        return text;
+        return new JTextField(size);
     }
 
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
@@ -150,12 +138,17 @@ public class SettingsWindow extends JFrame {
         JPanel gamesOptionPanel = new JPanel(new GridLayout(numPlayer, 2, 14,10));
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
 
-        for(int i = 1; i <= numPlayer; i++) {
-            gamesOptionPanel.add(createLabel("Player n°" + i + " : "));
+        for(int i = 0; i < numPlayer; i++) {
+            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : "));
             gamesOptionPanel.add(createComboBox(gameOptions.toArray(), actionEvent -> updateGameOptions(actionEvent)));
         }
 
         return gamesOptionPanel;
+    }
+
+    private String cboDataRetrieving(Component c) {
+        JComboBox cbo = (JComboBox) c;
+        return String.valueOf(cbo.getSelectedItem());
     }
 
     private void updateGameOptions(ActionEvent e) {
@@ -171,8 +164,9 @@ public class SettingsWindow extends JFrame {
                     cboTemp.removeAllItems();
 
                     for(String option: _gameOptions) {
-                        if(!option.equals(gameOptionSelected))
+                        if(!option.equals(gameOptionSelected)) {
                             cboTemp.addItem(option);
+                        }
                     }
 
                     cboTemp.setSelectedItem(optionTemp);
@@ -182,10 +176,9 @@ public class SettingsWindow extends JFrame {
         }
     }
 
-    private void confirmSettings() { //TODO
+    private void confirmSettings() {
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
-
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
 
         for(Component comp: settingsContents.getComponents()) {
@@ -208,11 +201,8 @@ public class SettingsWindow extends JFrame {
         }
         System.out.println(numericParameters);
         System.out.println(textParameters);
-    }
 
-    private String cboDataRetrieving(Component c) {
-        JComboBox cbo = (JComboBox) c;
-        return String.valueOf(cbo.getSelectedItem());
+        Facade.initGameWindow(numericParameters, textParameters);
     }
 
     public static void main(String[] args) {
