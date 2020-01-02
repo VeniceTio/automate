@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
@@ -50,7 +51,6 @@ public class SettingsWindow extends JFrame {
 
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
         JComboBox<Object> cbo = new JComboBox<>(values);
-        cbo.setPreferredSize(new Dimension(20, 10));
         cbo.addActionListener(al);
         return cbo;
     }
@@ -75,11 +75,10 @@ public class SettingsWindow extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.weightx = 1;
+        gbc.weighty = 1;
 
-        gbc.weightx = 5;
-        gbc.weighty = 5;
-
-        //Adding the elements to the pane
+        //Adding the components to the pane
         gbc.gridx = 0;
         gbc.gridy = 0;
         settingsContents.add(createLabel("Grid's size : "), gbc);
@@ -131,7 +130,7 @@ public class SettingsWindow extends JFrame {
 
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        footer.setBorder(new EmptyBorder(0, 0, 0, 5));
+        footer.setBorder(new EmptyBorder(0, 0, 0, 0));
         footer.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
         footer.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
         return footer;
@@ -149,33 +148,38 @@ public class SettingsWindow extends JFrame {
         return gamesOptionPanel;
     }
 
-    private void updateGameOptions(ActionEvent e) { //TODO: problem here
+    private void updateGameOptions(ActionEvent e) { //TODO: problem
         JComboBox<String> cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
-
         String gameOptionSelected = (String) cboSelected.getSelectedItem();
-        ArrayList<String> gameOptionsRemaining = new ArrayList<>();
 
-        for(String s: _gameOptions) {
-            if(!s.equals(gameOptionSelected)) {
-                gameOptionsRemaining.add(s);
-            }
-        }
+        if(gameOptionSelected != null) {
+            for(Component comp: contents.getComponents()) {
+                if((comp instanceof JComboBox) && (!comp.equals(cboSelected))) {
+                    JComboBox<String> cboTemp = (JComboBox) comp;
+                    String optionTemp = (String) cboTemp.getSelectedItem();
+                    cboTemp.removeAllItems();
 
-        System.out.println(gameOptionsRemaining);
+                    for(String option: _gameOptions) {
+                        if(!option.equals(gameOptionSelected))
+                            cboTemp.addItem(option);
+                    }
 
-        for(Component c : contents.getComponents()) {
-            if((c instanceof JComboBox) && (!c.equals(cboSelected))) {
-                JComboBox<String> cbo = (JComboBox) c;
-                cbo.removeAllItems();
-                for(String s: gameOptionsRemaining) {
-                    cbo.addItem(s);
+                    cboTemp.setSelectedItem(optionTemp);
+                    cboSelected.setSelectedItem(gameOptionSelected);
                 }
             }
         }
     }
 
     private void confirmSettings() { //TODO
+        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        for(Component c: settingsContents.getComponents()) {
+            if(c instanceof JTextField) {
+                JTextField text = (JTextField) c;
+
+            }
+        }
     }
 
     public static void main(String[] args) {
