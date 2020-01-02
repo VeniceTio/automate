@@ -1,16 +1,38 @@
 package view;
 
-import model.Automaton;
-
+import controler.Game;
+import controler.GridController;
+import model.State;
+import utils.Observer;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 
-public class GameWindow extends JFrame {
+public class GameWindow extends JFrame implements Observer{
+
+    public static class MyButton extends JButton {
+        int _index;
+        MyButton(int index){
+            super();
+            _index=index;
+        }
+    }
+
+    private int _startCell;
+    private boolean _init = false;
+    private Color[] _players = {Color.BLUE,Color.RED};
+    private ArrayList<MyButton> _cells = new ArrayList<>();
+    private static SecureRandom _rand = new SecureRandom();
     /**
      * Méthode permettant de créer la fenêtre de jeu
      * @param size
      */
-    public GameWindow(int size, String[] players) {
+    public GameWindow(int size, String[] players, int cellNum) {
+        //
+        _startCell = cellNum;
         //Game window
         setTitle("Game Window");
         setSize(500, 400);
@@ -64,9 +86,15 @@ public class GameWindow extends JFrame {
      * @return la panel contenant la grille de jeu
      */
     private JPanel createGridGame(int gridSize) {
-        JPanel gridGame = new JPanel(new GridLayout(gridSize, gridSize));
+
+        GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
+        JPanel gridGame = new JPanel(gridLayout);
         for(int i = 0; i < gridSize * gridSize; i++) {
-            gridGame.add(new JCheckBox(), false);
+            MyButton cell = new MyButton(i);
+            cell.setBackground(Color.white);
+            cell.addActionListener(actionEvent -> select(cell));
+            gridGame.add(cell, false);
+            _cells.add(cell);
         }
         return gridGame;
     }
@@ -85,11 +113,102 @@ public class GameWindow extends JFrame {
 
         JButton button = new JButton("Start");
         button.setPreferredSize(new Dimension(80, 30));
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(_init){
+                    try {
+                        Game.getInstance().automatonGame();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    button.setEnabled(false);
+                }
+            }
+        });
 
         footer.add(cSpeedLabel);
         footer.add(cSpeedSlider);
         footer.add(button);
 
         return footer;
+    }
+
+    public void select(MyButton button){
+        if(!_init){
+            GridController GC = GridController.getInstance();
+            if (GC.count(0)!= _startCell){
+                changeColor(button,0,true);
+            }
+            else if (GC.count(1)!= _startCell){
+                changeColor(button,1,true);
+            } else {
+                _init = true;
+            }
+        }
+    }
+    private void changeColor(MyButton button, int player,boolean send){
+        Color newColor = Color.white;
+        if(button.getBackground() == _players[player]){
+            button.setBackground(newColor);
+        }else {
+            newColor = _players[player];
+            button.setBackground(newColor);
+        }
+        if(send){
+            if(newColor == Color.white) {
+                GridController.getInstance().setStateGrid(player, button._index, State.DEAD);
+            } else{
+                GridController.getInstance().setStateGrid(player, button._index, State.ALIVE);
+            }
+        }
+    }
+    private Color fight(boolean[] player,int nbPlayer,int pos){
+        int winner;
+        Color newColor = Color.white;
+        int index = -1;
+        int idPlayer = -1;
+        if(nbPlayer!=0) {
+            winner = _rand.nextInt(nbPlayer);
+        }else {
+            winner = 0;
+        }
+        //System.out.println("## winner : "+winner);
+        for (boolean play:player){
+            idPlayer++;
+            if(play){
+                index++;
+                if(index==winner){
+                    newColor = _players[idPlayer];
+                }else {
+                    GridController.getInstance().setStateGrid(idPlayer, pos, State.DEAD);
+                }
+            }
+        }
+        return newColor;
+    }
+
+    public void update() {
+        int nbCell;
+        boolean[] players = {false,false};
+        MyButton button;
+        GridController GC = GridController.getInstance();
+        for(int i=0;i<_cells.size();i++){
+            button = _cells.get(i);
+            nbCell=-1;
+            for(int j=0;j<_players.length;j++){
+                if (GC.getState(j,i) != State.DEAD){
+                    nbCell++;
+                    players[j] = true;
+                    //System.out.println("#### cellule vivante pos="+i);
+                }
+            }
+            if(nbCell==-1){
+                button.setBackground(Color.white);
+            } else {
+                //System.out.println("#### combat pos="+i);
+                button.setBackground(fight(players, nbCell,i));
+            }
+        }
     }
 }
