@@ -158,7 +158,7 @@ public class GameWindow extends JFrame implements Observer {
             }
         }
     }
-    private Color fight(boolean[] player,int nbPlayer){
+    private Color fight(boolean[] player,int nbPlayer,int pos){
         Color newColor = Color.white;
         int index = -1;
         int idPlayer = -1;
@@ -170,6 +170,7 @@ public class GameWindow extends JFrame implements Observer {
                 if(index==winner){
                     newColor = _players[idPlayer];
                 }
+                GridController.getInstance().setStateGrid(idPlayer,pos,State.DEAD);
             }
         }
         return newColor;
@@ -190,10 +191,10 @@ public class GameWindow extends JFrame implements Observer {
                     players[j] = true;
                 }
             }
-            if(nbCell!=-1){
+            if(nbCell==-1){
                 button.setBackground(Color.white);
             } else {
-                button.setBackground(fight(players, nbCell));
+                button.setBackground(fight(players, nbCell,i));
             }
         }
     }
