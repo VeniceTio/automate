@@ -35,12 +35,11 @@ public class GridController extends Observable {
     /**
      * Méthode permettant de changer l'état d'une cellule
      * @param index la grille sur laquelle on doit l'état de la cellule
-     * @param x la position x de la cellule
-     * @param y la position y de la cellule
+     * @param position la position x de la cellule
      * @param state le nouvelle état de la cellule
      */
-    public void setStateGrid(int index, int x, int y, State state){
-        _grids.get(index).setState(x,y,state);
+    public void setStateGrid(int index, int position, State state){
+        _grids.get(index).setState(position,state);
     }
 
     /**
@@ -50,7 +49,7 @@ public class GridController extends Observable {
      * @param expansion la stratégie d'extension que doit utiliser la grille
      */
     public void initGrid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
-        _grids.add(new Grid(size,strategy,expansion));
+        _grids.add(new Grid(size*size,strategy,expansion));
     }
 
     public boolean allAlive(){

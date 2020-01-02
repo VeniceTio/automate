@@ -12,11 +12,10 @@ import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
     public class MyButton extends JButton {
-        int _x,_y;
-        MyButton(int x,int y){
+        int _index;
+        MyButton(int index){
             super();
-            x=x;
-            y=y;
+            _index=index;
         }
     }
 
@@ -87,7 +86,7 @@ public class GameWindow extends JFrame {
         GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
         JPanel gridGame = new JPanel(gridLayout);
         for(int i = 0; i < gridSize * gridSize; i++) {
-            MyButton cell = new MyButton(i%gridSize,i/gridSize);
+            MyButton cell = new MyButton(i);
             cell.setBackground(Color.white);
             cell.addActionListener(new ActionListener() {
                 @Override
@@ -128,8 +127,10 @@ public class GameWindow extends JFrame {
             if (GC.count(0)!= _startCell){
                 changeColor(button,0,true);
             }
-            else{
+            else if (GC.count(1)!= _startCell){
                 changeColor(button,1,true);
+            } else {
+                _init = true;
             }
         }
     }
@@ -143,9 +144,9 @@ public class GameWindow extends JFrame {
         }
         if(send){
             if(newColor == Color.white) {
-                GridController.getInstance().setStateGrid(0, button._x, button._y, State.DEAD);
+                GridController.getInstance().setStateGrid(player, button._index, State.DEAD);
             } else{
-                GridController.getInstance().setStateGrid(0, button._x, button._y, State.ALIVE);
+                GridController.getInstance().setStateGrid(player, button._index, State.ALIVE);
             }
         }
     }

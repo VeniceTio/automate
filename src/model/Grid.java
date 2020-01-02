@@ -47,12 +47,11 @@ public class Grid {
 
     /**
      * Méthode permettant de changer l'état d'une cellule
-     * @param x la position x de la cellule
-     * @param y la position y de la cellule
+     * @param index la position de la cellule
      * @param state le nouvel état de la cellule
      */
-    public void setState(int x, int y, State state){
-        _grid.set((x*_size)+y, state);
+    public void setState(int index, State state){
+        _grid.set(index, state);
     }
 
     /**
