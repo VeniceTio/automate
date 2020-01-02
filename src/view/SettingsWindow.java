@@ -6,6 +6,7 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,9 @@ public class SettingsWindow extends JFrame {
     private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
 
+    /**
+     * Méthode permettant de créer la fenêtre de paramètrage du jeu
+     */
     public SettingsWindow() {
         //Settings of the settings window
         setTitle("Settings window");
@@ -40,20 +44,44 @@ public class SettingsWindow extends JFrame {
         setContentPane(settingsWindow);
     }
 
+    /**
+     * Méthode permettant de créer un label
+     * @param text le texte qu'affichera le label
+     * @return le label
+     */
     private JLabel createLabel(String text) {
         return new JLabel(text);
     }
 
+    /**
+     * Méthode permettant de créer un champ texte
+     * @param size la taille du champ texte
+     * @return le champ texte
+     */
     private JTextField createTextField(int size) {
         return new JTextField(size);
     }
 
+    /**
+     * Méthode permettant de créer une combobox
+     * @param values les valeurs qui seront affichée dans la combobox
+     * @param al l'événement de cette combobox
+     * @return la combobox
+     */
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
         JComboBox<Object> cbo = new JComboBox<>(values);
         cbo.addActionListener(al);
         return cbo;
     }
 
+    /**
+     * Méthode permettant de créer un bouton
+     * @param text le texte qu'affichera le bouton
+     * @param width la largeur du bouton
+     * @param height la hauteur du bouton
+     * @param al l'événement du bouton
+     * @return le bouton
+     */
     private JButton createButton(String text, int width, int height, ActionListener al) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(width, height));
@@ -61,13 +89,21 @@ public class SettingsWindow extends JFrame {
         return button;
     }
 
+    /**
+     * Méthode permettant de créer le titre de la fenêtre
+     * @return le panel contenant tous les élements de cette partie de la fenêtre
+     */
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
         header.add(createLabel("Choose the settings for your game !"));
         return header;
     }
 
-    private JPanel createSettingsContents() {
+    /**
+     * Méthode permettant de créer tous les paramètres nécéssaires au jeu que le joueur pourra modifier
+     * @return le panel contenant tous ces paramètres
+     */
+        private JPanel createSettingsContents() {
         JPanel settingsContents = new JPanel(new GridBagLayout());
         settingsContents.setBorder(new EmptyBorder(0, 0, 0, 0));
 
@@ -126,6 +162,10 @@ public class SettingsWindow extends JFrame {
         return settingsContents;
     }
 
+    /**
+     * Méthode permettant de créer les boutons du bas de la fenêtre
+     * @return le panel contenant les boutons
+     */
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         footer.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -134,6 +174,12 @@ public class SettingsWindow extends JFrame {
         return footer;
     }
 
+    /**
+     * Méthode permettant de créer les combobox des options de jeu
+     * @param gameOptions les options disponibles dans le jeu
+     * @param numPlayer le nombre de joueurs
+     * @return la panel contenant toutes les combobox contentant les options de jeu
+     */
     private JPanel createGamesOption(ArrayList<String> gameOptions, int numPlayer) { //TODO: change the size of the cells
         JPanel gamesOptionPanel = new JPanel(new GridLayout(numPlayer, 2, 14,10));
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
@@ -146,11 +192,20 @@ public class SettingsWindow extends JFrame {
         return gamesOptionPanel;
     }
 
+    /**
+     * Méthode permettant de récupérer les informations dans les combobox
+     * @param c le composant qu'on doit cast en combobox
+     * @return l'information récupérer de la combobox
+     */
     private String cboDataRetrieving(Component c) {
         JComboBox cbo = (JComboBox) c;
         return String.valueOf(cbo.getSelectedItem());
     }
 
+    /**
+     * Méthode permettant de mettre à jour les options de jeu restantes
+     * @param e l'action event
+     */
     private void updateGameOptions(ActionEvent e) {
         JComboBox<String> cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
@@ -176,6 +231,9 @@ public class SettingsWindow extends JFrame {
         }
     }
 
+    /**
+     * Méthode permettant de récupérer toutes les informations de tous les champs de la fenêtre
+     */
     private void confirmSettings() {
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
@@ -199,13 +257,8 @@ public class SettingsWindow extends JFrame {
                 }
             }
         }
-        System.out.println(numericParameters);
-        System.out.println(textParameters);
 
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
         Facade.initGameWindow(numericParameters, textParameters);
-    }
-
-    public static void main(String[] args) {
-        new SettingsWindow().setVisible(true);
     }
 }

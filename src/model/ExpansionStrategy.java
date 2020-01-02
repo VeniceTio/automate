@@ -3,9 +3,18 @@ package model;
 import java.util.ArrayList;
 
 public interface ExpansionStrategy<Expansion extends Enum<?>> {
-
+    /**
+     * Liste de voisins de la cellule
+     */
     ArrayList<State> _neighbors = new ArrayList<>();
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @return la grille contenant l'état des voisins de la cellule
+     */
     default ArrayList<State> getNeighborsState(int x,int y, ArrayList<State> grid){
         int size = (int)(Math.sqrt(grid.size()));
         if (x==0 && (y==0 || y==size-1)) {         //coin gauche

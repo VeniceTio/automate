@@ -8,8 +8,15 @@ import java.util.ArrayList;
 
 public class Facade {
     public static void initGameWindow(ArrayList<Integer> numericParameters, ArrayList<String> textParameters) {
-        Automaton[] players = {toAutomaton(textParameters.get(5)), toAutomaton((textParameters.get(6)))};
-        Game.getInstance().createGameWindow(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), toExpansion(textParameters.get(4)), players);
+        Automaton[] aPlayers = {toAutomaton(textParameters.get(1)), toAutomaton((textParameters.get(2)))};
+        String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
+        Game.getInstance().createGameWindow(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), toExpansion(textParameters.get(0)), aPlayers);
+        new GameWindow(numericParameters.get(0), sPlayers).setVisible(true);
+
+        System.out.println(numericParameters);
+        System.out.println(toExpansion(textParameters.get(0)));
+        System.out.println(toAutomaton(textParameters.get(1)));
+        System.out.println(toAutomaton(textParameters.get(2)));
     }
 
     public static void createSettingsWindow(){
@@ -23,7 +30,7 @@ public class Facade {
                 automatonChosen = Automaton.GAMEOFLIFE;
                 break;
             case "Fredkin n°1":
-                automatonChosen = Automaton.FREDKIN;
+                automatonChosen = Automaton.FREDKIN1;
                 break;
             case "Fredkin n°2":
                 automatonChosen = Automaton.FREDKIN2;
