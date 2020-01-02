@@ -11,7 +11,7 @@ public class Facade {
         Automaton[] aPlayers = {toAutomaton(textParameters.get(1)), toAutomaton((textParameters.get(2)))};
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
         Game.getInstance().createGameWindow(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), toExpansion(textParameters.get(0)), aPlayers);
-        new GameWindow(numericParameters.get(0), sPlayers).setVisible(true);
+        new GameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3)).setVisible(true);
 
         System.out.println(numericParameters);
         System.out.println(toExpansion(textParameters.get(0)));

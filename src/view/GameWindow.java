@@ -1,16 +1,35 @@
 package view;
 
+import controler.GridController;
+import javafx.scene.layout.GridPane;
 import model.Automaton;
+import model.State;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
+    public class MyButton extends JButton {
+        int _x,_y;
+        MyButton(int x,int y){
+            super();
+            x=x;
+            y=y;
+        }
+    }
+
+    private int _startCell;
+    private boolean _init = false;
+    private Color[] _players = {Color.BLUE,Color.RED};
     /**
      * Méthode permettant de créer la fenêtre de jeu
      * @param size
      */
-    public GameWindow(int size, String[] players) {
+    public GameWindow(int size, String[] players,int cellNum) {
+        //
+        _startCell = cellNum;
         //Game window
         setTitle("Game Window");
         setSize(500, 400);
@@ -64,9 +83,19 @@ public class GameWindow extends JFrame {
      * @return la panel contenant la grille de jeu
      */
     private JPanel createGridGame(int gridSize) {
-        JPanel gridGame = new JPanel(new GridLayout(gridSize, gridSize));
+
+        GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
+        JPanel gridGame = new JPanel(gridLayout);
         for(int i = 0; i < gridSize * gridSize; i++) {
-            gridGame.add(new JCheckBox(), false);
+            MyButton cell = new MyButton(i%gridSize,i/gridSize);
+            cell.setBackground(Color.white);
+            cell.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    select(cell);
+                }
+            });
+            gridGame.add(cell, false);
         }
         return gridGame;
     }
@@ -91,5 +120,33 @@ public class GameWindow extends JFrame {
         footer.add(button);
 
         return footer;
+    }
+
+    public void select(MyButton button){
+        if(!_init){
+            GridController GC = GridController.getInstance();
+            if (GC.count(0)!= _startCell){
+                changeColor(button,0,true);
+            }
+            else{
+                changeColor(button,1,true);
+            }
+        }
+    }
+    private void changeColor(MyButton button, int player,boolean send){
+        Color newColor = Color.white;
+        if(button.getBackground() == _players[player]){
+            button.setBackground(newColor);
+        }else {
+            newColor = _players[player];
+            button.setBackground(newColor);
+        }
+        if(send){
+            if(newColor == Color.white) {
+                GridController.getInstance().setStateGrid(0, button._x, button._y, State.DEAD);
+            } else{
+                GridController.getInstance().setStateGrid(0, button._x, button._y, State.ALIVE);
+            }
+        }
     }
 }

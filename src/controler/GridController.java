@@ -34,13 +34,13 @@ public class GridController extends Observable {
 
     /**
      * Méthode permettant de changer l'état d'une cellule
-     * @param grid la grille sur laquelle on doit l'état de la cellule
+     * @param index la grille sur laquelle on doit l'état de la cellule
      * @param x la position x de la cellule
      * @param y la position y de la cellule
      * @param state le nouvelle état de la cellule
      */
-    public void setStateGrid(Grid grid, int x, int y, State state){
-        grid.setState(x,y,state);
+    public void setStateGrid(int index, int x, int y, State state){
+        _grids.get(index).setState(x,y,state);
     }
 
     /**
@@ -61,6 +61,10 @@ public class GridController extends Observable {
             }
         }
         return alive;
+    }
+
+    public int count(int index){
+        return _grids.get(index).countAlive();
     }
     
     public void clockForward(){

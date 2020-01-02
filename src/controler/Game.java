@@ -41,6 +41,13 @@ public class Game {
             autoType = getAutomaton(auto);
             GC.initGrid(gridSize,autoType,expansionType);
         }
+        System.out.println("size : " + gridSize);
+        System.out.println("gameSpeed : " + gameSpeed);
+        System.out.println("turnNum : " + turnNum);
+        System.out.println("cellNum : " + cellNum);
+        System.out.println("expansion : " + expansion);
+        System.out.println("player one : " + players[0]);
+        System.out.println("player two : " + players[1]);
     }
 
     /**
