@@ -4,6 +4,7 @@ public class Facade {
     public void initGameWindow(int gridSize, Expansion expansionType, int turnNum) {
 
     }
+
     public static void createSettingWindow(){
 
     }
