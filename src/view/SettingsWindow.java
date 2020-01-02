@@ -1,5 +1,7 @@
 package view;
 
+import model.Expansion;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -7,14 +9,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicity", "Symetry n°1", "Symetry n°2", "Constant"));
+    //private ArrayList<Expansion> _expansionOptions = new ArrayList<>(Arrays.asList(Expansion.REPETITION, Expansion.PERIODICITY, Expansion.SYMETRY1, Expansion.SYMETRY2, Expansion.CONSTANT));
 
     public SettingsWindow() {
         //Settings of the settings window
@@ -46,7 +50,14 @@ public class SettingsWindow extends JFrame {
     }
 
     private JTextField createTextField(int size) {
-        return new JTextField(size);
+        JTextField text = new JTextField(size);
+        text.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+        return text;
     }
 
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
@@ -124,7 +135,6 @@ public class SettingsWindow extends JFrame {
         gbc.gridy = 5;
         settingsContents.add(createTextField(10), gbc);
 
-
         return settingsContents;
     }
 
@@ -148,16 +158,16 @@ public class SettingsWindow extends JFrame {
         return gamesOptionPanel;
     }
 
-    private void updateGameOptions(ActionEvent e) { //TODO: problem
+    private void updateGameOptions(ActionEvent e) {
         JComboBox<String> cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
-        String gameOptionSelected = (String) cboSelected.getSelectedItem();
+        String gameOptionSelected = String.valueOf(cboSelected.getSelectedItem());
 
         if(gameOptionSelected != null) {
             for(Component comp: contents.getComponents()) {
                 if((comp instanceof JComboBox) && (!comp.equals(cboSelected))) {
                     JComboBox<String> cboTemp = (JComboBox) comp;
-                    String optionTemp = (String) cboTemp.getSelectedItem();
+                    String optionTemp = String.valueOf(cboTemp.getSelectedItem());
                     cboTemp.removeAllItems();
 
                     for(String option: _gameOptions) {
@@ -173,13 +183,36 @@ public class SettingsWindow extends JFrame {
     }
 
     private void confirmSettings() { //TODO
-        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
-        for(Component c: settingsContents.getComponents()) {
-            if(c instanceof JTextField) {
-                JTextField text = (JTextField) c;
+        ArrayList<Integer> numericParameters = new ArrayList<>();
+        ArrayList<String> textParameters = new ArrayList<>();
 
+        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+
+        for(Component comp: settingsContents.getComponents()) {
+            if(comp instanceof JTextField) {
+                JTextField text = (JTextField) comp;
+                int parameter = Integer.parseInt(text.getText());
+                numericParameters.add(parameter);
+            }
+            if(comp instanceof JComboBox) {
+                textParameters.add(cboDataRetrieving(comp));
+            }
+            if(comp instanceof JPanel) {
+                JPanel gameOptionsPanel = (JPanel) comp;
+                for(Component c: gameOptionsPanel.getComponents()) {
+                    if(c instanceof JComboBox) {
+                        textParameters.add(cboDataRetrieving(c));
+                    }
+                }
             }
         }
+        System.out.println(numericParameters);
+        System.out.println(textParameters);
+    }
+
+    private String cboDataRetrieving(Component c) {
+        JComboBox cbo = (JComboBox) c;
+        return String.valueOf(cbo.getSelectedItem());
     }
 
     public static void main(String[] args) {
