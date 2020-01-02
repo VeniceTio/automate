@@ -6,6 +6,7 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +103,7 @@ public class SettingsWindow extends JFrame {
      * Méthode permettant de créer tous les paramètres nécéssaires au jeu que le joueur pourra modifier
      * @return le panel contenant tous ces paramètres
      */
-    private JPanel createSettingsContents() {
+        private JPanel createSettingsContents() {
         JPanel settingsContents = new JPanel(new GridBagLayout());
         settingsContents.setBorder(new EmptyBorder(0, 0, 0, 0));
 
@@ -257,10 +258,7 @@ public class SettingsWindow extends JFrame {
             }
         }
 
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
         Facade.initGameWindow(numericParameters, textParameters);
-    }
-
-    public static void main(String[] args) {
-        new SettingsWindow().setVisible(true);
     }
 }
