@@ -73,7 +73,7 @@ public class GridController extends Observable {
     
     public void clockForward(){
         for (Grid grid:_grids) {
-            //System.out.println(grid);
+            System.out.println(grid);
             grid.clockForward();
         }
         System.out.println("turn finish");

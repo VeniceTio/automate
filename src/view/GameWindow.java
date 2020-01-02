@@ -200,13 +200,13 @@ public class GameWindow extends JFrame implements Observer{
                 if (GC.getState(j,i) != State.DEAD){
                     nbCell++;
                     players[j] = true;
-                    System.out.println("#### cellule vivante pos="+i);
+                    //System.out.println("#### cellule vivante pos="+i);
                 }
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);
             } else {
-                System.out.println("#### combat pos="+i);
+                //System.out.println("#### combat pos="+i);
                 button.setBackground(fight(players, nbCell,i));
             }
         }
