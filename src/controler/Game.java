@@ -32,22 +32,21 @@ public class Game {
      */
     public void createGameWindow(int gridSize, int gameSpeed, int turnNum, int cellNum,
                                  Expansion expansion, Automaton[] players){
-        _gameSpeed = gameSpeed;
+        _gameSpeed = gameSpeed*1000;
         _maxturn = turnNum;
         GridController GC = GridController.getInstance();
         ExpansionStrategy<Expansion> expansionType = getExpansionType(expansion);
         Rule<State> autoType;
-        for (Automaton auto:players) {
-            autoType = getAutomaton(auto);
-            GC.initGrid(gridSize,autoType,expansionType);
-        }
         System.out.println("size : " + gridSize);
         System.out.println("gameSpeed : " + gameSpeed);
         System.out.println("turnNum : " + turnNum);
         System.out.println("cellNum : " + cellNum);
         System.out.println("expansion : " + expansion);
-        System.out.println("player one : " + players[0]);
-        System.out.println("player two : " + players[1]);
+        for (Automaton auto:players) {
+            autoType = getAutomaton(auto);
+            GC.initGrid(gridSize,autoType,expansionType);
+            System.out.println("player : " + auto);
+        }
     }
 
     /**
@@ -56,13 +55,14 @@ public class Game {
      */
     public void automatonGame() throws InterruptedException {
         int turn = 0;
-        Boolean alive = true;
+        boolean alive = true;
         GridController GC = GridController.getInstance();
         while(alive || turn<_maxturn){
+            System.out.println("## turn : "+turn+"##");
             GC.clockForward();
-            sleep(_gameSpeed);
             alive = GC.allAlive();
             turn++;
+            sleep(_gameSpeed);
         }
         //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }
@@ -77,12 +77,20 @@ public class Game {
         switch (automaton){
             case FREDKIN1:
                 autoType = new Fredkin1();
+                System.out.println("automa rnetré fred1");
+                break;
             case FREDKIN2:
                 autoType = new Fredkin2();
+                System.out.println("automa rnetré fred2");
+                break;
             case GAMEOFLIFE:
                 autoType = new GameOfLife();
+                System.out.println("automa rnetré gameoflife");
+                break;
             default:
                 autoType = null;
+                System.out.println("automa pas trouvé");
+                break;
         }
         return autoType;
     }
@@ -97,10 +105,13 @@ public class Game {
         switch (expansion){
             case CONSTANT:
                 expansionType = new Constant();
+                break;
             case REPETITION:
                 expansionType = new Repetition();
+                break;
             default:
                 expansionType = null;
+                break;
         }
         return expansionType;
     }

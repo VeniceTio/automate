@@ -13,6 +13,7 @@ public class GameOfLife implements Rule<State> {
     public State getNewState(ArrayList<State> neighbors, State actualState) {
         int nbLivingCel = 0;
         State nextState = actualState;
+        //System.out.println("voisinage :" + neighbors);
         if(actualState == State.ALIVE){
             nbLivingCel--;
         }

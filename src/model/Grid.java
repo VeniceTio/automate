@@ -38,7 +38,7 @@ public class Grid {
     public ArrayList<State> initGrid(){
         ArrayList<State> grid = new ArrayList<>();
         for(int i=0; i<_size;i++){
-            for(int k=0;i<_size;i++){
+            for(int k=0;k<_size;k++){
                 grid.add(State.DEAD);
             }
         }
@@ -99,12 +99,24 @@ public class Grid {
         State newState;
         ArrayList<State> nextGrid = initGrid();
         for(int i = 0; i< _size; i++){
-            for(int k = 0; i< _size; i++){
+            for(int k = 0; k< _size; k++){
                 previousState = _grid.get((i*_size)+k);
-                newState = getNewState(getNeighbors(i,k),previousState);
+                newState = getNewState(getNeighbors(k,i),previousState);
                 nextGrid.set((i*_size+k),newState);
             }
         }
         _grid = nextGrid;
+    }
+
+    @Override
+    public String toString(){
+        String chaine = "grid :\n";
+        for(int i = 0; i< _size; i++) {
+            for (int k = 0; k < _size; k++) {
+                chaine+=_grid.get(i*_size+k)+", ";
+            }
+            chaine+="\n";
+        }
+        return chaine;
     }
 }

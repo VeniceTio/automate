@@ -1,20 +1,17 @@
 package view;
 
+import controler.Game;
 import controler.GridController;
-import javafx.scene.layout.GridPane;
-import model.Grid;
 import model.State;
 import utils.Observer;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
-public class GameWindow extends JFrame implements Observer {
+public class GameWindow extends JFrame implements Observer{
 
     public static class MyButton extends JButton {
         int _index;
@@ -27,13 +24,13 @@ public class GameWindow extends JFrame implements Observer {
     private int _startCell;
     private boolean _init = false;
     private Color[] _players = {Color.BLUE,Color.RED};
-    private ArrayList<MyButton> _cells;
+    private ArrayList<MyButton> _cells = new ArrayList<>();
     private static SecureRandom _rand = new SecureRandom();
     /**
      * Méthode permettant de créer la fenêtre de jeu
      * @param size
      */
-    public GameWindow(int size, String[] players,int cellNum) {
+    public GameWindow(int size, String[] players, int cellNum) {
         //
         _startCell = cellNum;
         //Game window
@@ -95,12 +92,7 @@ public class GameWindow extends JFrame implements Observer {
         for(int i = 0; i < gridSize * gridSize; i++) {
             MyButton cell = new MyButton(i);
             cell.setBackground(Color.white);
-            cell.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    select(cell);
-                }
-            });
+            cell.addActionListener(actionEvent -> select(cell));
             gridGame.add(cell, false);
             _cells.add(cell);
         }
@@ -121,6 +113,19 @@ public class GameWindow extends JFrame implements Observer {
 
         JButton button = new JButton("Start");
         button.setPreferredSize(new Dimension(80, 30));
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(_init){
+                    try {
+                        Game.getInstance().automatonGame();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    button.setEnabled(false);
+                }
+            }
+        });
 
         footer.add(cSpeedLabel);
         footer.add(cSpeedSlider);
@@ -159,24 +164,30 @@ public class GameWindow extends JFrame implements Observer {
         }
     }
     private Color fight(boolean[] player,int nbPlayer,int pos){
+        int winner;
         Color newColor = Color.white;
         int index = -1;
         int idPlayer = -1;
-        int winner = _rand.nextInt(nbPlayer);
+        if(nbPlayer!=0) {
+            winner = _rand.nextInt(nbPlayer);
+        }else {
+            winner = 0;
+        }
+        //System.out.println("## winner : "+winner);
         for (boolean play:player){
             idPlayer++;
             if(play){
                 index++;
                 if(index==winner){
                     newColor = _players[idPlayer];
+                }else {
+                    GridController.getInstance().setStateGrid(idPlayer, pos, State.DEAD);
                 }
-                GridController.getInstance().setStateGrid(idPlayer,pos,State.DEAD);
             }
         }
         return newColor;
     }
 
-    @Override
     public void update() {
         int nbCell;
         boolean[] players = {false,false};
@@ -186,14 +197,16 @@ public class GameWindow extends JFrame implements Observer {
             button = _cells.get(i);
             nbCell=-1;
             for(int j=0;j<_players.length;j++){
-                if (GC.getState(0,i) != State.DEAD){
+                if (GC.getState(j,i) != State.DEAD){
                     nbCell++;
                     players[j] = true;
+                    System.out.println("#### cellule vivante pos="+i);
                 }
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);
             } else {
+                System.out.println("#### combat pos="+i);
                 button.setBackground(fight(players, nbCell,i));
             }
         }

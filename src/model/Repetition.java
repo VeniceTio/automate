@@ -101,6 +101,7 @@ public class Repetition implements ExpansionStrategy<Expansion> {
         }
     }
 
+
     //    public ArrayList<State> getNeighborsState(int x, int y, ArrayList<State> grid) {
 //        ArrayList<State> nextGrid = new ArrayList<>();
 //        int size = (int)(Math.sqrt(grid.size()));

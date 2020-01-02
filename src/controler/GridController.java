@@ -3,6 +3,7 @@ package controler;
 import model.*;
 import utils.Observable;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GridController extends Observable {
@@ -49,7 +50,7 @@ public class GridController extends Observable {
      * @param expansion la stratégie d'extension que doit utiliser la grille
      */
     public void initGrid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
-        _grids.add(new Grid(size*size,strategy,expansion));
+        _grids.add(new Grid(size,strategy,expansion));
     }
 
     public boolean allAlive(){
@@ -72,8 +73,10 @@ public class GridController extends Observable {
     
     public void clockForward(){
         for (Grid grid:_grids) {
+            //System.out.println(grid);
             grid.clockForward();
         }
+        System.out.println("turn finish");
         notifyObservers();
     }
 }
