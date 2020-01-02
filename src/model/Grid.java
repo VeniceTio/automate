@@ -54,6 +54,8 @@ public class Grid {
         _grid.set(index, state);
     }
 
+    public State getState(int index){return _grid.get(index);}
+
     /**
      * Méthode permettant de récupérer les voisins d'une cellule
      * @param x la position x d'une cellule

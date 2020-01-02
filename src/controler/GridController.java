@@ -65,6 +65,10 @@ public class GridController extends Observable {
     public int count(int index){
         return _grids.get(index).countAlive();
     }
+
+    public State getState(int index, int cell){
+        return _grids.get(index).getState(cell);
+    }
     
     public void clockForward(){
         for (Grid grid:_grids) {
