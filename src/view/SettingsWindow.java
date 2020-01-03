@@ -12,8 +12,8 @@ import java.util.Arrays;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
-    private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
-    private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
+    private ArrayList<String> _gameOptions;//= new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
+    private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
     private JLabel _userMessage = createLabel("");
 
     class IntFilter extends DocumentFilter {
@@ -96,13 +96,17 @@ public class SettingsWindow extends JFrame {
     /**
      * Méthode permettant de créer la fenêtre de paramètrage du jeu
      */
-    public SettingsWindow() {
+    public SettingsWindow(ArrayList<String> automatons,ArrayList<String> expansions) {
+        _expansionOptions = expansions;
+        _gameOptions = automatons;
+
         //Settings of the settings window
         setTitle("Settings window");
         setSize(500, 400);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 
         //The panel containing everything
         JPanel settingsWindow = (JPanel) getContentPane();
