@@ -81,9 +81,14 @@ public class Game {
                 VC.wait();
                 alive = GC.allAlive();
                 turn++;
-
+                try {
+                    sleep(_gameSpeed);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
+        System.out.println("jeu fini");
         //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }
 
