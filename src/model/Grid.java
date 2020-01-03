@@ -8,6 +8,9 @@ public class Grid {
      * La grille de jeu contenant les états des cellules
      */
     ArrayList<State> _grid;
+    /**
+     * TODO: commentaire à faire
+     */
     final Rule<State> _strategy;
     /**
      * La méthode d'extension de la grille
@@ -45,15 +48,21 @@ public class Grid {
         return grid;
     }
 
+
     /**
-     * Méthode permettant de changer l'état d'une cellule
-     * @param index la position de la cellule
-     * @param state le nouvel état de la cellule
+     * TODO: commentaire à faire
+     * @param index
+     * @param state
      */
     public void setState(int index, State state){
         _grid.set(index, state);
     }
 
+    /**
+     * TODO: commentaire à faire
+     * @param index
+     * @return
+     */
     public State getState(int index){return _grid.get(index);}
 
     /**
@@ -67,7 +76,7 @@ public class Grid {
     }
 
     /**
-     * Méthode permettant de récupérer le nouvel état de la cellule
+     * Méthode permettant de récupérer le nouvel état de la cellule TODO: bonne description?
      * @param neighbors les voisins de cette cellule
      * @param actualState l'état actuel de la cellule
      * @return le nouvel état
@@ -78,7 +87,7 @@ public class Grid {
     }
 
     /**
-     * Méthode permettant de compter le nombre de cellule vivante
+     * Méthode permettant de compter le nombre de cellule vivante TODO: bonne description ?
      * @return le nombre de cellule vivante
      */
     public int countAlive(){
@@ -108,6 +117,10 @@ public class Grid {
         _grid = nextGrid;
     }
 
+    /**
+     * TODO: commentaire à faire
+     * @return
+     */
     @Override
     public String toString(){
         String chaine = "grid :\n";

@@ -49,7 +49,7 @@ public class GridController extends Observable {
     /**
      * Méthode permettant d'initialiser une grille de jeu
      * @param size la taille de la grille
-     * @param strategy
+     * @param strategy //TODO: commentaire à faire
      * @param expansion la stratégie d'extension que doit utiliser la grille
      */
     public void initGrid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
