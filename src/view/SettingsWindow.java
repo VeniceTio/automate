@@ -18,6 +18,22 @@ public class SettingsWindow extends JFrame {
     private JLabel _userMessage = createLabel("");
 
     class IntFilter extends DocumentFilter {
+        int _lowerBound;
+        int _upperBound;
+
+        public IntFilter(int min, int max) {
+            _lowerBound = min;
+            _upperBound = max;
+        }
+
+        private int getLowerBound() {
+            return _lowerBound;
+        }
+
+        private int getUpperBound() {
+            return _upperBound;
+        }
+
         @Override
         public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
             Document doc = fb.getDocument();
@@ -25,7 +41,7 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.insert(offset, string);
 
-            if (isInt(sb.toString())) {
+            if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                 correctValue();
                 super.insertString(fb, offset, string, attr);
             }
@@ -41,7 +57,7 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.replace(offset, offset + length, text);
 
-            if(isInt(sb.toString())) {
+            if(isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                 correctValue();
                 super.replace(fb, offset, length, text, attrs);
             }
@@ -62,7 +78,7 @@ public class SettingsWindow extends JFrame {
                 super.replace(fb, offset, length, "", null);
             }
             else {
-                if (isInt(sb.toString())) {
+                if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                     correctValue();
                     super.remove(fb, offset, length);
                 }
@@ -89,6 +105,10 @@ public class SettingsWindow extends JFrame {
             } catch (NumberFormatException e) {
                 return false;
             }
+        }
+
+        private boolean inRange(int min, int max, int value) {
+            return min <= value && value <= max;
         }
     }
 
@@ -138,12 +158,12 @@ public class SettingsWindow extends JFrame {
      * @param size la taille du champ texte
      * @return le champ texte
      */
-    private JTextField createTextField(int size, String toolTipText) {
+    private JTextField createTextField(int size, int min, int max, String toolTipText) {
         JTextField text = new JTextField(size);
         text.setToolTipText(toolTipText);
 
         PlainDocument doc = (PlainDocument) text.getDocument();
-        doc.setDocumentFilter(new IntFilter());
+        doc.setDocumentFilter(new IntFilter(min, max));
 
         return text;
     }
@@ -206,7 +226,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10, "Enter a value between 2 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -223,7 +243,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -231,7 +251,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 50,"Enter a value between 1 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -243,7 +263,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
 
         return settingsContents;
     }
@@ -297,8 +317,22 @@ public class SettingsWindow extends JFrame {
         return String.valueOf(cbo.getSelectedItem());
     }
 
-    private void parametersVerification(boolean bool1, boolean bool2) {
+    private void parametersVerification(boolean nullValue, boolean alreadySelected) {
+        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
+        String message = "";
 
+        if(nullValue && alreadySelected) {
+            message = messages.get(0);
+        }
+        else if(nullValue) {
+            message = messages.get(1);
+        }
+        else if(alreadySelected) {
+            message = messages.get(2);
+        }
+
+        _userMessage.setText(message);
+        _userMessage.setVisible(true);
     }
 
     /**
@@ -335,23 +369,21 @@ public class SettingsWindow extends JFrame {
      */
     private void confirmSettings() {
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
-        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Empty field(s) - Same options chosen", "Empty field(s)", "Same options chosen"));
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
         boolean alreadySelected = false;
         boolean nullValue = false;
-        String message = "";
 
         for(Component comp: settingsContents.getComponents()) {
             if(comp instanceof JTextField) {
                 JTextField text = (JTextField) comp;
-                String textValue = text.getText();
+                String value = text.getText();
 
-                if(textValue.isEmpty()) {
+                if(value.isEmpty()) {
                     nullValue = true;
                 }
                 else {
-                    int parameter = Integer.parseInt(textValue);
+                    int parameter = Integer.parseInt(value);
                     numericParameters.add(parameter);
                 }
             }
@@ -384,24 +416,13 @@ public class SettingsWindow extends JFrame {
                     }
                 }
             }
-        }
 
-        if(nullValue && alreadySelected) {
-            message = messages.get(0);
-        }
-        else if(nullValue) {
-            message = messages.get(1);
-        }
-        else if(alreadySelected) {
-            message = messages.get(2);
-        }
+            parametersVerification(nullValue, alreadySelected);
 
-        _userMessage.setText(message);
-        _userMessage.setVisible(true);
-
-        if(!nullValue && !alreadySelected) {
-            _userMessage.setVisible(true);
-            Facade.initGameWindow(numericParameters, textParameters);
+            if(!nullValue && !alreadySelected) {
+                _userMessage.setVisible(false);
+                Facade.initGameWindow(numericParameters, textParameters);
+            }
         }
     }
 }
