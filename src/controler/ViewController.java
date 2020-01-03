@@ -7,6 +7,8 @@ import view.SettingsWindow;
 
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 public class ViewController {
     //private ...
     private SettingsWindow _settingsWin;
@@ -50,8 +52,43 @@ public class ViewController {
         _gameWin.setVisible(true);
     }
     public void clockForward() {
-        _gameWin.update();
+        synchronized (this) {
+            _gameWin.update();
+//            try {
+//                sleep(3000);
+//            }catch (InterruptedException e){
+//                e.printStackTrace();
+//            }
+            notify();
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Méthode permettant de convertir un type d'évolution (string) en type d'énumération

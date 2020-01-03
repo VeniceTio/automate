@@ -69,20 +69,26 @@ public class Game {
         ViewController VC = ViewController.getInstance();
         Thread MajView = new Thread(VC:: clockForward);
         Thread MajGrids = new Thread(GC::clockForward);
-        while(alive || turn<_maxturn){
+        while(alive && turn<_maxturn){
             System.out.println("## turn : "+turn+"##");
             //MajGrids.start();
             //MajView.start();
-            new Thread(VC:: clockForward).start();
-            new Thread(GC::clockForward).start();
-            alive = GC.allAlive();
-            turn++;
-            try {
-                Thread.sleep(_gameSpeed);
-            }catch (InterruptedException e){
-                e.printStackTrace();
+            //VC.clockForward();
+            //new Thread(GC::clockForward).start();
+            synchronized (VC){
+                GC.clockForward();
+                new Thread(VC:: clockForward).start();
+                VC.wait();
+                alive = GC.allAlive();
+                turn++;
+                try {
+                    sleep(_gameSpeed);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
+        System.out.println("jeu fini");
         //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }
 
