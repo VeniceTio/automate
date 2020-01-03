@@ -20,10 +20,11 @@ public class Facade {
         GameWindow gw = new GameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3));
         GridController.getInstance().add(gw);
         gw.setVisible(true);
-        System.out.println(numericParameters);
-        System.out.println(toExpansion(textParameters.get(0)));
-        System.out.println(toAutomaton(textParameters.get(1)));
-        System.out.println(toAutomaton(textParameters.get(2)));
+        System.out.println("Facade.java: initGameWindow()");
+        System.out.println("Les paramètres numériques entrés: " + numericParameters);
+        System.out.println("Méthode d'extension de la grille choisi: " + toExpansion(textParameters.get(0)));
+        System.out.println("Méthode d'évolution joueur n°1: " + toAutomaton(textParameters.get(1)));
+        System.out.println("Méthode d'évolution joueur n°2: " + toAutomaton(textParameters.get(2)));
     }
 
     /**

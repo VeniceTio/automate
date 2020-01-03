@@ -45,6 +45,7 @@ public class Game {
         GridController GC = GridController.getInstance();
         ExpansionStrategy<Expansion> expansionType = getExpansionType(expansion);
         Rule<State> autoType;
+        System.out.println("Game.java: createGameWindow()");
         System.out.println("size : " + gridSize);
         System.out.println("gameSpeed : " + gameSpeed);
         System.out.println("turnNum : " + turnNum);
@@ -81,23 +82,24 @@ public class Game {
      * @return l'instance de l'automate choisi
      */
     public Rule<State> getAutomaton(Automaton automaton){
+        System.out.println("Game.java: getAutomaton()");
         Rule<State> autoType;
         switch (automaton){
             case FREDKIN1:
                 autoType = new Fredkin1();
-                System.out.println("automa rnetré fred1");
+                System.out.println("automate fred1");
                 break;
             case FREDKIN2:
                 autoType = new Fredkin2();
-                System.out.println("automa rnetré fred2");
+                System.out.println("automate fred2");
                 break;
             case GAMEOFLIFE:
                 autoType = new GameOfLife();
-                System.out.println("automa rnetré gameoflife");
+                System.out.println("automate gameoflife");
                 break;
             default:
                 autoType = null;
-                System.out.println("automa pas trouvé");
+                System.out.println("automate non trouvé");
                 break;
         }
         return autoType;
