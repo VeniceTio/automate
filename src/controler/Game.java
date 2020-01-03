@@ -38,8 +38,8 @@ public class Game {
      * @param expansion la méthode d'extension de la grille
      * @param players les choix d'évolution d'automates des deux joueurs
      */
-    public void createGameWindow(int gridSize, int gameSpeed, int turnNum, int cellNum,
-                                 Expansion expansion, Automaton[] players){
+    public void createGame(int gridSize, int gameSpeed, int turnNum, int cellNum,
+                           Expansion expansion, Automaton[] players){
         _gameSpeed = gameSpeed*1000;
         _maxturn = turnNum;
         GridController GC = GridController.getInstance();
@@ -66,12 +66,22 @@ public class Game {
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
+        ViewController VC = ViewController.getInstance();
+        Thread MajView = new Thread(VC:: clockForward);
+        Thread MajGrids = new Thread(GC::clockForward);
         while(alive || turn<_maxturn){
             System.out.println("## turn : "+turn+"##");
-            GC.clockForward();
+            //MajGrids.start();
+            //MajView.start();
+            new Thread(VC:: clockForward).start();
+            new Thread(GC::clockForward).start();
             alive = GC.allAlive();
             turn++;
-            sleep(_gameSpeed);
+            try {
+                Thread.sleep(_gameSpeed);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
         }
         //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }

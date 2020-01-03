@@ -2,6 +2,7 @@ package view;
 
 import controler.Game;
 import controler.GridController;
+import controler.ViewController;
 import model.Automaton;
 import model.Expansion;
 
@@ -16,10 +17,10 @@ public class Facade {
     public static void initGameWindow(ArrayList<Integer> numericParameters, ArrayList<String> textParameters) {
         Automaton[] aPlayers = {toAutomaton(textParameters.get(1)), toAutomaton((textParameters.get(2)))};
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
-        Game.getInstance().createGameWindow(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), toExpansion(textParameters.get(0)), aPlayers);
-        GameWindow gw = new GameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3));
-        GridController.getInstance().add(gw);
-        gw.setVisible(true);
+
+        Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), toExpansion(textParameters.get(0)), aPlayers);
+        ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3));
+
         System.out.println("Facade.java: initGameWindow()");
         System.out.println("Les paramètres numériques entrés: " + numericParameters);
         System.out.println("Méthode d'extension de la grille choisi: " + toExpansion(textParameters.get(0)));
@@ -30,8 +31,8 @@ public class Facade {
     /**
      * Méthode permettant de créer la fenêtre de paramètrage
      */
-    public static void createSettingsWindow(){
-        new SettingsWindow().setVisible(true);
+    public static void init(){
+        ViewController.getInstance().createSettingWindow();
     }
 
     /**
@@ -89,6 +90,6 @@ public class Facade {
     }
 
     public static void main(String[] args){
-        createSettingsWindow();
+        init();
     }
 }

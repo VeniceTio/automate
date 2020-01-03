@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameWindow extends JFrame implements Observer{
 
@@ -194,11 +195,12 @@ public class GameWindow extends JFrame implements Observer{
         int index = -1;
         int idPlayer = -1;
         if(nbPlayer!=0) {
-            winner = _rand.nextInt(nbPlayer);
+            winner = _rand.nextInt(nbPlayer+1);
         }else {
             winner = 0;
         }
         //System.out.println("## winner : "+winner);
+        //System.out.println(Arrays.toString(player));
         for (boolean play:player){
             idPlayer++;
             if(play){
@@ -218,12 +220,13 @@ public class GameWindow extends JFrame implements Observer{
      */
     public void update() {
         int nbCell;
-        boolean[] players = {false,false};
+        boolean[] players;
         MyButton button;
         GridController GC = GridController.getInstance();
         for(int i=0;i<_cells.size();i++){
             button = _cells.get(i);
             nbCell=-1;
+            players = new boolean[]{false, false};
             for(int j=0;j<_players.length;j++){
                 if (GC.getState(j,i) != State.DEAD){
                     nbCell++;
