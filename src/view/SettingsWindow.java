@@ -135,8 +135,9 @@ public class SettingsWindow extends JFrame {
      * @param size la taille du champ texte
      * @return le champ texte
      */
-    private JTextField createTextField(int size) {
+    private JTextField createTextField(int size, String toolTipText) {
         JTextField text = new JTextField(size);
+        text.setToolTipText(toolTipText);
 
         PlainDocument doc = (PlainDocument) text.getDocument();
         doc.setDocumentFilter(new IntFilter());
@@ -202,7 +203,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, "Enter a value between 2 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -219,7 +220,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -227,7 +228,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -239,7 +240,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         return settingsContents;
     }
