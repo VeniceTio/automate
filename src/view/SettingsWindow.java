@@ -2,11 +2,10 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import javax.swing.text.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +14,84 @@ public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions = new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions = new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
+    private JLabel _userMessage = createLabel("");
+
+    class IntFilter extends DocumentFilter {
+        @Override
+        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+            Document doc = fb.getDocument();
+            StringBuilder sb = new StringBuilder();
+            sb.append(doc.getText(0, doc.getLength()));
+            sb.insert(offset, string);
+
+            if (isInt(sb.toString())) {
+                correctValue();
+                super.insertString(fb, offset, string, attr);
+            }
+            else {
+                incorrectValue();
+            }
+        }
+
+        @Override
+        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            Document doc = fb.getDocument();
+            StringBuilder sb = new StringBuilder();
+            sb.append(doc.getText(0, doc.getLength()));
+            sb.replace(offset, offset + length, text);
+
+            if (isInt(sb.toString())) {
+                correctValue();
+                super.replace(fb, offset, length, text, attrs);
+            }
+            else {
+                incorrectValue();
+            }
+
+        }
+
+        @Override
+        public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
+            Document doc = fb.getDocument();
+            StringBuilder sb = new StringBuilder();
+            sb.append(doc.getText(0, doc.getLength()));
+            sb.delete(offset, offset + length);
+
+            if(sb.toString().isEmpty()) {
+                super.replace(fb, offset, length, "", null);
+            }
+            else {
+                if (isInt(sb.toString())) {
+                    correctValue();
+                    super.remove(fb, offset, length);
+                }
+                else {
+                    incorrectValue();
+                }
+            }
+        }
+
+        private void correctValue() {
+            _userMessage.setText("");
+            _userMessage.setVisible(false);
+        }
+
+        private void incorrectValue() {
+            _userMessage.setText("Invalid value !");
+            _userMessage.setForeground(Color.RED);
+            _userMessage.setVisible(true);
+        }
+
+        private boolean isInt(String text) {
+            try {
+                Integer.parseInt(text);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+
+    }
 
     /**
      * Méthode permettant de créer la fenêtre de paramètrage du jeu
@@ -58,8 +135,14 @@ public class SettingsWindow extends JFrame {
      * @param size la taille du champ texte
      * @return le champ texte
      */
-    private JTextField createTextField(int size) {
-        return new JTextField(size);
+    private JTextField createTextField(int size, String toolTipText) {
+        JTextField text = new JTextField(size);
+        text.setToolTipText(toolTipText);
+
+        PlainDocument doc = (PlainDocument) text.getDocument();
+        doc.setDocumentFilter(new IntFilter());
+
+        return text;
     }
 
     /**
@@ -120,7 +203,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, "Enter a value between 2 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -137,7 +220,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -145,7 +228,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -157,7 +240,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10), gbc);
+        settingsContents.add(createTextField(10, ""), gbc);
 
         return settingsContents;
     }
@@ -168,7 +251,8 @@ public class SettingsWindow extends JFrame {
      */
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        footer.setBorder(new EmptyBorder(0, 0, 0, 0));
+        footer.setBorder(new EmptyBorder(0, 0, 0, 6));
+        footer.add(_userMessage);
         footer.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
         footer.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
         return footer;
@@ -257,6 +341,7 @@ public class SettingsWindow extends JFrame {
                 }
             }
         }
+
 
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
         Facade.initGameWindow(numericParameters, textParameters);
