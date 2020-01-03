@@ -21,18 +21,25 @@ public class GameWindow extends JFrame implements Observer{
         }
     }
 
+    //TODO: commentaire à faire
+    /**
+     * Le nombre de cellule par joueur
+     */
     private int _startCell;
     private boolean _init = false;
     private Color[] _players = {Color.BLUE,Color.RED};
     private ArrayList<MyButton> _cells = new ArrayList<>();
     private static SecureRandom _rand = new SecureRandom();
+
     /**
      * Méthode permettant de créer la fenêtre de jeu
-     * @param size
+     * @param size la taille de la grille de jeu
+     * @param players les méthodes d'évolution des joueurs
+     * @param cellNum le nombre de cellule par joueur
      */
     public GameWindow(int size, String[] players, int cellNum) {
-        //
         _startCell = cellNum;
+
         //Game window
         setTitle("Game Window");
         setSize(500, 400);
@@ -86,10 +93,9 @@ public class GameWindow extends JFrame implements Observer{
      * @return la panel contenant la grille de jeu
      */
     private JPanel createGridGame(int gridSize) {
-
         GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
         JPanel gridGame = new JPanel(gridLayout);
-        for(int i = 0; i < gridSize * gridSize; i++) {
+        for(int i = 0; i < (gridSize * gridSize); i++) {
             MyButton cell = new MyButton(i);
             cell.setBackground(Color.white);
             cell.addActionListener(actionEvent -> select(cell));
@@ -134,6 +140,10 @@ public class GameWindow extends JFrame implements Observer{
         return footer;
     }
 
+    /**
+     * TODO: commentaire à faire
+     * @param button
+     */
     public void select(MyButton button){
         if(!_init){
             GridController GC = GridController.getInstance();
@@ -147,6 +157,13 @@ public class GameWindow extends JFrame implements Observer{
             }
         }
     }
+
+    /**
+     * TODO: commentaire à faire
+     * @param button
+     * @param player
+     * @param send
+     */
     private void changeColor(MyButton button, int player,boolean send){
         Color newColor = Color.white;
         if(button.getBackground() == _players[player]){
@@ -163,6 +180,14 @@ public class GameWindow extends JFrame implements Observer{
             }
         }
     }
+
+    /**
+     * TODO: commentaire à faire
+     * @param player
+     * @param nbPlayer
+     * @param pos
+     * @return
+     */
     private Color fight(boolean[] player,int nbPlayer,int pos){
         int winner;
         Color newColor = Color.white;
@@ -188,6 +213,9 @@ public class GameWindow extends JFrame implements Observer{
         return newColor;
     }
 
+    /**
+     * TODO: commentaire à faire
+     */
     public void update() {
         int nbCell;
         boolean[] players = {false,false};

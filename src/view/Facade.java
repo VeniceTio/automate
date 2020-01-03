@@ -8,6 +8,11 @@ import model.Expansion;
 import java.util.ArrayList;
 
 public class Facade {
+    /**
+     * Méthode permettant d'initialiser une fenêtre de jeu
+     * @param numericParameters les paramètres numérriques du jeu
+     * @param textParameters les paramètres textuels du jeu
+     */
     public static void initGameWindow(ArrayList<Integer> numericParameters, ArrayList<String> textParameters) {
         Automaton[] aPlayers = {toAutomaton(textParameters.get(1)), toAutomaton((textParameters.get(2)))};
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
@@ -21,10 +26,18 @@ public class Facade {
         System.out.println(toAutomaton(textParameters.get(2)));
     }
 
+    /**
+     * Méthode permettant de créer la fenêtre de paramètrage
+     */
     public static void createSettingsWindow(){
         new SettingsWindow().setVisible(true);
     }
 
+    /**
+     * Méthode permettant de convertir un type d'évolution (string) en type d'énumération
+     * @param text le type d'évolution choisi par les joueurs
+     * @return le type d'évolution en type énuméré
+     */
     private static Automaton toAutomaton(String text) {
         Automaton automatonChosen;
         switch(text) {
@@ -44,6 +57,11 @@ public class Facade {
         return automatonChosen;
     }
 
+    /**
+     * Méthode permettant de convertir une méthode d'extension(string) en type d'énumération
+     * @param text la méthode d'extension de la grille
+     * @return la méthode d'évolution de la grille  en type énuméré
+     */
     private static Expansion toExpansion(String text) {
         Expansion expansionChosen;
         switch(text) {
@@ -68,6 +86,7 @@ public class Facade {
 
         return expansionChosen;
     }
+
     public static void main(String[] args){
         createSettingsWindow();
     }
