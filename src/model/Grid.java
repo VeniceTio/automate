@@ -111,7 +111,7 @@ public class Grid {
             for(int k = 0; k< _size; k++){
                 previousState = _grid.get((i*_size)+k);
                 newState = getNewState(getNeighbors(k,i),previousState);
-                nextGrid.set((i*_size+k),newState);
+                nextGrid.set(((i*_size)+k),newState);
             }
         }
         _grid = nextGrid;
