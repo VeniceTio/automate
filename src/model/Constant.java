@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Constant implements ExpansionStrategy<Expansion> {
+public class Constant implements ExpansionStrategy<Expansion> { //TODO: commentaire à faire
     @Override
     public void leftUpCorner(int x, int y, ArrayList<State> grid, int size) {
         _neighbors.add(State.DEAD);

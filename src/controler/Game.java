@@ -5,13 +5,21 @@ import model.*;
 import static java.lang.Thread.sleep;
 
 public class Game {
-
+    /**
+     * Le nombre de tours maximale de jeu
+     */
     private int _maxturn;
+    /**
+     * la vitesse de jeu
+     */
     private int _gameSpeed;
+    /**
+     * L'instance de la classe
+     */
     private static Game _instance = null;
 
     /**
-     * Méthode permettant de récupérer l"instance de la classe
+     * Méthode permettant de récupérer l'instance de la classe
      * @return
      */
     public static Game getInstance(){
@@ -28,7 +36,7 @@ public class Game {
      * @param turnNum le nombre de tours de jeu
      * @param cellNum le nombre de cellule par joueur
      * @param expansion la méthode d'extension de la grille
-     * @param players les choix d'évolution des automates
+     * @param players les choix d'évolution d'automates des deux joueurs
      */
     public void createGameWindow(int gridSize, int gameSpeed, int turnNum, int cellNum,
                                  Expansion expansion, Automaton[] players){
@@ -50,7 +58,7 @@ public class Game {
     }
 
     /**
-     *
+     * Méthode permettant de faire tourner le jeu
      * @throws InterruptedException
      */
     public void automatonGame() throws InterruptedException {
@@ -68,9 +76,9 @@ public class Game {
     }
 
     /**
-     *
+     * Méthode permettant de créer l'instance de l'automate choisi
      * @param automaton le mode d'évolution choisi
-     * @return
+     * @return l'instance de l'automate choisi
      */
     public Rule<State> getAutomaton(Automaton automaton){
         Rule<State> autoType;
@@ -96,9 +104,9 @@ public class Game {
     }
 
     /**
-     *
+     * Méthode permettant de créer l'intance de l'extension choisi
      * @param expansion la méthode d'extension de grille choisi
-     * @return
+     * @return l'instance de l'extension de la grille choisi
      */
     public ExpansionStrategy<Expansion> getExpansionType(Expansion expansion){
         ExpansionStrategy<Expansion> expansionType;

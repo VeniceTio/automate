@@ -13,7 +13,7 @@ public interface ExpansionStrategy<Expansion> {
      * @param x la position x de la cellule
      * @param y la position y de la cellule
      * @param grid la grille de jeu
-     * @return la grille contenant l'état des voisins de la cellule
+     * @return la liste contenant l'état des voisins de la cellule
      */
     default ArrayList<State> getNeighborsState(int x,int y, ArrayList<State> grid){
         //System.out.println("trouvé x="+x+" y="+y);
@@ -49,6 +49,7 @@ public interface ExpansionStrategy<Expansion> {
         return _neighbors;
     }
 
+    //TODO: commentaire à faire
     void leftUpCorner(int x,int y, ArrayList<State> grid,int size);
     void leftDownCorner(int x,int y, ArrayList<State> grid,int size);
     void rightUpCorner(int x,int y, ArrayList<State> grid,int size);
