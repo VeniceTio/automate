@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
 
@@ -40,7 +41,7 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.replace(offset, offset + length, text);
 
-            if (isInt(sb.toString())) {
+            if(isInt(sb.toString())) {
                 correctValue();
                 super.replace(fb, offset, length, text, attrs);
             }
@@ -78,7 +79,6 @@ public class SettingsWindow extends JFrame {
 
         private void incorrectValue() {
             _userMessage.setText("Invalid value !");
-            _userMessage.setForeground(Color.RED);
             _userMessage.setVisible(true);
         }
 
@@ -90,7 +90,6 @@ public class SettingsWindow extends JFrame {
                 return false;
             }
         }
-
     }
 
     /**
@@ -250,11 +249,19 @@ public class SettingsWindow extends JFrame {
      * @return le panel contenant les boutons
      */
     private JPanel createFooter() {
-        JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        footer.setBorder(new EmptyBorder(0, 0, 0, 6));
-        footer.add(_userMessage);
-        footer.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
-        footer.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
+        _userMessage.setForeground(Color.RED);
+        _userMessage.setBorder(new EmptyBorder(0, 5, 0, 0));
+
+        JPanel footer = new JPanel(new BorderLayout());
+        footer.setBorder(new EmptyBorder(0, 0, 0, 0));
+
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttons.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
+        buttons.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
+
+        footer.add(_userMessage, BorderLayout.WEST);
+        footer.add(buttons, BorderLayout.EAST);
+
         return footer;
     }
 
@@ -322,28 +329,60 @@ public class SettingsWindow extends JFrame {
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        boolean notNull = false;
 
         for(Component comp: settingsContents.getComponents()) {
             if(comp instanceof JTextField) {
                 JTextField text = (JTextField) comp;
-                int parameter = Integer.parseInt(text.getText());
-                numericParameters.add(parameter);
+                String textValue = text.getText();
+
+                if(textValue.isEmpty()) {
+                    notNull = true;
+                }
+                else {
+                    int parameter = Integer.parseInt(textValue);
+                    numericParameters.add(parameter);
+                }
             }
             if(comp instanceof JComboBox) {
-                textParameters.add(cboDataRetrieving(comp));
+                String value = cboDataRetrieving(comp);
+
+                if(value.isEmpty()) {
+                    notNull = true;
+                }
+                else {
+                    textParameters.add(value);
+                }
             }
             if(comp instanceof JPanel) {
                 JPanel gameOptionsPanel = (JPanel) comp;
                 for(Component c: gameOptionsPanel.getComponents()) {
                     if(c instanceof JComboBox) {
-                        textParameters.add(cboDataRetrieving(c));
+                        String value = cboDataRetrieving(c);
+
+                        if(value.isEmpty()) {
+                            notNull = true;
+                        }
+                        else {
+                            textParameters.add(value);
+                        }
                     }
                 }
             }
         }
 
+        //TODO: faire la vérification des modes d'évolution choisi par les deux joueurs
 
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
-        Facade.initGameWindow(numericParameters, textParameters);
+        if(notNull) {
+            _userMessage.setText("Every field should be filled !");
+            _userMessage.setVisible(true);
+        }
+        else {
+            _userMessage.setText("");
+            _userMessage.setVisible(false);
+
+            //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
+            Facade.initGameWindow(numericParameters, textParameters);
+        }
     }
 }
