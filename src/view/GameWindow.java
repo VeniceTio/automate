@@ -19,6 +19,8 @@ public class GameWindow extends JFrame implements Observer{
         MyButton(int index){
             super();
             _index=index;
+            setOpaque(true);
+            setEnabled(true);
         }
     }
 
@@ -31,6 +33,7 @@ public class GameWindow extends JFrame implements Observer{
     private Color[] _players = {Color.BLUE,Color.RED};
     private ArrayList<MyButton> _cells = new ArrayList<>();
     private static SecureRandom _rand = new SecureRandom();
+    private JPanel  _gridGame;
 
     /**
      * Méthode permettant de créer la fenêtre de jeu
@@ -95,15 +98,15 @@ public class GameWindow extends JFrame implements Observer{
      */
     private JPanel createGridGame(int gridSize) {
         GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
-        JPanel gridGame = new JPanel(gridLayout);
+        _gridGame = new JPanel(gridLayout);
         for(int i = 0; i < (gridSize * gridSize); i++) {
             MyButton cell = new MyButton(i);
             cell.setBackground(Color.white);
             cell.addActionListener(actionEvent -> select(cell));
-            gridGame.add(cell, false);
+            _gridGame.add(cell, false);
             _cells.add(cell);
         }
-        return gridGame;
+        return _gridGame;
     }
 
     /**
@@ -124,11 +127,13 @@ public class GameWindow extends JFrame implements Observer{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if(_init){
-                    try {
-                        Game.getInstance().automatonGame();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    new Thread(()-> {
+                        try {
+                            Game.getInstance().automatonGame();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
                     button.setEnabled(false);
                 }
             }
@@ -157,6 +162,9 @@ public class GameWindow extends JFrame implements Observer{
                 _init = true;
             }
         }
+//        else {
+//            button.setBackground(Color.MAGENTA);
+//        }
     }
 
     /**
@@ -238,8 +246,17 @@ public class GameWindow extends JFrame implements Observer{
                 button.setBackground(Color.white);
             } else {
                 //System.out.println("#### combat pos="+i);
-                button.setBackground(fight(players, nbCell,i));
+                Color newColor = fight(players, nbCell,i);
+                //System.out.println("couleur : "+newColor);
+                button.setBackground(newColor);
+                //button.repaint();
             }
+            //_gridGame.removeAll();
         }
+//        _gridGame.repaint();
+//        for(int i=0;i<_cells.size();i++){
+//            _gridGame.add(_cells.get(i));
+//        }
+
     }
 }
