@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
 
@@ -10,6 +9,7 @@ import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
@@ -293,8 +293,12 @@ public class SettingsWindow extends JFrame {
      * @return l'information récupérer de la combobox
      */
     private String cboDataRetrieving(Component c) {
-        JComboBox cbo = (JComboBox) c;
+        JComboBox<String> cbo = (JComboBox) c;
         return String.valueOf(cbo.getSelectedItem());
+    }
+
+    private void parametersVerification(boolean bool1, boolean bool2) {
+
     }
 
     /**
@@ -302,7 +306,7 @@ public class SettingsWindow extends JFrame {
      * @param e l'action event
      */
     private void updateGameOptions(ActionEvent e) {
-        JComboBox<String> cboSelected = (JComboBox) e.getSource();
+        JComboBox cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
         String gameOptionSelected = String.valueOf(cboSelected.getSelectedItem());
 
@@ -330,10 +334,13 @@ public class SettingsWindow extends JFrame {
      * Méthode permettant de récupérer toutes les informations de tous les champs de la fenêtre
      */
     private void confirmSettings() {
+        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Empty field(s) - Same options chosen", "Empty field(s)", "Same options chosen"));
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
-        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
-        boolean notNull = false;
+        boolean alreadySelected = false;
+        boolean nullValue = false;
+        String message = "";
 
         for(Component comp: settingsContents.getComponents()) {
             if(comp instanceof JTextField) {
@@ -341,7 +348,7 @@ public class SettingsWindow extends JFrame {
                 String textValue = text.getText();
 
                 if(textValue.isEmpty()) {
-                    notNull = true;
+                    nullValue = true;
                 }
                 else {
                     int parameter = Integer.parseInt(textValue);
@@ -352,7 +359,7 @@ public class SettingsWindow extends JFrame {
                 String value = cboDataRetrieving(comp);
 
                 if(value.isEmpty()) {
-                    notNull = true;
+                    nullValue = true;
                 }
                 else {
                     textParameters.add(value);
@@ -365,27 +372,35 @@ public class SettingsWindow extends JFrame {
                         String value = cboDataRetrieving(c);
 
                         if(value.isEmpty()) {
-                            notNull = true;
+                            nullValue = true;
                         }
                         else {
                             textParameters.add(value);
+                        }
+
+                        if(Collections.frequency(textParameters, value) > 1) {
+                            alreadySelected = true;
                         }
                     }
                 }
             }
         }
 
-        //TODO: faire la vérification des modes d'évolution choisi par les deux joueurs
-
-        if(notNull) {
-            _userMessage.setText("Every field should be filled !");
-            _userMessage.setVisible(true);
+        if(nullValue && alreadySelected) {
+            message = messages.get(0);
         }
-        else {
-            _userMessage.setText("");
-            _userMessage.setVisible(false);
+        else if(nullValue) {
+            message = messages.get(1);
+        }
+        else if(alreadySelected) {
+            message = messages.get(2);
+        }
 
-            //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
+        _userMessage.setText(message);
+        _userMessage.setVisible(true);
+
+        if(!nullValue && !alreadySelected) {
+            _userMessage.setVisible(true);
             Facade.initGameWindow(numericParameters, textParameters);
         }
     }
