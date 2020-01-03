@@ -1,5 +1,6 @@
 package view;
 
+import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
@@ -318,21 +319,7 @@ public class SettingsWindow extends JFrame {
     }
 
     private void parametersVerification(boolean nullValue, boolean alreadySelected) {
-        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
-        String message = "";
 
-        if(nullValue && alreadySelected) {
-            message = messages.get(0);
-        }
-        else if(nullValue) {
-            message = messages.get(1);
-        }
-        else if(alreadySelected) {
-            message = messages.get(2);
-        }
-
-        _userMessage.setText(message);
-        _userMessage.setVisible(true);
     }
 
     /**
@@ -369,10 +356,12 @@ public class SettingsWindow extends JFrame {
      */
     private void confirmSettings() {
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
         boolean alreadySelected = false;
         boolean nullValue = false;
+        String message = "";
 
         for(Component comp: settingsContents.getComponents()) {
             if(comp instanceof JTextField) {
@@ -416,13 +405,24 @@ public class SettingsWindow extends JFrame {
                     }
                 }
             }
+        }
 
-            parametersVerification(nullValue, alreadySelected);
+        if(nullValue && alreadySelected) {
+            message = messages.get(0);
+        }
+        else if(nullValue) {
+            message = messages.get(1);
+        }
+        else if(alreadySelected) {
+            message = messages.get(2);
+        }
 
-            if(!nullValue && !alreadySelected) {
-                _userMessage.setVisible(false);
-                Facade.initGameWindow(numericParameters, textParameters);
-            }
+        _userMessage.setText(message);
+        _userMessage.setVisible(true);
+
+        if(!nullValue && !alreadySelected) {
+            _userMessage.setVisible(true);
+            Facade.initGameWindow(numericParameters, textParameters);
         }
     }
 }
