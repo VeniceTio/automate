@@ -156,10 +156,15 @@ public class GameWindow extends JFrame implements Observer{
             if (GC.count(0)!= _startCell){
                 changeColor(button,0,true);
             }
-            else if (GC.count(1)!= _startCell){
-                changeColor(button,1,true);
-            } else {
-                _init = true;
+            else if (GC.count(1)!= _startCell-1){
+                if (button.getBackground()==Color.white){
+                    changeColor(button,1,true);
+                }
+            } else if (GC.count(1)!= _startCell){
+                if (button.getBackground()==Color.white) {
+                    changeColor(button, 1, true);
+                    _init = true;
+                }
             }
         }
 //        else {
