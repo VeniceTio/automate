@@ -1,5 +1,6 @@
 package view;
 
+import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
@@ -9,6 +10,7 @@ import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
@@ -17,6 +19,22 @@ public class SettingsWindow extends JFrame {
     private JLabel _userMessage = createLabel("");
 
     class IntFilter extends DocumentFilter {
+        int _lowerBound;
+        int _upperBound;
+
+        public IntFilter(int min, int max) {
+            _lowerBound = min;
+            _upperBound = max;
+        }
+
+        private int getLowerBound() {
+            return _lowerBound;
+        }
+
+        private int getUpperBound() {
+            return _upperBound;
+        }
+
         @Override
         public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
             Document doc = fb.getDocument();
@@ -24,7 +42,7 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.insert(offset, string);
 
-            if (isInt(sb.toString())) {
+            if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                 correctValue();
                 super.insertString(fb, offset, string, attr);
             }
@@ -40,7 +58,7 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.replace(offset, offset + length, text);
 
-            if (isInt(sb.toString())) {
+            if(isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                 correctValue();
                 super.replace(fb, offset, length, text, attrs);
             }
@@ -61,7 +79,7 @@ public class SettingsWindow extends JFrame {
                 super.replace(fb, offset, length, "", null);
             }
             else {
-                if (isInt(sb.toString())) {
+                if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                     correctValue();
                     super.remove(fb, offset, length);
                 }
@@ -78,7 +96,6 @@ public class SettingsWindow extends JFrame {
 
         private void incorrectValue() {
             _userMessage.setText("Invalid value !");
-            _userMessage.setForeground(Color.RED);
             _userMessage.setVisible(true);
         }
 
@@ -91,6 +108,9 @@ public class SettingsWindow extends JFrame {
             }
         }
 
+        private boolean inRange(int min, int max, int value) {
+            return min <= value && value <= max;
+        }
     }
 
     /**
@@ -139,12 +159,12 @@ public class SettingsWindow extends JFrame {
      * @param size la taille du champ texte
      * @return le champ texte
      */
-    private JTextField createTextField(int size, String toolTipText) {
+    private JTextField createTextField(int size, int min, int max, String toolTipText) {
         JTextField text = new JTextField(size);
         text.setToolTipText(toolTipText);
 
         PlainDocument doc = (PlainDocument) text.getDocument();
-        doc.setDocumentFilter(new IntFilter());
+        doc.setDocumentFilter(new IntFilter(min, max));
 
         return text;
     }
@@ -207,7 +227,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10, "Enter a value between 2 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -224,7 +244,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -232,7 +252,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 50,"Enter a value between 1 and 50"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -244,7 +264,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10, ""), gbc);
+        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
 
         return settingsContents;
     }
@@ -254,11 +274,19 @@ public class SettingsWindow extends JFrame {
      * @return le panel contenant les boutons
      */
     private JPanel createFooter() {
-        JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        footer.setBorder(new EmptyBorder(0, 0, 0, 6));
-        footer.add(_userMessage);
-        footer.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
-        footer.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
+        _userMessage.setForeground(Color.RED);
+        _userMessage.setBorder(new EmptyBorder(0, 5, 0, 0));
+
+        JPanel footer = new JPanel(new BorderLayout());
+        footer.setBorder(new EmptyBorder(0, 0, 0, 0));
+
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttons.add(createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
+        buttons.add(createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
+
+        footer.add(_userMessage, BorderLayout.WEST);
+        footer.add(buttons, BorderLayout.EAST);
+
         return footer;
     }
 
@@ -286,8 +314,12 @@ public class SettingsWindow extends JFrame {
      * @return l'information récupérer de la combobox
      */
     private String cboDataRetrieving(Component c) {
-        JComboBox cbo = (JComboBox) c;
+        JComboBox<String> cbo = (JComboBox) c;
         return String.valueOf(cbo.getSelectedItem());
+    }
+
+    private void parametersVerification(boolean nullValue, boolean alreadySelected) {
+
     }
 
     /**
@@ -295,7 +327,7 @@ public class SettingsWindow extends JFrame {
      * @param e l'action event
      */
     private void updateGameOptions(ActionEvent e) {
-        JComboBox<String> cboSelected = (JComboBox) e.getSource();
+        JComboBox cboSelected = (JComboBox) e.getSource();
         JPanel contents = (JPanel) cboSelected.getParent();
         String gameOptionSelected = String.valueOf(cboSelected.getSelectedItem());
 
@@ -323,31 +355,74 @@ public class SettingsWindow extends JFrame {
      * Méthode permettant de récupérer toutes les informations de tous les champs de la fenêtre
      */
     private void confirmSettings() {
+        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
-        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        boolean alreadySelected = false;
+        boolean nullValue = false;
+        String message = "";
 
         for(Component comp: settingsContents.getComponents()) {
             if(comp instanceof JTextField) {
                 JTextField text = (JTextField) comp;
-                int parameter = Integer.parseInt(text.getText());
-                numericParameters.add(parameter);
+                String value = text.getText();
+
+                if(value.isEmpty()) {
+                    nullValue = true;
+                }
+                else {
+                    int parameter = Integer.parseInt(value);
+                    numericParameters.add(parameter);
+                }
             }
             if(comp instanceof JComboBox) {
-                textParameters.add(cboDataRetrieving(comp));
+                String value = cboDataRetrieving(comp);
+
+                if(value.isEmpty()) {
+                    nullValue = true;
+                }
+                else {
+                    textParameters.add(value);
+                }
             }
             if(comp instanceof JPanel) {
                 JPanel gameOptionsPanel = (JPanel) comp;
                 for(Component c: gameOptionsPanel.getComponents()) {
                     if(c instanceof JComboBox) {
-                        textParameters.add(cboDataRetrieving(c));
+                        String value = cboDataRetrieving(c);
+
+                        if(value.isEmpty()) {
+                            nullValue = true;
+                        }
+                        else {
+                            textParameters.add(value);
+                        }
+
+                        if(Collections.frequency(textParameters, value) > 1) {
+                            alreadySelected = true;
+                        }
                     }
                 }
             }
         }
 
+        if(nullValue && alreadySelected) {
+            message = messages.get(0);
+        }
+        else if(nullValue) {
+            message = messages.get(1);
+        }
+        else if(alreadySelected) {
+            message = messages.get(2);
+        }
 
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
-        Facade.initGameWindow(numericParameters, textParameters);
+        _userMessage.setText(message);
+        _userMessage.setVisible(true);
+
+        if(!nullValue && !alreadySelected) {
+            _userMessage.setVisible(true);
+            Facade.initGameWindow(numericParameters, textParameters);
+        }
     }
 }
