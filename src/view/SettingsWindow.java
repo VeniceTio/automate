@@ -1,6 +1,5 @@
 package view;
 
-import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
@@ -43,8 +42,8 @@ public class SettingsWindow extends JFrame {
             sb.insert(offset, string);
 
             if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                correctValue();
                 super.insertString(fb, offset, string, attr);
+                correctValue();
             }
             else {
                 incorrectValue();
@@ -59,8 +58,8 @@ public class SettingsWindow extends JFrame {
             sb.replace(offset, offset + length, text);
 
             if(isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                correctValue();
                 super.replace(fb, offset, length, text, attrs);
+                correctValue();
             }
             else {
                 incorrectValue();
@@ -79,9 +78,10 @@ public class SettingsWindow extends JFrame {
                 super.replace(fb, offset, length, "", null);
             }
             else {
-                if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                    correctValue();
+                if (isInt(sb.toString())&& inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                     super.remove(fb, offset, length);
+                    correctValue();
+
                 }
                 else {
                     incorrectValue();
@@ -227,7 +227,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -244,7 +244,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
+        settingsContents.add(createTextField(10, 1, 10, "Enter a value between 1 and 10"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -252,7 +252,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10, 1, 50,"Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 20,"Enter a value between 1 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -264,7 +264,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
 
         return settingsContents;
     }
