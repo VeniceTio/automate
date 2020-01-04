@@ -1,7 +1,6 @@
 package view;
 
 import controler.Game;
-import controler.GridController;
 import controler.ViewController;
 import model.Automaton;
 import model.Expansion;
@@ -31,8 +30,15 @@ public class Facade {
     /**
      * Méthode permettant de créer la fenêtre de paramètrage
      */
-    public static void init(){
+    public static void initSettingsWindow(){
         ViewController.getInstance().createSettingWindow();
+    }
+
+    /**
+     * Méthode permettant de créer la fenêtre de fin de jeu
+     */
+    public static void initEndWindow(int turnNumber) {
+        ViewController.getInstance().createEndWindow(turnNumber);
     }
 
     /**
@@ -90,6 +96,6 @@ public class Facade {
     }
 
     public static void main(String[] args){
-        init();
+        initSettingsWindow();
     }
 }

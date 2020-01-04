@@ -1,6 +1,7 @@
 package controler;
 
 import model.*;
+import view.Facade;
 
 import static java.lang.Thread.sleep;
 
@@ -88,7 +89,7 @@ public class Game {
                 }
             }
         }
-        System.out.println("jeu fini");
+        Facade.initEndWindow(turn);
         //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }
 
