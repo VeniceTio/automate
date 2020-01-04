@@ -2,9 +2,12 @@ package view;
 
 import controler.Game;
 import controler.GridController;
+import controler.ViewController;
 import model.State;
 import utils.Observer;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +44,7 @@ public class GameWindow extends JFrame implements Observer{
      * @param players les méthodes d'évolution des joueurs
      * @param cellNum le nombre de cellule par joueur
      */
-    public GameWindow(int size, String[] players, int cellNum) {
+    public GameWindow(int size, String[] players, int cellNum,int gamespeed) {
         _startCell = cellNum;
 
         //Game window
@@ -62,7 +65,7 @@ public class GameWindow extends JFrame implements Observer{
         windowsContents.add(createGridGame(size), BorderLayout.CENTER);
 
         //Footer of the window
-        windowsContents.add(createFooter(), BorderLayout.SOUTH);
+        windowsContents.add(createFooter(gamespeed), BorderLayout.SOUTH);
 
         //Settings the content pane of the game window
         setContentPane(windowsContents);
@@ -113,11 +116,11 @@ public class GameWindow extends JFrame implements Observer{
      * Méthode permettant de créer les boutons du bas de la fenêtre
      * @return le panel contenant bouton/curseur
      */
-    private JPanel createFooter() {
+    private JPanel createFooter(int initvalue) {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel cSpeedLabel = new JLabel("Speed's cursor : ");
-        JSlider cSpeedSlider = new JSlider();
+        JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,2,20,initvalue);
         cSpeedSlider.setPreferredSize(new Dimension(280, 20));
 
 
@@ -139,6 +142,13 @@ public class GameWindow extends JFrame implements Observer{
             }
         });
 
+        cSpeedSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+                Game.getInstance().setGameSpeed(cSpeedSlider.getValue());
+            }
+        });
+
         footer.add(cSpeedLabel);
         footer.add(cSpeedSlider);
         footer.add(button);
@@ -147,7 +157,7 @@ public class GameWindow extends JFrame implements Observer{
     }
 
     /**
-     * TODO: commentaire à faire
+     * select
      * @param button
      */
     public void select(MyButton button){
