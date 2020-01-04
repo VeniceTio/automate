@@ -141,4 +141,9 @@ public class Game {
         }
         return expansionType;
     }
+
+    public void setGameSpeed(int gameSpeed){
+        _gameSpeed = gameSpeed;
+        System.out.println("game speed : "+gameSpeed);
+    }
 }
