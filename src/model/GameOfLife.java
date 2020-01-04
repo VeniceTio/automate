@@ -25,7 +25,7 @@ public class GameOfLife implements Rule<State> {
         if (nbLivingCel<2 || nbLivingCel>3){
             nextState = State.DEAD;
         } else if (nbLivingCel==3){
-            System.out.println("cellule vivante au prochain tour");
+            //System.out.println("cellule vivante au prochain tour");
             nextState = State.ALIVE;
         }
         return nextState;

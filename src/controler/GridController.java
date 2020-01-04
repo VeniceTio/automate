@@ -100,4 +100,22 @@ public class GridController extends Observable {
         System.out.println("turn finish");
         //new Thread(this::notifyObservers).start();
     }
+
+    /**
+     * Méthode permettant de savoir quel automate est le gagnant de la partie
+     * @return winner l'index de l'automate gagnant
+     */
+    public int getWinner(){
+        int winner = 0;
+        int cell = _grids.get(0).countAlive();
+        for (int i=1;i<_grids.size();i++) {
+            if(_grids.get(i).countAlive()>cell){
+                winner = i;
+                cell = _grids.get(i).countAlive();
+            }else if (_grids.get(i).countAlive() == cell){
+                winner = -1;
+            }
+        }
+        return winner;
+    }
 }

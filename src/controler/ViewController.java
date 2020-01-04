@@ -46,9 +46,9 @@ public class ViewController {
         _settingsWin.setVisible(true);
     }
 
-    public void createGameWindow(int size, String[] players, int cellNum) {
+    public void createGameWindow(int size, String[] players, int cellNum,int initValue) {
         _settingsWin.setVisible(false);
-        _gameWin = new GameWindow(size, players,cellNum);
+        _gameWin = new GameWindow(size, players,cellNum,initValue);
         _gameWin.setVisible(true);
     }
     public void clockForward() {
