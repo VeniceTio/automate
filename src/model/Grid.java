@@ -1,5 +1,7 @@
 package model;
 
+import controler.Game;
+
 import java.util.ArrayList;
 
 public class Grid {
@@ -21,6 +23,21 @@ public class Grid {
      */
     final int _size;
 
+    public String getStringStrategy() {
+        String automaton = "";
+
+        if(_strategy instanceof Fredkin1) {
+            automaton = Automaton.FREDKIN1.getAbreviation();
+        }
+        else if(_strategy instanceof Fredkin2) {
+            automaton = Automaton.FREDKIN2.getAbreviation();
+        }
+        else if(_strategy instanceof GameOfLife) {
+            automaton = Automaton.GAMEOFLIFE.getAbreviation();
+        }
+
+        return automaton;
+    }
     /**
      * Méthode permettant d'initialiser les paramètres de jeu
      * @param size la taille de la grille de jeu

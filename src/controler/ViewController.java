@@ -2,9 +2,11 @@ package controler;
 
 import model.Automaton;
 import model.Expansion;
+import view.EndWindow;
 import view.GameWindow;
 import view.SettingsWindow;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
@@ -13,6 +15,7 @@ public class ViewController {
     //private ...
     private SettingsWindow _settingsWin;
     private GameWindow _gameWin;
+    private EndWindow _endWin;
     private ArrayList<String> _expansions = new ArrayList<>();
     private ArrayList<String> _automatons = new ArrayList<>();
 
@@ -47,10 +50,17 @@ public class ViewController {
     }
 
     public void createGameWindow(int size, String[] players, int cellNum,int initValue) {
-        _settingsWin.setVisible(false);
+        _settingsWin.dispose();
         _gameWin = new GameWindow(size, players,cellNum,initValue);
         _gameWin.setVisible(true);
     }
+
+    public void createEndWindow(int turnNumber) {
+        _gameWin.dispose();
+        _endWin = new EndWindow(turnNumber);
+        _endWin.setVisible(true);
+    }
+
     public void clockForward() {
         synchronized (this) {
             _gameWin.update();

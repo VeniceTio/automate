@@ -1,6 +1,5 @@
 package view;
 
-import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
@@ -16,7 +15,7 @@ public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions;//= new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
-    private JLabel _userMessage = createLabel("");
+    private JLabel _userMessage = createLabel("", null);
 
     class IntFilter extends DocumentFilter {
         int _lowerBound;
@@ -43,8 +42,8 @@ public class SettingsWindow extends JFrame {
             sb.insert(offset, string);
 
             if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                correctValue();
                 super.insertString(fb, offset, string, attr);
+                correctValue();
             }
             else {
                 incorrectValue();
@@ -59,8 +58,8 @@ public class SettingsWindow extends JFrame {
             sb.replace(offset, offset + length, text);
 
             if(isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                correctValue();
                 super.replace(fb, offset, length, text, attrs);
+                correctValue();
             }
             else {
                 incorrectValue();
@@ -79,9 +78,10 @@ public class SettingsWindow extends JFrame {
                 super.replace(fb, offset, length, "", null);
             }
             else {
-                if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
-                    correctValue();
+                if (isInt(sb.toString())&& inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
                     super.remove(fb, offset, length);
+                    correctValue();
+
                 }
                 else {
                     incorrectValue();
@@ -150,8 +150,10 @@ public class SettingsWindow extends JFrame {
      * @param text le texte qu'affichera le label
      * @return le label
      */
-    private JLabel createLabel(String text) {
-        return new JLabel(text);
+    private JLabel createLabel(String text, Font f) {
+        JLabel lbl = new JLabel(text);
+        lbl.setFont(f);
+        return lbl;
     }
 
     /**
@@ -176,8 +178,10 @@ public class SettingsWindow extends JFrame {
      * @return la combobox
      */
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
+        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
         JComboBox<Object> cbo = new JComboBox<>(values);
         cbo.addActionListener(al);
+        cbo.setFont(f);
         return cbo;
     }
 
@@ -191,8 +195,10 @@ public class SettingsWindow extends JFrame {
      */
     private JButton createButton(String text, int width, int height, ActionListener al) {
         JButton button = new JButton(text);
+        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
         button.setPreferredSize(new Dimension(width, height));
         button.addActionListener(al);
+        button.setFont(f);
         return button;
     }
 
@@ -202,7 +208,8 @@ public class SettingsWindow extends JFrame {
      */
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        header.add(createLabel("Choose the settings for your game !"));
+        Font f = new Font("Arial Rounded MT Bold", Font.BOLD, 14);
+        header.add(createLabel("Choose the settings for your game !", f));
         return header;
     }
 
@@ -220,18 +227,21 @@ public class SettingsWindow extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 
+
+        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
+
         //Adding the components to the pane
         gbc.gridx = 0;
         gbc.gridy = 0;
-        settingsContents.add(createLabel("Grid's size : "), gbc);
+        settingsContents.add(createLabel("Grid's size : ", f), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        settingsContents.add(createLabel("Games's extension : "), gbc);
+        settingsContents.add(createLabel("Games's extension : ", f), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -240,7 +250,7 @@ public class SettingsWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
-        settingsContents.add(createLabel("Games's speed : "), gbc);
+        settingsContents.add(createLabel("Games's speed : ", f), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -248,11 +258,11 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        settingsContents.add(createLabel("Number of turns : "), gbc);
+        settingsContents.add(createLabel("Number of turns : ", f), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10, 1, 50,"Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 20,"Enter a value between 1 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -260,11 +270,11 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 5;
-        settingsContents.add(createLabel("Number of cells : "), gbc);
+        settingsContents.add(createLabel("Number of cells : ", f), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10, 1, 50, "Enter a value between 1 and 50"), gbc);
+        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
 
         return settingsContents;
     }
@@ -300,8 +310,10 @@ public class SettingsWindow extends JFrame {
         JPanel gamesOptionPanel = new JPanel(new GridLayout(numPlayer, 2, 14,10));
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
 
+        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
+
         for(int i = 0; i < numPlayer; i++) {
-            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : "));
+            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : ", f));
             gamesOptionPanel.add(createComboBox(gameOptions.toArray(), actionEvent -> updateGameOptions(actionEvent)));
         }
 
