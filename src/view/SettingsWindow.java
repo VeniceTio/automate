@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.text.*;
 
 import java.awt.*;
@@ -15,7 +17,7 @@ public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions;//= new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
-    private JLabel _userMessage = createLabel("", null);
+    private JLabel _userMessage = createLabel("");
 
     class IntFilter extends DocumentFilter {
         int _lowerBound;
@@ -127,10 +129,10 @@ public class SettingsWindow extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
         //The panel containing everything
         JPanel settingsWindow = (JPanel) getContentPane();
         settingsWindow.setLayout(new BorderLayout());
+        changeFont(settingsWindow);
 
         //Header of the settings window
         settingsWindow.add(createHeader(), BorderLayout.NORTH);
@@ -145,15 +147,24 @@ public class SettingsWindow extends JFrame {
         setContentPane(settingsWindow);
     }
 
+    public static void changeFont(Component component)
+    {
+        component.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+        if (component instanceof Container) {
+            Container container = (Container) component;
+            for (Component child: container.getComponents()) {
+                changeFont(child);
+            }
+        }
+    }
+
     /**
      * Méthode permettant de créer un label
      * @param text le texte qu'affichera le label
      * @return le label
      */
-    private JLabel createLabel(String text, Font f) {
-        JLabel lbl = new JLabel(text);
-        lbl.setFont(f);
-        return lbl;
+    private JLabel createLabel(String text) {
+        return new JLabel(text);
     }
 
     /**
@@ -164,7 +175,6 @@ public class SettingsWindow extends JFrame {
     private JTextField createTextField(int size, int min, int max, String toolTipText) {
         JTextField text = new JTextField(size);
         text.setToolTipText(toolTipText);
-
         PlainDocument doc = (PlainDocument) text.getDocument();
         doc.setDocumentFilter(new IntFilter(min, max));
 
@@ -178,10 +188,8 @@ public class SettingsWindow extends JFrame {
      * @return la combobox
      */
     private JComboBox<Object> createComboBox(Object[] values, ActionListener al) {
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
         JComboBox<Object> cbo = new JComboBox<>(values);
         cbo.addActionListener(al);
-        cbo.setFont(f);
         return cbo;
     }
 
@@ -195,10 +203,8 @@ public class SettingsWindow extends JFrame {
      */
     private JButton createButton(String text, int width, int height, ActionListener al) {
         JButton button = new JButton(text);
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
         button.setPreferredSize(new Dimension(width, height));
         button.addActionListener(al);
-        button.setFont(f);
         return button;
     }
 
@@ -208,8 +214,7 @@ public class SettingsWindow extends JFrame {
      */
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Font f = new Font("Arial Rounded MT Bold", Font.BOLD, 14);
-        header.add(createLabel("Choose the settings for your game !", f));
+        header.add(createLabel("Choose the settings for your game !"));
         return header;
     }
 
@@ -228,12 +233,10 @@ public class SettingsWindow extends JFrame {
         gbc.weighty = 1;
 
 
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
-
         //Adding the components to the pane
         gbc.gridx = 0;
         gbc.gridy = 0;
-        settingsContents.add(createLabel("Grid's size : ", f), gbc);
+        settingsContents.add(createLabel("Grid's size : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -241,7 +244,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        settingsContents.add(createLabel("Games's extension : ", f), gbc);
+        settingsContents.add(createLabel("Games's extension : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -250,7 +253,7 @@ public class SettingsWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
-        settingsContents.add(createLabel("Games's speed : ", f), gbc);
+        settingsContents.add(createLabel("Games's speed : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -258,7 +261,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        settingsContents.add(createLabel("Number of turns : ", f), gbc);
+        settingsContents.add(createLabel("Number of turns : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -270,7 +273,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 5;
-        settingsContents.add(createLabel("Number of cells : ", f), gbc);
+        settingsContents.add(createLabel("Number of cells : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 5;
@@ -310,10 +313,8 @@ public class SettingsWindow extends JFrame {
         JPanel gamesOptionPanel = new JPanel(new GridLayout(numPlayer, 2, 14,10));
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
 
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
-
         for(int i = 0; i < numPlayer; i++) {
-            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : ", f));
+            gamesOptionPanel.add(createLabel("Player n°" + (i + 1) + " : "));
             gamesOptionPanel.add(createComboBox(gameOptions.toArray(), actionEvent -> updateGameOptions(actionEvent)));
         }
 
