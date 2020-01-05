@@ -1,6 +1,7 @@
 package view;
 
 import controler.GridController;
+import controler.ViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,9 @@ public class EndWindow extends JFrame {
 
         //The footer of the window
         endWindow.add(createFooter(), BorderLayout.SOUTH);
+
+        //Setting the font for the window
+        ViewController.getInstance().changeFont(endWindow);
 
         //Settings the content pane of the end window
         setContentPane(endWindow);

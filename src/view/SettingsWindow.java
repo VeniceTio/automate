@@ -1,9 +1,9 @@
 package view;
 
+import controler.ViewController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.text.*;
 
 import java.awt.*;
@@ -19,23 +19,10 @@ public class SettingsWindow extends JFrame {
     private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
     private JLabel _userMessage = createLabel("");
 
-    class IntFilter extends DocumentFilter {
-        int _lowerBound;
-        int _upperBound;
-
-        public IntFilter(int min, int max) {
-            _lowerBound = min;
-            _upperBound = max;
-        }
-
-        private int getLowerBound() {
-            return _lowerBound;
-        }
-
-        private int getUpperBound() {
-            return _upperBound;
-        }
-
+    /**
+     * Classe permettant de permettant de filtrer seulement les chiffres dans JTextfield
+     */
+    private class IntFilter extends DocumentFilter {
         @Override
         public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
             Document doc = fb.getDocument();
@@ -43,12 +30,12 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.insert(offset, string);
 
-            if (isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
+            if (isInt(sb.toString())) {
                 super.insertString(fb, offset, string, attr);
                 correctValue();
             }
             else {
-                incorrectValue();
+                incorrectValue("Invalid value !");
             }
         }
 
@@ -59,12 +46,12 @@ public class SettingsWindow extends JFrame {
             sb.append(doc.getText(0, doc.getLength()));
             sb.replace(offset, offset + length, text);
 
-            if(isInt(sb.toString()) && inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
+            if(isInt(sb.toString())) {
                 super.replace(fb, offset, length, text, attrs);
                 correctValue();
             }
             else {
-                incorrectValue();
+                incorrectValue("Invalid value !");
             }
 
         }
@@ -80,25 +67,15 @@ public class SettingsWindow extends JFrame {
                 super.replace(fb, offset, length, "", null);
             }
             else {
-                if (isInt(sb.toString())&& inRange(getLowerBound(), getUpperBound(), Integer.parseInt(sb.toString()))) {
+                if (isInt(sb.toString())) {
                     super.remove(fb, offset, length);
                     correctValue();
 
                 }
                 else {
-                    incorrectValue();
+                    incorrectValue("Invalid value !");
                 }
             }
-        }
-
-        private void correctValue() {
-            _userMessage.setText("");
-            _userMessage.setVisible(false);
-        }
-
-        private void incorrectValue() {
-            _userMessage.setText("Invalid value !");
-            _userMessage.setVisible(true);
         }
 
         private boolean isInt(String text) {
@@ -108,6 +85,43 @@ public class SettingsWindow extends JFrame {
             } catch (NumberFormatException e) {
                 return false;
             }
+        }
+    }
+
+    /**
+     * Classe permettant de mettre un filtre sur l'étendue des valeurs requises pour le jeu
+     */
+    private class RangeInputVerifier extends InputVerifier {
+        int _lowerBound;
+        int _upperBound;
+
+        public RangeInputVerifier(int min, int max) {
+            _lowerBound = min;
+            _upperBound = max;
+        }
+
+        private int getLowerBound() {
+            return _lowerBound;
+        }
+
+        private int getUpperBound() {
+            return _upperBound;
+        }
+
+        @Override
+        public boolean verify(JComponent input) {
+            JTextField textField = (JTextField) input;
+            boolean inRange = true;
+            if(!textField.getText().isEmpty()) {
+                inRange = inRange(getLowerBound(), getUpperBound(), Integer.parseInt(textField.getText()));
+                if(inRange) {
+                    correctValue();
+                }
+                else {
+                    incorrectValue("Invalid value !");
+                }
+            }
+            return inRange;
         }
 
         private boolean inRange(int min, int max, int value) {
@@ -132,7 +146,6 @@ public class SettingsWindow extends JFrame {
         //The panel containing everything
         JPanel settingsWindow = (JPanel) getContentPane();
         settingsWindow.setLayout(new BorderLayout());
-        changeFont(settingsWindow);
 
         //Header of the settings window
         settingsWindow.add(createHeader(), BorderLayout.NORTH);
@@ -143,19 +156,27 @@ public class SettingsWindow extends JFrame {
         //Footer of the settings windows
         settingsWindow.add(createFooter(), BorderLayout.SOUTH);
 
+        //Setting the font for the window
+        ViewController.getInstance().changeFont(settingsWindow);
+
         //Settings the content pane of the settings window
         setContentPane(settingsWindow);
     }
 
-    public static void changeFont(Component component)
-    {
-        component.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-        if (component instanceof Container) {
-            Container container = (Container) component;
-            for (Component child: container.getComponents()) {
-                changeFont(child);
-            }
-        }
+    /**
+     * Méthode permettant d'enlever le message d'erreur
+     */
+    private void correctValue() {
+        _userMessage.setText("");
+        _userMessage.setVisible(false);
+    }
+
+    /**
+     * Méthode permettant d'afficher un message d'erreur
+     */
+    private void incorrectValue(String text) {
+        _userMessage.setText(text);
+        _userMessage.setVisible(true);
     }
 
     /**
@@ -175,8 +196,9 @@ public class SettingsWindow extends JFrame {
     private JTextField createTextField(int size, int min, int max, String toolTipText) {
         JTextField text = new JTextField(size);
         text.setToolTipText(toolTipText);
+        text.setInputVerifier(new RangeInputVerifier(min, max));
         PlainDocument doc = (PlainDocument) text.getDocument();
-        doc.setDocumentFilter(new IntFilter(min, max));
+        doc.setDocumentFilter(new IntFilter());
 
         return text;
     }
@@ -222,7 +244,7 @@ public class SettingsWindow extends JFrame {
      * Méthode permettant de créer tous les paramètres nécéssaires au jeu que le joueur pourra modifier
      * @return le panel contenant tous ces paramètres
      */
-        private JPanel createSettingsContents() {
+    private JPanel createSettingsContents() {
         JPanel settingsContents = new JPanel(new GridBagLayout());
         settingsContents.setBorder(new EmptyBorder(0, 0, 0, 0));
 
@@ -232,7 +254,6 @@ public class SettingsWindow extends JFrame {
         gbc.weightx = 1;
         gbc.weighty = 1;
 
-
         //Adding the components to the pane
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -240,7 +261,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc);
+        settingsContents.add(createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc); //2 - 20
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -257,7 +278,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
+        settingsContents.add(createTextField(10, 1, 10, "Enter a value between 1 and 10"), gbc); //1 - 10
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -265,7 +286,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(createTextField(10, 1, 20,"Enter a value between 1 and 20"), gbc);
+        settingsContents.add(createTextField(10, 1, 20,"Enter a value between 1 and 20"), gbc); //1 - 20
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -277,7 +298,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc);
+        settingsContents.add(createTextField(10, 1, 20, "Enter a value between 1 and 20"), gbc); //1 - (gridSize/2)
 
         return settingsContents;
     }
@@ -329,10 +350,6 @@ public class SettingsWindow extends JFrame {
     private String cboDataRetrieving(Component c) {
         JComboBox<String> cbo = (JComboBox) c;
         return String.valueOf(cbo.getSelectedItem());
-    }
-
-    private void parametersVerification(boolean nullValue, boolean alreadySelected) {
-
     }
 
     /**
@@ -430,11 +447,10 @@ public class SettingsWindow extends JFrame {
             message = messages.get(2);
         }
 
-        _userMessage.setText(message);
-        _userMessage.setVisible(true);
+        incorrectValue(message);
 
         if(!nullValue && !alreadySelected) {
-            _userMessage.setVisible(true);
+            correctValue();
             Facade.initGameWindow(numericParameters, textParameters);
         }
     }
