@@ -4,6 +4,7 @@ import controler.GridController;
 import controler.ViewController;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -11,7 +12,7 @@ public class EndWindow extends JFrame {
     public EndWindow(int turnNumber) {
         //EndWindow
         setTitle("End Window");
-        setSize(400, 300);
+        setSize(300, 200);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -58,7 +59,9 @@ public class EndWindow extends JFrame {
      * @return le label
      */
     private JLabel createLabel(String text) {
-        return new JLabel(text);
+        JLabel lbl = new JLabel(text);
+        lbl.setHorizontalAlignment(JLabel.CENTER);
+        return lbl;
     }
 
     private JPanel createHeader() {
@@ -70,21 +73,26 @@ public class EndWindow extends JFrame {
     }
 
     private JPanel createMainContents(int turnNumber) {
-        JPanel contents = new JPanel(new GridLayout(3, 1, 0, 0));
+        JPanel contents = new JPanel(new GridLayout(4, 1, 0, 0));
 
-        String automatonWinner;
+        String winningPlayer;
+        String winningAutomaton;
+
         int winnerIndex = GridController.getInstance().getWinner();
         int cellNumber = 0;
 
         if(winnerIndex == -1) {
-            automatonWinner = "Draw";
+            winningPlayer = "Draw";
+            winningAutomaton = "None";
         }
         else {
+            winningPlayer = "player n°" + (winnerIndex + 1);
             cellNumber = GridController.getInstance().count(winnerIndex);
-            automatonWinner = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
+            winningAutomaton = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
         }
 
-        contents.add(createLabel("The winnner: " + automatonWinner));
+        contents.add(createLabel("The winner: " + winningPlayer));
+        contents.add(createLabel("Automaton: " + winningAutomaton.toLowerCase()));
         contents.add(createLabel("Number of turn: " + turnNumber));
         contents.add(createLabel("Number of cells: " + cellNumber));
 
