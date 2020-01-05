@@ -33,7 +33,7 @@ public class SettingsWindow extends JFrame {
                 correctValue();
             }
             else {
-                incorrectValue();
+                incorrectValue("Invalid value !");
             }
         }
 
@@ -49,7 +49,7 @@ public class SettingsWindow extends JFrame {
                 correctValue();
             }
             else {
-                incorrectValue();
+                incorrectValue("Invalid value !");
             }
 
         }
@@ -71,7 +71,7 @@ public class SettingsWindow extends JFrame {
 
                 }
                 else {
-                    incorrectValue();
+                    incorrectValue("Invalid value !");
                 }
             }
         }
@@ -116,7 +116,7 @@ public class SettingsWindow extends JFrame {
                     correctValue();
                 }
                 else {
-                    incorrectValue();
+                    incorrectValue("Invalid value !");
                 }
             }
             return inRange;
@@ -170,8 +170,8 @@ public class SettingsWindow extends JFrame {
     /**
      * Méthode permettant d'afficher un message d'erreur
      */
-    private void incorrectValue() {
-        _userMessage.setText("Invalid value !");
+    private void incorrectValue(String text) {
+        _userMessage.setText(text);
         _userMessage.setVisible(true);
     }
 
@@ -454,11 +454,10 @@ public class SettingsWindow extends JFrame {
             message = messages.get(2);
         }
 
-        _userMessage.setText(message);
-        _userMessage.setVisible(true);
+        incorrectValue(message);
 
         if(!nullValue && !alreadySelected) {
-            _userMessage.setVisible(true);
+            correctValue();
             Facade.initGameWindow(numericParameters, textParameters);
         }
     }
