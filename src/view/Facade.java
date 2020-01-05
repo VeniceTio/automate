@@ -1,6 +1,7 @@
 package view;
 
 import controler.Game;
+import controler.GridController;
 import controler.ViewController;
 import model.Automaton;
 import model.Expansion;
@@ -39,6 +40,10 @@ public class Facade {
      */
     public static void initEndWindow(int turnNumber) {
         ViewController.getInstance().createEndWindow(turnNumber);
+    }
+
+    public static void resetGame() {
+        GridController.getInstance().getGrids().clear();
     }
 
     /**

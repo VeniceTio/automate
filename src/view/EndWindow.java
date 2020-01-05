@@ -98,6 +98,7 @@ public class EndWindow extends JFrame {
 
     private void playAgain() {
         this.dispose();
+        Facade.resetGame();
         Facade.initSettingsWindow();
     }
 }
