@@ -6,6 +6,7 @@ import view.EndWindow;
 import view.GameWindow;
 import view.SettingsWindow;
 
+import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class ViewController {
         return _instance;
     }
 
-    public void createSettingWindow(){
+    public void createSettingWindow() {
         _settingsWin = new SettingsWindow(_automatons,_expansions);
         _settingsWin.setVisible(true);
     }

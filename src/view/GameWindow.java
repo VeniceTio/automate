@@ -80,15 +80,10 @@ public class GameWindow extends JFrame implements Observer{
         JPanel title = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel playersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        Font f = new Font("Arial Rounded MT Bold", Font.BOLD, 12);
 
         JLabel lbl = new JLabel("Automaton's game");
         JLabel playerOne = new JLabel("Player n°1: " + players[0].toLowerCase());
         JLabel playerTwo = new JLabel("Player n°2: " + players[1].toLowerCase());
-
-        lbl.setFont(f);
-        playerOne.setFont(f);
-        playerTwo.setFont(f);
 
         title.add(lbl);
         playersPanel.add(playerOne);
@@ -125,16 +120,12 @@ public class GameWindow extends JFrame implements Observer{
     private JPanel createFooter(int initvalue) {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
-
         JLabel cSpeedLabel = new JLabel("Speed's cursor : ");
-        cSpeedLabel.setFont(f);
         JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,1,20,initvalue);
         cSpeedSlider.setPreferredSize(new Dimension(280, 20));
 
 
         JButton button = new JButton("Start");
-        button.setFont(f);
         button.setPreferredSize(new Dimension(80, 30));
         button.addActionListener(new ActionListener() {
             @Override

@@ -43,12 +43,8 @@ public class EndWindow extends JFrame {
     private JButton createButton(String text, int width, int height, ActionListener al) {
         JButton button = new JButton(text);
 
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
-
         button.setPreferredSize(new Dimension(width, height));
         button.addActionListener(al);
-        button.setFont(f);
-
         return button;
     }
 
@@ -57,24 +53,20 @@ public class EndWindow extends JFrame {
      * @param text le texte qu'affichera le label
      * @return le label
      */
-    private JLabel createLabel(String text, Font f) {
-        JLabel lbl = new JLabel(text);
-        lbl.setFont(f);
-        return lbl;
+    private JLabel createLabel(String text) {
+        return new JLabel(text);
     }
 
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Font f = new Font("Arial Rounded MT Bold", Font.BOLD, 12);
 
-        header.add(createLabel("The result of the game", f));
+        header.add(createLabel("The result of the game"));
 
         return header;
     }
 
     private JPanel createMainContents(int turnNumber) {
         JPanel contents = new JPanel(new GridLayout(3, 1, 0, 0));
-        Font f = new Font("Arial Rounded MT Bold", Font.PLAIN, 12);
 
         String automatonWinner;
         int winnerIndex = GridController.getInstance().getWinner();
@@ -88,9 +80,9 @@ public class EndWindow extends JFrame {
             automatonWinner = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
         }
 
-        contents.add(createLabel("The winnner: " + automatonWinner, f));
-        contents.add(createLabel("Number of turn: " + turnNumber, f));
-        contents.add(createLabel("Number of cells: " + cellNumber, f));
+        contents.add(createLabel("The winnner: " + automatonWinner));
+        contents.add(createLabel("Number of turn: " + turnNumber));
+        contents.add(createLabel("Number of cells: " + cellNumber));
 
         return contents;
     }
