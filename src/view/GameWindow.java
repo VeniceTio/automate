@@ -67,6 +67,9 @@ public class GameWindow extends JFrame implements Observer{
         //Footer of the window
         windowsContents.add(createFooter(gamespeed), BorderLayout.SOUTH);
 
+        //Setting the font for the window
+        ViewController.getInstance().changeFont(windowsContents);
+
         //Settings the content pane of the game window
         setContentPane(windowsContents);
     }
@@ -82,7 +85,7 @@ public class GameWindow extends JFrame implements Observer{
 
 
         JLabel lbl = new JLabel("Automaton's game");
-        JLabel playerOne = new JLabel("Player n°1: " + players[0].toLowerCase());
+        JLabel playerOne = new JLabel("Player n°1: " + players[0].toLowerCase() + " vs ");
         JLabel playerTwo = new JLabel("Player n°2: " + players[1].toLowerCase());
 
         title.add(lbl);

@@ -7,6 +7,7 @@ import view.GameWindow;
 import view.SettingsWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -60,6 +61,16 @@ public class ViewController {
         _gameWin.dispose();
         _endWin = new EndWindow(turnNumber);
         _endWin.setVisible(true);
+    }
+
+    public  void changeFont(Component component) {
+        component.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
+        if (component instanceof Container) {
+            Container container = (Container) component;
+            for (Component child: container.getComponents()) {
+                changeFont(child);
+            }
+        }
     }
 
     public void clockForward() {

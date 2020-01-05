@@ -1,5 +1,7 @@
 package view;
 
+import controler.ViewController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
@@ -144,7 +146,6 @@ public class SettingsWindow extends JFrame {
         //The panel containing everything
         JPanel settingsWindow = (JPanel) getContentPane();
         settingsWindow.setLayout(new BorderLayout());
-        changeFont(settingsWindow);
 
         //Header of the settings window
         settingsWindow.add(createHeader(), BorderLayout.NORTH);
@@ -154,6 +155,9 @@ public class SettingsWindow extends JFrame {
 
         //Footer of the settings windows
         settingsWindow.add(createFooter(), BorderLayout.SOUTH);
+
+        //Setting the font for the window
+        ViewController.getInstance().changeFont(settingsWindow);
 
         //Settings the content pane of the settings window
         setContentPane(settingsWindow);
@@ -173,17 +177,6 @@ public class SettingsWindow extends JFrame {
     private void incorrectValue(String text) {
         _userMessage.setText(text);
         _userMessage.setVisible(true);
-    }
-
-    public static void changeFont(Component component)
-    {
-        component.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-        if (component instanceof Container) {
-            Container container = (Container) component;
-            for (Component child: container.getComponents()) {
-                changeFont(child);
-            }
-        }
     }
 
     /**
@@ -251,7 +244,7 @@ public class SettingsWindow extends JFrame {
      * Méthode permettant de créer tous les paramètres nécéssaires au jeu que le joueur pourra modifier
      * @return le panel contenant tous ces paramètres
      */
-        private JPanel createSettingsContents() {
+    private JPanel createSettingsContents() {
         JPanel settingsContents = new JPanel(new GridBagLayout());
         settingsContents.setBorder(new EmptyBorder(0, 0, 0, 0));
 
