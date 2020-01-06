@@ -149,7 +149,7 @@ public class GameWindow extends JFrame implements Observer{
         cSpeedSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
-                Game.getInstance().setGameSpeed(cSpeedSlider.getValue());
+                Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000);
             }
         });
 
