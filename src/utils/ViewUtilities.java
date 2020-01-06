@@ -84,8 +84,8 @@ public class ViewUtilities {
      * Classe permettant de mettre un filtre sur l'étendue des valeurs requises pour le jeu
      */
     private static class RangeInputVerifier extends InputVerifier {
-        int _lowerBound;
-        int _upperBound;
+        private int _lowerBound;
+        private int _upperBound;
 
         public RangeInputVerifier(int min, int max) {
             _lowerBound = min;
