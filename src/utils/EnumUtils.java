@@ -24,6 +24,38 @@ public class EnumUtils {
         return expansionType;
     }
     /**
+     * Méthode permettant de convertir une méthode d'extension(string) en type d'énumération
+     * @param text la méthode d'extension de la grille
+     * @return la méthode d'évolution de la grille  en type énuméré
+     */
+    public static Expansion toExpansion(String text) {
+        Expansion expansionChosen;
+        switch(text) {
+            case "Repetition":
+                expansionChosen = Expansion.REPETITION;
+                break;
+//            case "Periodicity":
+//                expansionChosen = Expansion.PERIODICITY;
+//                break;
+//            case "Symetry n°1":
+//                expansionChosen = Expansion.SYMETRY1;
+//                break;
+//            case "Symetry n°2":
+//                expansionChosen = Expansion.SYMETRY2;
+//                break;
+            case "Constant":
+                expansionChosen = Expansion.CONSTANT;
+                break;
+            default:
+                expansionChosen = null;
+        }
+
+        return expansionChosen;
+    }
+
+    //Enum State
+
+    /**
      * Méthode permettant de créer l'instance de l'automate choisi
      * @param automaton le mode d'évolution choisi
      * @return l'instance de l'automate choisi
@@ -50,36 +82,6 @@ public class EnumUtils {
                 break;
         }
         return autoType;
-    }
-
-    /**
-     * Méthode permettant de convertir une méthode d'extension(string) en type d'énumération
-     * @param text la méthode d'extension de la grille
-     * @return la méthode d'évolution de la grille  en type énuméré
-     */
-    public static Expansion toExpansion(String text) {
-        Expansion expansionChosen;
-        switch(text) {
-            case "Repetition":
-                expansionChosen = Expansion.REPETITION;
-                break;
-            case "Periodicity":
-                expansionChosen = Expansion.PERIODICITY;
-                break;
-            case "Symetry n°1":
-                expansionChosen = Expansion.SYMETRY1;
-                break;
-            case "Symetry n°2":
-                expansionChosen = Expansion.SYMETRY2;
-                break;
-            case "Constant":
-                expansionChosen = Expansion.CONSTANT;
-                break;
-            default:
-                expansionChosen = null;
-        }
-
-        return expansionChosen;
     }
 
     /**
