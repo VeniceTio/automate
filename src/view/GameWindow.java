@@ -232,7 +232,7 @@ public class GameWindow extends JFrame implements Observer{
             winner = 0;
         }
         //System.out.println("## winner : "+winner);
-        System.out.println(Arrays.toString(player));
+        //System.out.println(Arrays.toString(player));
         for (boolean play:player){
             idPlayer++;
             if(play){
