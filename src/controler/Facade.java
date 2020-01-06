@@ -45,6 +45,6 @@ public class Facade {
      * Méthode permettant de remetre à zero les automate du gridController
      */
     public static void resetGame() {
-        GridController.getInstance().getGrids().clear();
+        GridController.getInstance().reset();
     }
 }

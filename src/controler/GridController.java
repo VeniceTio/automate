@@ -2,8 +2,6 @@ package controler;
 
 import model.*;
 import utils.Observable;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 public class GridController extends Observable {
@@ -35,12 +33,18 @@ public class GridController extends Observable {
     public ArrayList<Grid> getGrids(){
         return _grids;
     }
+    /**
+     * Méthode permettant de supprimer toute les grilles du controller
+     */
+    public void reset(){
+        _grids.clear();
+    }
 
     /**
-     *
-     * @param index
-     * @param position
-     * @param state
+     * Méthode permettant de mettre a jour une cellule d'une grille donnée
+     * @param index référence la grille à modifier
+     * @param position référence la cellule à modifier
+     * @param state l'etat vers lequel la cellule doit évoluer
      */
     public void setStateGrid(int index, int position, State state){ //TODO: commentaire à faire ici
         _grids.get(index).setState(position,state);
