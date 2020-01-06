@@ -95,7 +95,7 @@ public class SettingsWindow extends JFrame {
         settingsContents.add(ViewUtilities.createTextField(10, 2, 20, "Enter a value between 2 and 20", new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                changeMaxCellNumber(e);
+                gridSizeChanged(e);
             }
         }), gbc);
 
@@ -139,12 +139,14 @@ public class SettingsWindow extends JFrame {
         return settingsContents;
     }
 
-    private int changeMaxCellNumber(FocusEvent e) {
+    private int gridSizeChanged(FocusEvent e) {
         JTextField text = (JTextField) e.getSource();
+        int res = 200;
         if(!text.getText().isEmpty()) {
-            return (Integer.parseInt(text.getText())) / 2;
+            int value = Integer.parseInt(text.getText());
+            res = (value * value) / 2;
         }
-        return 0;
+        return res;
     }
 
     /**
@@ -159,8 +161,8 @@ public class SettingsWindow extends JFrame {
         footer.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttons.add(ViewUtilities.createButton("Quit", 90, 30, actionEvent -> System.exit(0)));
-        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> confirmSettings()));
+        buttons.add(ViewUtilities.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
+        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> noName()));
 
         footer.add(_userMessage, BorderLayout.WEST);
         footer.add(buttons, BorderLayout.EAST);
@@ -196,12 +198,6 @@ public class SettingsWindow extends JFrame {
         return String.valueOf(cbo.getSelectedItem());
     }
 
-    private void test(ActionEvent e) {
-        JTextField txt = (JTextField) e.getSource();
-        int value = Integer.parseInt(txt.getText());
-        System.out.println(value);
-    }
-
     /**
      * Méthode permettant de mettre à jour les options de jeu restantes
      * @param e l'action event
@@ -231,61 +227,40 @@ public class SettingsWindow extends JFrame {
         }
     }
 
-    /**
-     * Méthode permettant de récupérer toutes les informations de tous les champs de la fenêtre
-     */
-    private void confirmSettings() {
-        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
-        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
-        ArrayList<Integer> numericParameters = new ArrayList<>();
-        ArrayList<String> textParameters = new ArrayList<>();
-        boolean alreadySelected = false;
-        boolean nullValue = false;
-        String message = "";
+    private boolean isNull(ArrayList<Integer> numericList) {
+        boolean res = false;
+        int i = 0;
 
-        for(Component comp: settingsContents.getComponents()) {
-            if(comp instanceof JTextField) {
-                JTextField text = (JTextField) comp;
-                String value = text.getText();
-
-                if(value.isEmpty()) {
-                    nullValue = true;
-                }
-                else {
-                    int parameter = Integer.parseInt(value);
-                    numericParameters.add(parameter);
-                }
-            }
-            if(comp instanceof JComboBox) {
-                String value = cboDataRetrieving(comp);
-
-                if(value.isEmpty()) {
-                    nullValue = true;
-                }
-                else {
-                    textParameters.add(value);
-                }
-            }
-            if(comp instanceof JPanel) {
-                JPanel gameOptionsPanel = (JPanel) comp;
-                for(Component c: gameOptionsPanel.getComponents()) {
-                    if(c instanceof JComboBox) {
-                        String value = cboDataRetrieving(c);
-
-                        if(value.isEmpty()) {
-                            nullValue = true;
-                        }
-                        else {
-                            textParameters.add(value);
-                        }
-
-                        if(Collections.frequency(textParameters, value) > 1) {
-                            alreadySelected = true;
-                        }
-                    }
-                }
+        if(numericList.size() == 4) {
+            while(i < numericList.size() && !res) {
+                String value = String.valueOf(numericList.get(i));
+                if(value.isEmpty()) res = true;
+                i++;
             }
         }
+        else {
+            res = true;
+        }
+        return res;
+    }
+
+    private boolean isDuplicated(ArrayList<String> textList) {
+        boolean res = false;
+        int i = 0;
+
+        if(!textList.isEmpty()) {
+            while(i < textList.size() && !res) {
+                String text = textList.get(i);
+                if(Collections.frequency(textList, text) > 1) res = true;
+                i++;
+            }
+        }
+        return res;
+    }
+
+    private boolean confirmParameters(boolean nullValue, boolean alreadySelected) {
+        ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
+        String message = "";
 
         if(nullValue && alreadySelected) {
             message = messages.get(0);
@@ -298,8 +273,41 @@ public class SettingsWindow extends JFrame {
         }
 
         ViewUtilities.incorrectValue(message);
+        return (!nullValue && !alreadySelected);
+    }
 
-        if(!nullValue && !alreadySelected) {
+    private void retrievingParameters(Component component, ArrayList<Integer> numericList, ArrayList<String> textList) {
+        if(component instanceof JTextField) {
+            JTextField text = (JTextField) component;
+            if(!text.getText().isEmpty())
+                numericList.add(Integer.parseInt(text.getText()));
+        }
+        else if(component instanceof JComboBox) {
+            textList.add(cboDataRetrieving(component));
+        }
+        else if(component instanceof JPanel) {
+            for(Component c: ((JPanel) component).getComponents()) {
+                retrievingParameters(c, numericList, textList);
+            }
+        }
+    }
+
+    private void noName() {
+        JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
+        ArrayList<Integer> numericParameters = new ArrayList<>();
+        ArrayList<String> textParameters = new ArrayList<>();
+        boolean alreadySelected;
+        boolean nullValue;
+
+        retrievingParameters(settingsContents, numericParameters, textParameters);
+
+        nullValue = isNull(numericParameters);
+        alreadySelected = isDuplicated(textParameters);
+
+        System.out.println(nullValue);
+        System.out.println(alreadySelected);
+
+        if(confirmParameters(nullValue, alreadySelected)) {
             ViewUtilities.correctValue();
             Facade.initGameWindow(numericParameters, textParameters);
         }
