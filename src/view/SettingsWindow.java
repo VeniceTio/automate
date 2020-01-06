@@ -162,7 +162,7 @@ public class SettingsWindow extends JFrame {
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttons.add(ViewUtilities.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
-        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> noName()));
+        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> validateButton()));
 
         footer.add(_userMessage, BorderLayout.WEST);
         footer.add(buttons, BorderLayout.EAST);
@@ -258,7 +258,7 @@ public class SettingsWindow extends JFrame {
         return res;
     }
 
-    private boolean confirmParameters(boolean nullValue, boolean alreadySelected) {
+    private boolean checkParameters(boolean nullValue, boolean alreadySelected) {
         ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
         String message = "";
 
@@ -292,7 +292,7 @@ public class SettingsWindow extends JFrame {
         }
     }
 
-    private void noName() {
+    private void validateButton() {
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
@@ -304,10 +304,7 @@ public class SettingsWindow extends JFrame {
         nullValue = isNull(numericParameters);
         alreadySelected = isDuplicated(textParameters);
 
-        System.out.println(nullValue);
-        System.out.println(alreadySelected);
-
-        if(confirmParameters(nullValue, alreadySelected)) {
+        if(checkParameters(nullValue, alreadySelected)) {
             ViewUtilities.correctValue();
             Facade.initGameWindow(numericParameters, textParameters);
         }
