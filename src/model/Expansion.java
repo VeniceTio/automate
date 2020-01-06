@@ -5,9 +5,9 @@ package model;
  */
 public enum Expansion {
     REPETITION("Repetition"),
-    PERIODICITY("Periodicity"),
-    SYMETRY1("Symetry n°1"),
-    SYMETRY2("Symetry n°2"),
+//    PERIODICITY("Periodicity"),
+//    SYMETRY1("Symetry n°1"),
+//    SYMETRY2("Symetry n°2"),
     CONSTANT("Constant");
 
     private String _abreviation;
