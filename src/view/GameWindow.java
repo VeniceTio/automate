@@ -44,8 +44,9 @@ public class GameWindow extends JFrame implements Observer{
      * @param players les méthodes d'évolution des joueurs
      * @param cellNum le nombre de cellule par joueur
      */
-    public GameWindow(int size, String[] players, int cellNum,int gamespeed) {
+    public GameWindow(int size, String[] players, int cellNum,int gamespeed,Color[] playersColor) {
         _startCell = cellNum;
+        _players = playersColor;
 
         //Game window
         setTitle("Game Window");
@@ -149,7 +150,7 @@ public class GameWindow extends JFrame implements Observer{
         cSpeedSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
-                Game.getInstance().setGameSpeed(cSpeedSlider.getValue());
+                Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000);
             }
         });
 
@@ -167,17 +168,18 @@ public class GameWindow extends JFrame implements Observer{
     public void select(MyButton button){
         if(!_init){
             GridController GC = GridController.getInstance();
-            if (GC.count(0)!= _startCell){
-                changeColor(button,0,true);
-            }
-            else if (GC.count(1)!= _startCell-1){
-                if (button.getBackground()==Color.white){
-                    changeColor(button,1,true);
-                }
-            } else if (GC.count(1)!= _startCell){
+            if(GC.count(0)==GC.count(1)){
                 if (button.getBackground()==Color.white) {
                     changeColor(button, 1, true);
-                    _init = true;
+                    JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 1");
+                }
+            }else {
+                if (button.getBackground()==Color.white){
+                    changeColor(button,0,true);
+                    if(GC.count(0)==_startCell){
+                        _init = true;
+                    }
+                    JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 2");
                 }
             }
         }
@@ -253,13 +255,14 @@ public class GameWindow extends JFrame implements Observer{
         for(int i=0;i<_cells.size();i++){
             button = _cells.get(i);
             nbCell=-1;
-            players = new boolean[]{false, false};
+            players = new boolean[_players.length];//{false, false};
             for(int j=0;j<_players.length;j++){
                 if (GC.getState(j,i) != State.DEAD){
                     nbCell++;
                     players[j] = true;
                     //System.out.println("#### cellule vivante pos="+i);
                 }
+                players[j] = false;
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);

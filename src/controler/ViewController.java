@@ -51,9 +51,9 @@ public class ViewController {
         _settingsWin.setVisible(true);
     }
 
-    public void createGameWindow(int size, String[] players, int cellNum,int initValue) {
+    public void createGameWindow(int size, String[] players, int cellNum,int initValue,Color[] playersColor) {
         _settingsWin.dispose();
-        _gameWin = new GameWindow(size, players,cellNum,initValue);
+        _gameWin = new GameWindow(size, players,cellNum,initValue,playersColor);
         _gameWin.setVisible(true);
     }
 
