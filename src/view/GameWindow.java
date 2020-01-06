@@ -4,7 +4,7 @@ import controler.Game;
 import controler.GridController;
 import model.State;
 import utils.Observer;
-import utils.ViewUtilities;
+import utils.ViewUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.security.SecureRandom;
@@ -55,7 +55,7 @@ public class GameWindow extends JFrame implements Observer {
         windowsContents.add(createFooter(gamespeed), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewUtilities.changeFont(windowsContents);
+        ViewUtils.changeFont(windowsContents);
 
         JOptionPane.showMessageDialog(windowsContents, "Le joueur 2 commence !", "Message", JOptionPane.INFORMATION_MESSAGE);
 

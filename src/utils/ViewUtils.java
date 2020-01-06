@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-public class ViewUtilities {
+public class ViewUtils {
     /**
      * Classe permettant de permettant de filtrer seulement les chiffres dans JTextfield
      */
