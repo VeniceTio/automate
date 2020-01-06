@@ -19,8 +19,8 @@ public class Game {
     private static Game _instance = null;
 
     /**
-     * Méthode permettant de récupérer l'instance de la classe
-     * @return
+     * Méthode permettant de récupérer l'unique instance de la classe
+     * @return _instance
      */
     public static Game getInstance(){
         if(_instance == null){
@@ -61,9 +61,8 @@ public class Game {
 
     /**
      * Méthode permettant de faire tourner le jeu
-     * @throws InterruptedException
      */
-    public void automatonGame() throws InterruptedException {
+    public void automatonGame(){
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
