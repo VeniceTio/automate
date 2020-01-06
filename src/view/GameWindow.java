@@ -13,15 +13,25 @@ import java.util.ArrayList;
 public class GameWindow extends JFrame implements Observer {
 
 
-
-    //TODO: commentaire à faire
     /**
-     * Le nombre de cellule par joueur
+     * Le nombre de cellule par joueur au depart
      */
     private final int _startCell;
+    /**
+     * est en initialisé
+     */
     private boolean _init = false;
+    /**
+     * couleur des joueurs
+     */
     private final Color[] _players;
+    /**
+     * liste des bouttons representant les cellules
+     */
     private final ArrayList<MyButton> _cells = new ArrayList<>();
+    /**
+     * Nombre aleatoire pour les combat
+     */
     private static final SecureRandom _rand = new SecureRandom();
 
     /**
