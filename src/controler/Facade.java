@@ -2,7 +2,6 @@ package controler;
 
 import model.Automaton;
 import utils.EnumUtils;
-import utils.ViewUtilities;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -42,6 +41,9 @@ public class Facade {
         ViewController.getInstance().createEndWindow(turnNumber);
     }
 
+    /**
+     * Méthode permettant de remetre à zero les automate du gridController
+     */
     public static void resetGame() {
         GridController.getInstance().getGrids().clear();
     }
