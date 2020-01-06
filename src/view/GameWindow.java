@@ -6,11 +6,7 @@ import model.State;
 import utils.Observer;
 import utils.ViewUtilities;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
@@ -22,11 +18,11 @@ public class GameWindow extends JFrame implements Observer{
     /**
      * Le nombre de cellule par joueur
      */
-    private int _startCell;
+    private final int _startCell;
     private boolean _init = false;
-    private Color[] _players = {Color.BLUE,Color.RED};
-    private ArrayList<MyButton> _cells = new ArrayList<>();
-    private static SecureRandom _rand = new SecureRandom();
+    private Color[] _players;
+    private final ArrayList<MyButton> _cells = new ArrayList<>();
+    private static final SecureRandom _rand = new SecureRandom();
 
     /**
      * Méthode permettant de créer la fenêtre de jeu
@@ -122,24 +118,14 @@ public class GameWindow extends JFrame implements Observer{
 
         JButton button = new JButton("Start");
         button.setPreferredSize(new Dimension(80, 30));
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if(_init){
-                    new Thread(()-> {
-                            Game.getInstance().automatonGame();
-                    }).start();
-                    button.setEnabled(false);
-                }
+        button.addActionListener(actionEvent -> {
+            if(_init){
+                new Thread(()-> Game.getInstance().automatonGame()).start();
+                button.setEnabled(false);
             }
         });
 
-        cSpeedSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent changeEvent) {
-                Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000);
-            }
-        });
+        cSpeedSlider.addChangeListener(changeEvent -> Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000));
 
         footer.add(cSpeedLabel);
         footer.add(cSpeedSlider);
@@ -170,9 +156,6 @@ public class GameWindow extends JFrame implements Observer{
                 }
             }
         }
-//        else {
-//            button.setBackground(Color.MAGENTA);
-//        }
     }
 
     /**
