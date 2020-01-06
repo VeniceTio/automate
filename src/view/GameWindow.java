@@ -44,8 +44,9 @@ public class GameWindow extends JFrame implements Observer{
      * @param players les méthodes d'évolution des joueurs
      * @param cellNum le nombre de cellule par joueur
      */
-    public GameWindow(int size, String[] players, int cellNum,int gamespeed) {
+    public GameWindow(int size, String[] players, int cellNum,int gamespeed,Color[] playersColor) {
         _startCell = cellNum;
+        _players = playersColor;
 
         //Game window
         setTitle("Game Window");
@@ -254,13 +255,14 @@ public class GameWindow extends JFrame implements Observer{
         for(int i=0;i<_cells.size();i++){
             button = _cells.get(i);
             nbCell=-1;
-            players = new boolean[]{false, false};
+            players = new boolean[_players.length];//{false, false};
             for(int j=0;j<_players.length;j++){
                 if (GC.getState(j,i) != State.DEAD){
                     nbCell++;
                     players[j] = true;
                     //System.out.println("#### cellule vivante pos="+i);
                 }
+                players[j] = false;
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);
