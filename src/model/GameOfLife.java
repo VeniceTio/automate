@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameOfLife implements Rule<State> {
     /**
-     * Méthode permettant d'avoir le nouvel état d'une cellule
+     * Méthode permettant d'avoir le nouvel état d'une cellule en fonction du voisinage
      * @param neighbors les voisins de cette cellule
      * @param actualState l'état actuel de la cellule
      * @return le nouvel état que doit prendre la cellule
