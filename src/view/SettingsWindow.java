@@ -1,11 +1,10 @@
 package view;
 
-import controler.ViewController;
+import controler.Facade;
 import utils.ViewUtilities;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.*;
 
 import java.awt.*;
 import java.awt.event.*;

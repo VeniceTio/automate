@@ -98,6 +98,7 @@ public class GridController extends Observable {
             grid.clockForward();
         }
         System.out.println("turn finish");
+        notifyObservers();
         //new Thread(this::notifyObservers).start();
     }
 

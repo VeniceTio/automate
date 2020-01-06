@@ -2,43 +2,27 @@ package view;
 
 import controler.Game;
 import controler.GridController;
-import controler.ViewController;
 import model.State;
 import utils.Observer;
 import utils.ViewUtilities;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameWindow extends JFrame implements Observer{
 
-    public static class MyButton extends JButton {
-        int _index;
-        MyButton(int index){
-            super();
-            _index=index;
-            setOpaque(true);
-            setEnabled(true);
-        }
-    }
+
 
     //TODO: commentaire à faire
     /**
      * Le nombre de cellule par joueur
      */
-    private int _startCell;
+    private final int _startCell;
     private boolean _init = false;
-    private Color[] _players = {Color.BLUE,Color.RED};
-    private ArrayList<MyButton> _cells = new ArrayList<>();
-    private static SecureRandom _rand = new SecureRandom();
-    private JPanel  _gridGame;
+    private Color[] _players;
+    private final ArrayList<MyButton> _cells = new ArrayList<>();
+    private static final SecureRandom _rand = new SecureRandom();
 
     /**
      * Méthode permettant de créer la fenêtre de jeu
@@ -109,15 +93,15 @@ public class GameWindow extends JFrame implements Observer{
      */
     private JPanel createGridGame(int gridSize) {
         GridLayout gridLayout = new GridLayout(gridSize,gridSize,0,0);
-        _gridGame = new JPanel(gridLayout);
+        JPanel gridGame = new JPanel(gridLayout);
         for(int i = 0; i < (gridSize * gridSize); i++) {
             MyButton cell = new MyButton(i);
             cell.setBackground(Color.white);
             cell.addActionListener(actionEvent -> select(cell));
-            _gridGame.add(cell, false);
+            gridGame.add(cell, false);
             _cells.add(cell);
         }
-        return _gridGame;
+        return gridGame;
     }
 
     /**
@@ -134,28 +118,14 @@ public class GameWindow extends JFrame implements Observer{
 
         JButton button = new JButton("Start");
         button.setPreferredSize(new Dimension(80, 30));
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if(_init){
-                    new Thread(()-> {
-                        try {
-                            Game.getInstance().automatonGame();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }).start();
-                    button.setEnabled(false);
-                }
+        button.addActionListener(actionEvent -> {
+            if(_init){
+                new Thread(()-> Game.getInstance().automatonGame()).start();
+                button.setEnabled(false);
             }
         });
 
-        cSpeedSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent changeEvent) {
-                Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000);
-            }
-        });
+        cSpeedSlider.addChangeListener(changeEvent -> Game.getInstance().setGameSpeed(cSpeedSlider.getValue()*1000));
 
         footer.add(cSpeedLabel);
         footer.add(cSpeedSlider);
@@ -186,9 +156,6 @@ public class GameWindow extends JFrame implements Observer{
                 }
             }
         }
-//        else {
-//            button.setBackground(Color.MAGENTA);
-//        }
     }
 
     /**
@@ -207,9 +174,9 @@ public class GameWindow extends JFrame implements Observer{
         }
         if(send){
             if(newColor == Color.white) {
-                GridController.getInstance().setStateGrid(player, button._index, State.DEAD);
+                GridController.getInstance().setStateGrid(player, button.getIndex(), State.DEAD);
             } else{
-                GridController.getInstance().setStateGrid(player, button._index, State.ALIVE);
+                GridController.getInstance().setStateGrid(player, button.getIndex(), State.ALIVE);
             }
         }
     }
@@ -255,34 +222,28 @@ public class GameWindow extends JFrame implements Observer{
         boolean[] players;
         MyButton button;
         GridController GC = GridController.getInstance();
-        for(int i=0;i<_cells.size();i++){
+        for(int i=0;i<_cells.size();i++) {
             button = _cells.get(i);
-            nbCell=-1;
+            nbCell = -1;
             players = new boolean[_players.length];//{false, false};
-            for(int j=0;j<_players.length;j++){
-                if (GC.getState(j,i) != State.DEAD){
+            for (int j = 0; j < _players.length; j++) {
+                if (GC.getState(j, i) != State.DEAD) {
                     nbCell++;
                     players[j] = true;
                     //System.out.println("#### cellule vivante pos="+i);
-                }else {
+                } else {
                     players[j] = false;
                 }
             }
-            if(nbCell==-1){
+            if (nbCell == -1) {
                 button.setBackground(Color.white);
             } else {
                 //System.out.println("#### combat pos="+i);
-                Color newColor = fight(players, nbCell,i);
+                Color newColor = fight(players, nbCell, i);
                 //System.out.println("couleur : "+newColor);
                 button.setBackground(newColor);
-                //button.repaint();
             }
-            //_gridGame.removeAll();
         }
-//        _gridGame.repaint();
-//        for(int i=0;i<_cells.size();i++){
-//            _gridGame.add(_cells.get(i));
-//        }
 
     }
 }
