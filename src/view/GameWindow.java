@@ -128,7 +128,7 @@ public class GameWindow extends JFrame implements Observer{
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel cSpeedLabel = new JLabel("Speed's cursor : ");
-        JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,1,100, initvalue);
+        JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,1,20, initvalue);
         cSpeedSlider.setPreferredSize(new Dimension(280, 20));
 
 
@@ -264,8 +264,9 @@ public class GameWindow extends JFrame implements Observer{
                     nbCell++;
                     players[j] = true;
                     //System.out.println("#### cellule vivante pos="+i);
+                }else {
+                    players[j] = false;
                 }
-                players[j] = false;
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);

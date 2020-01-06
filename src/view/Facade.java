@@ -4,7 +4,6 @@ import controler.Game;
 import controler.GridController;
 import controler.ViewController;
 import model.Automaton;
-import model.Expansion;
 import utils.ViewUtilities;
 
 import java.awt.*;
@@ -21,7 +20,8 @@ public class Facade {
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
         Color[] colorPlayer = new Color[]{Color.BLUE,Color.RED};
 
-        Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), ViewUtilities.toExpansion(textParameters.get(0)), aPlayers);
+        Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),
+                numericParameters.get(3), ViewUtilities.toExpansion(textParameters.get(0)), aPlayers);
         ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1),colorPlayer);
 
         System.out.println("Facade.java: initGameWindow()");
