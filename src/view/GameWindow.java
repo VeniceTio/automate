@@ -5,6 +5,8 @@ import controler.GridController;
 import controler.ViewController;
 import model.State;
 import utils.Observer;
+import utils.ViewUtilities;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -69,7 +71,9 @@ public class GameWindow extends JFrame implements Observer{
         windowsContents.add(createFooter(gamespeed), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewController.getInstance().changeFont(windowsContents);
+        ViewUtilities.changeFont(windowsContents);
+
+        JOptionPane.showMessageDialog(windowsContents, "Le joueur 2 commence !", "Message", JOptionPane.INFORMATION_MESSAGE);
 
         //Settings the content pane of the game window
         setContentPane(windowsContents);
@@ -83,7 +87,6 @@ public class GameWindow extends JFrame implements Observer{
         JPanel header = new JPanel(new BorderLayout());
         JPanel title = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel playersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
 
         JLabel lbl = new JLabel("Automaton's game");
         JLabel playerOne = new JLabel("Player n°1: " + players[0].toLowerCase() + " vs ");
@@ -125,7 +128,7 @@ public class GameWindow extends JFrame implements Observer{
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel cSpeedLabel = new JLabel("Speed's cursor : ");
-        JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,1,20,initvalue);
+        JSlider cSpeedSlider = new JSlider(JSlider.HORIZONTAL,1,100, initvalue);
         cSpeedSlider.setPreferredSize(new Dimension(280, 20));
 
 
