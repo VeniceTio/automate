@@ -161,8 +161,8 @@ public class SettingsWindow extends JFrame {
         footer.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttons.add(ViewUtilities.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
-        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> validateButton()));
+        buttons.add(ViewUtils.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
+        buttons.add(ViewUtils.createButton("Validate", 90, 30, actionEvent -> validateButton()));
 
         footer.add(_userMessage, BorderLayout.WEST);
         footer.add(buttons, BorderLayout.EAST);
@@ -304,14 +304,15 @@ public class SettingsWindow extends JFrame {
         nullValue = isNull(numericParameters);
         alreadySelected = isDuplicated(textParameters);
 
-        if(checkParameters(nullValue, alreadySelected)) {
+        if (checkParameters(nullValue, alreadySelected)) {
             ViewUtils.correctValue();
-        System.out.println(nullValue);
-        System.out.println(alreadySelected);
+            System.out.println(nullValue);
+            System.out.println(alreadySelected);
 
-        if(confirmParameters(nullValue, alreadySelected)) {
-            ViewUtils.correctValue();
-            Facade.initGameWindow(numericParameters, textParameters);
+            if (checkParameters(nullValue, alreadySelected)) {
+                ViewUtils.correctValue();
+                Facade.initGameWindow(numericParameters, textParameters);
+            }
         }
     }
 }
