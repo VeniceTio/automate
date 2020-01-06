@@ -8,7 +8,7 @@ public enum Automaton {
     FREDKIN1("Fredkin n°1"),
     FREDKIN2("Fredkin n°2");
 
-    private String _abreviation;
+    private final String _abreviation;
 
     Automaton(String abreviation){
         this._abreviation = abreviation;

@@ -56,7 +56,7 @@ public class Game {
             GC.initGrid(gridSize,autoType,expansionType);
             System.out.println("player : " + auto);
         }
-        GC.add(ViewController.getInstance());
+        GC.add(ViewController.getInstance().getGameWin());
     }
 
     /**

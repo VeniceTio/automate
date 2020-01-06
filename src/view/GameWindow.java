@@ -10,7 +10,7 @@ import java.awt.*;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-public class GameWindow extends JFrame implements Observer{
+public class GameWindow extends JFrame implements Observer {
 
 
 
@@ -219,6 +219,7 @@ public class GameWindow extends JFrame implements Observer{
      * Méthode mettant à jour la grille affiché avec les nouvelles grilles. Lance les combats si conflit entre differente
      * grille
      */
+    @Override
     public void update() {
         int nbCell;
         boolean[] players;

@@ -14,13 +14,17 @@ import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
 
-public class ViewController implements Observer {
+public class ViewController {
     //private ...
     private SettingsWindow _settingsWin;
     private GameWindow _gameWin;
     private EndWindow _endWin;
     private ArrayList<String> _expansions = new ArrayList<>();
     private ArrayList<String> _automatons = new ArrayList<>();
+    /**
+     * L'instance de la classe ViewController (Singleton)
+     */
+    private static ViewController _instance = null;
 
     public ViewController(){
         for (Expansion exp:Expansion.values()){
@@ -30,11 +34,6 @@ public class ViewController implements Observer {
             _automatons.add(auto.getAbreviation());
         }
     }
-
-    /**
-     * L'instance de la classe ViewController (Singleton)
-     */
-    private static ViewController _instance = null;
 
     /**
      * Méthode permettant de récupérer l'instance de la classe
@@ -63,21 +62,5 @@ public class ViewController implements Observer {
         _endWin = new EndWindow(turnNumber);
         _endWin.setVisible(true);
     }
-
-    public void clockForward() {
-        synchronized (this) {
-            _gameWin.update();
-//            try {
-//                sleep(3000);
-//            }catch (InterruptedException e){
-//                e.printStackTrace();
-//            }
-            notify();
-        }
-    }
-
-    @Override
-    public void update() {
-        clockForward();
-    }
+    public GameWindow getGameWin(){return _gameWin;}
 }
