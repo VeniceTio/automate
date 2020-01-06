@@ -9,7 +9,7 @@ public class GridController extends Observable {
     /**
      * Liste contenant toutes les grilles de jeu
      */
-    private ArrayList<Grid> _grids = new ArrayList<>();
+    private final ArrayList<Grid> _grids = new ArrayList<>();
     /**
      * L'instance de la classe GridController
      */
