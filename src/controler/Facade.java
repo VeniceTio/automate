@@ -1,11 +1,7 @@
 package controler;
 
-import controler.Game;
-import controler.GridController;
-import controler.ViewController;
 import model.Automaton;
 import utils.ViewUtilities;
-
 import java.awt.*;
 import java.util.ArrayList;
 
