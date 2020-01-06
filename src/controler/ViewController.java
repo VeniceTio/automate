@@ -2,17 +2,12 @@ package controler;
 
 import model.Automaton;
 import model.Expansion;
-import utils.Observer;
 import view.EndWindow;
 import view.GameWindow;
 import view.SettingsWindow;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
-import static java.lang.Thread.sleep;
 
 public class ViewController {
     //private ...

@@ -180,7 +180,7 @@ public class SettingsWindow extends JFrame {
 
         for(int i = 0; i < numPlayer; i++) {
             gamesOptionPanel.add(ViewUtilities.createLabel("Player n°" + (i + 1) + " : "));
-            gamesOptionPanel.add(ViewUtilities.createComboBox(gameOptions.toArray(), actionEvent -> updateGameOptions(actionEvent)));
+            gamesOptionPanel.add(ViewUtilities.createComboBox(gameOptions.toArray(), this::updateGameOptions));
         }
 
         return gamesOptionPanel;

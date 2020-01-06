@@ -66,7 +66,6 @@ public class Game {
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
-        ViewController VC = ViewController.getInstance();
         while(alive && turn<_maxturn){
             System.out.println("## turn : "+turn+"##");
                 GC.clockForward();
