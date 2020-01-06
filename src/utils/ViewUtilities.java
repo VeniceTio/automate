@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 
 public class ViewUtilities {
     /**
@@ -150,10 +151,11 @@ public class ViewUtilities {
      * @param size la taille du champ texte
      * @return le champ texte
      */
-    public static JTextField createTextField(int size, int min, int max, String toolTipText) {
+    public static JTextField createTextField(int size, int min, int max, String toolTipText, FocusListener fl) {
         JTextField text = new JTextField(size);
         text.setToolTipText(toolTipText);
         text.setInputVerifier(new RangeInputVerifier(min, max));
+        text.addFocusListener(fl);
         PlainDocument doc = (PlainDocument) text.getDocument();
         doc.setDocumentFilter(new IntFilter());
 

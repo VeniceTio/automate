@@ -93,7 +93,12 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(ViewUtilities.createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc);
+        settingsContents.add(ViewUtilities.createTextField(10, 2, 20, "Enter a value between 2 and 20", new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                changeMaxCellNumber(e);
+            }
+        }), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -110,7 +115,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 100, "Enter a value between 1 and 100"), gbc);
+        settingsContents.add(ViewUtilities.createTextField(10, 1, 100, "Enter a value between 1 and 100", null), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -118,7 +123,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 100,"Enter a value between 1 and 100"), gbc);
+        settingsContents.add(ViewUtilities.createTextField(10, 1, 100,"Enter a value between 1 and 100", null), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -130,9 +135,17 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 200, "Enter a value between 1 and 200"), gbc);
+        settingsContents.add(ViewUtilities.createTextField(10, 1, 200, "Enter a value between 1 and 200", null), gbc);
 
         return settingsContents;
+    }
+
+    private int changeMaxCellNumber(FocusEvent e) {
+        JTextField text = (JTextField) e.getSource();
+        if(!text.getText().isEmpty()) {
+            return (Integer.parseInt(text.getText())) / 2;
+        }
+        return 0;
     }
 
     /**
@@ -182,6 +195,12 @@ public class SettingsWindow extends JFrame {
     private String cboDataRetrieving(Component c) {
         JComboBox<String> cbo = (JComboBox) c;
         return String.valueOf(cbo.getSelectedItem());
+    }
+
+    private void test(ActionEvent e) {
+        JTextField txt = (JTextField) e.getSource();
+        int value = Integer.parseInt(txt.getText());
+        System.out.println(value);
     }
 
     /**
