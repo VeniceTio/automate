@@ -2,7 +2,6 @@ package controler;
 
 import model.*;
 import utils.EnumUtils;
-
 import static java.lang.Thread.sleep;
 
 public class Game {
@@ -69,18 +68,9 @@ public class Game {
         boolean alive = true;
         GridController GC = GridController.getInstance();
         ViewController VC = ViewController.getInstance();
-        Thread MajView = new Thread(VC:: clockForward);
-        Thread MajGrids = new Thread(GC::clockForward);
         while(alive && turn<_maxturn){
             System.out.println("## turn : "+turn+"##");
-            //MajGrids.start();
-            //MajView.start();
-            //VC.clockForward();
-            //new Thread(GC::clockForward).start();
-            synchronized (VC){
                 GC.clockForward();
-                //new Thread(VC:: clockForward).start();
-                //VC.wait();
                 alive = GC.allAlive();
                 turn++;
                 try {
@@ -88,10 +78,8 @@ public class Game {
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
-            }
         }
         Facade.initEndWindow(turn);
-        //TODO : fin analyse du perdant et lancement de la fenetre de fin
     }
 
     public void setGameSpeed(int gameSpeed){
