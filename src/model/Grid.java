@@ -1,7 +1,5 @@
 package model;
 
-import controler.Game;
-
 import java.util.ArrayList;
 
 public class Grid {
@@ -11,7 +9,7 @@ public class Grid {
      */
     ArrayList<State> _grid;
     /**
-     * TODO: commentaire à faire
+     * strategie d'extention de la grille
      */
     final Rule<State> _strategy;
     /**
@@ -23,25 +21,10 @@ public class Grid {
      */
     final int _size;
 
-    public String getStringStrategy() {
-        String automaton = "";
-
-        if(_strategy instanceof Fredkin1) {
-            automaton = Automaton.FREDKIN1.getAbreviation();
-        }
-        else if(_strategy instanceof Fredkin2) {
-            automaton = Automaton.FREDKIN2.getAbreviation();
-        }
-        else if(_strategy instanceof GameOfLife) {
-            automaton = Automaton.GAMEOFLIFE.getAbreviation();
-        }
-
-        return automaton;
-    }
     /**
-     * Méthode permettant d'initialiser les paramètres de jeu
+     * Méthode permettant d'initialiser les paramètres de la grid
      * @param size la taille de la grille de jeu
-     * @param strategy
+     * @param strategy type d'automate
      * @param expansion la méthode d'extension de la grille
      */
     public Grid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
@@ -52,7 +35,7 @@ public class Grid {
     }
 
     /**
-     * Méthode permettant d'initialiser la grille de jeu
+     * Méthode permettant d'initialiser une grille de jeu à l'etat mort
      * @return la grille initialisée
      */
     public ArrayList<State> initGrid(){
@@ -65,20 +48,19 @@ public class Grid {
         return grid;
     }
 
-
     /**
-     * TODO: commentaire à faire
-     * @param index
-     * @param state
+     * Méthode permettant de mettre a jour l'etat d'une cellule
+     * @param index cellule à mettre a jour
+     * @param state nouvelle etat de la cellule
      */
     public void setState(int index, State state){
         _grid.set(index, state);
     }
 
     /**
-     * TODO: commentaire à faire
-     * @param index
-     * @return
+     * Renvoie l'etat d'une cellule de la grid
+     * @param index position de la cellule questionné
+     * @return etat de la cellule
      */
     public State getState(int index){return _grid.get(index);}
 
@@ -104,7 +86,7 @@ public class Grid {
     }
 
     /**
-     * Méthode permettant de compter le nombre de cellule vivante TODO: bonne description ?
+     * Méthode permettant de compter le nombre de cellule vivante
      * @return le nombre de cellule vivante
      */
     public int countAlive(){
@@ -135,18 +117,38 @@ public class Grid {
     }
 
     /**
-     * TODO: commentaire à faire
-     * @return
+     * Renvoie le type d'automate controllant la grid
+     * @return le nom de l'automate
+     */
+    public String getStringStrategy() {
+        String automaton = "";
+
+        if(_strategy instanceof Fredkin1) {
+            automaton = Automaton.FREDKIN1.getAbreviation();
+        }
+        else if(_strategy instanceof Fredkin2) {
+            automaton = Automaton.FREDKIN2.getAbreviation();
+        }
+        else if(_strategy instanceof GameOfLife) {
+            automaton = Automaton.GAMEOFLIFE.getAbreviation();
+        }
+
+        return automaton;
+    }
+
+    /**
+     * Renvoie la Grid formaté pour un affichage console
+     * @return chaine de caractere contenant la grid
      */
     @Override
     public String toString(){
-        String chaine = "grid :\n";
+        StringBuilder chaine = new StringBuilder("grid :\n");
         for(int i = 0; i< _size; i++) {
             for (int k = 0; k < _size; k++) {
-                chaine+=_grid.get(i*_size+k)+", ";
+                chaine.append(_grid.get(i * _size + k)).append(", ");
             }
-            chaine+="\n";
+            chaine.append("\n");
         }
-        return chaine;
+        return chaine.toString();
     }
 }
