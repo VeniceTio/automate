@@ -20,7 +20,7 @@ public class GameWindow extends JFrame implements Observer{
      */
     private final int _startCell;
     private boolean _init = false;
-    private Color[] _players;
+    private final Color[] _players;
     private final ArrayList<MyButton> _cells = new ArrayList<>();
     private static final SecureRandom _rand = new SecureRandom();
 
