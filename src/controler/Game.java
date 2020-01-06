@@ -1,7 +1,6 @@
 package controler;
 
 import model.*;
-import view.Facade;
 
 import static java.lang.Thread.sleep;
 

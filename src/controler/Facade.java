@@ -1,4 +1,4 @@
-package view;
+package controler;
 
 import controler.Game;
 import controler.GridController;
@@ -47,9 +47,5 @@ public class Facade {
 
     public static void resetGame() {
         GridController.getInstance().getGrids().clear();
-    }
-
-    public static void main(String[] args){
-        initSettingsWindow();
     }
 }
