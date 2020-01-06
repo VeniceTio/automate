@@ -7,6 +7,7 @@ import model.Automaton;
 import model.Expansion;
 import utils.ViewUtilities;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Facade {
@@ -18,9 +19,10 @@ public class Facade {
     public static void initGameWindow(ArrayList<Integer> numericParameters, ArrayList<String> textParameters) {
         Automaton[] aPlayers = {ViewUtilities.toAutomaton(textParameters.get(1)), ViewUtilities.toAutomaton((textParameters.get(2)))};
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
+        Color[] colorPlayer = new Color[]{Color.BLUE,Color.RED};
 
         Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),  numericParameters.get(3), ViewUtilities.toExpansion(textParameters.get(0)), aPlayers);
-        ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1));
+        ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1),colorPlayer);
 
         System.out.println("Facade.java: initGameWindow()");
         System.out.println("Les paramètres numériques entrés: " + numericParameters);
