@@ -49,15 +49,77 @@ public interface ExpansionStrategy<Expansion> {
         return _neighbors;
     }
 
-    //TODO: commentaire à faire
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin haut gauche vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void leftUpCorner(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin bas gauche vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void leftDownCorner(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin haut droit vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void rightUpCorner(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin bas droit vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void rightDownCorner(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté droit de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void rightSide(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté gauche de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void leftSide(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté haut de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void upSide(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté bas de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     void downSide(int x,int y, ArrayList<State> grid,int size);
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule au milieu de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     default void middle(int x,int y, ArrayList<State> grid,int size) {
         for (int i=y-1;i<y+2;i++){
             for(int k=x-1;k<x+2;k++){

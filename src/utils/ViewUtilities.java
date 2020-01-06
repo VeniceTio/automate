@@ -1,7 +1,5 @@
 package utils;
 
-import model.Automaton;
-import model.Expansion;
 import view.SettingsWindow;
 
 import javax.swing.*;

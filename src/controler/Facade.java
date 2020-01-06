@@ -16,9 +16,9 @@ public class Facade {
         String[] sPlayers = {textParameters.get(1), textParameters.get(2)};
         Color[] colorPlayer = new Color[]{Color.BLUE,Color.RED};
 
+        ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1),colorPlayer);
         Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),
                 numericParameters.get(3), EnumUtils.toExpansion(textParameters.get(0)), aPlayers);
-        ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1),colorPlayer);
 
         System.out.println("Facade.java: initGameWindow()");
         System.out.println("Les paramètres numériques entrés: " + numericParameters);
@@ -45,6 +45,6 @@ public class Facade {
      * Méthode permettant de remetre à zero les automate du gridController
      */
     public static void resetGame() {
-        GridController.getInstance().getGrids().clear();
+        GridController.getInstance().reset();
     }
 }

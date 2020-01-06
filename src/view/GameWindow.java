@@ -10,7 +10,7 @@ import java.awt.*;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-public class GameWindow extends JFrame implements Observer{
+public class GameWindow extends JFrame implements Observer {
 
 
 
@@ -20,7 +20,7 @@ public class GameWindow extends JFrame implements Observer{
      */
     private final int _startCell;
     private boolean _init = false;
-    private Color[] _players;
+    private final Color[] _players;
     private final ArrayList<MyButton> _cells = new ArrayList<>();
     private static final SecureRandom _rand = new SecureRandom();
 
@@ -135,8 +135,8 @@ public class GameWindow extends JFrame implements Observer{
     }
 
     /**
-     * select
-     * @param button
+     * Méthode qui gère le changement de couleur du bouton, selectionné
+     * @param button bouton selectionné
      */
     public void select(MyButton button){
         if(!_init){
@@ -159,10 +159,11 @@ public class GameWindow extends JFrame implements Observer{
     }
 
     /**
-     * TODO: commentaire à faire
-     * @param button
-     * @param player
-     * @param send
+     * Méthode qui change la couleur du bouton selectionné par la couleur du joueur qui la possède.
+     * Cette methode est utilisé pour l'initialisation de la grille
+     * @param button selectionné
+     * @param player index du joueur modifé
+     * @param send mets a jour le model si true
      */
     private void changeColor(MyButton button, int player,boolean send){
         Color newColor = Color.white;
@@ -182,11 +183,11 @@ public class GameWindow extends JFrame implements Observer{
     }
 
     /**
-     * TODO: commentaire à faire
-     * @param player
-     * @param nbPlayer
-     * @param pos
-     * @return
+     * Methode qui effectue les combat entre cellule
+     * @param player tableau associant true au cellule participant au combat sinon false
+     * @param nbPlayer nombre de joueur impliqué dans le combat
+     * @param pos position de la cellule où a lieu le combat
+     * @return la couleur du jeur vainqueur
      */
     private Color fight(boolean[] player,int nbPlayer,int pos){
         int winner;
@@ -215,8 +216,10 @@ public class GameWindow extends JFrame implements Observer{
     }
 
     /**
-     * TODO: commentaire à faire
+     * Méthode mettant à jour la grille affiché avec les nouvelles grilles. Lance les combats si conflit entre differente
+     * grille
      */
+    @Override
     public void update() {
         int nbCell;
         boolean[] players;

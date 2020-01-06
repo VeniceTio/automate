@@ -2,7 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
-public class Constant implements ExpansionStrategy<Expansion> { //TODO: commentaire à faire
+public class Constant implements ExpansionStrategy<Expansion> {
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin haut gauche vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void leftUpCorner(int x, int y, ArrayList<State> grid, int size) {
         _neighbors.add(State.DEAD);
@@ -17,6 +24,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin bas gauche vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void leftDownCorner(int x, int y, ArrayList<State> grid, int size) {
         for (int i=y-1;i<y+1;i++){
@@ -30,6 +44,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin haut droit vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void rightUpCorner(int x, int y, ArrayList<State> grid, int size) {
         for (int g=x-1;g<x+1;g++){
@@ -44,6 +65,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule dans le coin bas droit vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void rightDownCorner(int x, int y, ArrayList<State> grid, int size) {
         for (int i=y-1;i<y+1;i++){
@@ -57,6 +85,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté droit de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void rightSide(int x, int y, ArrayList<State> grid, int size) {
         for (int i=y-1;i<y+2;i++){
@@ -67,6 +102,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté gauche de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void leftSide(int x, int y, ArrayList<State> grid, int size) {
         for (int i=y-1;i<y+2;i++){
@@ -77,6 +119,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté haut de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void upSide(int x, int y, ArrayList<State> grid, int size) {
         for (int g=x-1;g<x+2;g++){
@@ -89,6 +138,13 @@ public class Constant implements ExpansionStrategy<Expansion> { //TODO: commenta
         }
     }
 
+    /**
+     * Méthode permettant de récupérer l'état des voisins d'une cellule sur le coté bas de la grille vers _neighbors
+     * @param x la position x de la cellule
+     * @param y la position y de la cellule
+     * @param grid la grille de jeu
+     * @param size taille de la grille (size*size)
+     */
     @Override
     public void downSide(int x, int y, ArrayList<State> grid, int size) {
         for (int i=y-1;i<y+1;i++){
