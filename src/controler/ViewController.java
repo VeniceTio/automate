@@ -2,6 +2,7 @@ package controler;
 
 import model.Automaton;
 import model.Expansion;
+import utils.Observer;
 import view.EndWindow;
 import view.GameWindow;
 import view.SettingsWindow;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
 
-public class ViewController {
+public class ViewController implements Observer {
     //private ...
     private SettingsWindow _settingsWin;
     private GameWindow _gameWin;
@@ -73,5 +74,10 @@ public class ViewController {
 //            }
             notify();
         }
+    }
+
+    @Override
+    public void update() {
+        clockForward();
     }
 }

@@ -1,13 +1,11 @@
 package view;
 
+import controler.Facade;
 import controler.GridController;
-import controler.ViewController;
 import utils.ViewUtilities;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class EndWindow extends JFrame {
     public EndWindow(int turnNumber) {

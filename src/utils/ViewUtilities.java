@@ -190,59 +190,6 @@ public class ViewUtilities {
     }
 
     /**
-     * Méthode permettant de convertir un type d'évolution (string) en type d'énumération
-     * @param text le type d'évolution choisi par les joueurs
-     * @return le type d'évolution en type énuméré
-     */
-    public static Automaton toAutomaton(String text) {
-        Automaton automatonChosen;
-        switch(text) {
-            case "Game of life":
-                automatonChosen = Automaton.GAMEOFLIFE;
-                break;
-            case "Fredkin n°1":
-                automatonChosen = Automaton.FREDKIN1;
-                break;
-            case "Fredkin n°2":
-                automatonChosen = Automaton.FREDKIN2;
-                break;
-            default:
-                automatonChosen = null;
-        }
-
-        return automatonChosen;
-    }
-
-    /**
-     * Méthode permettant de convertir une méthode d'extension(string) en type d'énumération
-     * @param text la méthode d'extension de la grille
-     * @return la méthode d'évolution de la grille  en type énuméré
-     */
-    public static Expansion toExpansion(String text) {
-        Expansion expansionChosen;
-        switch(text) {
-            case "Repetition":
-                expansionChosen = Expansion.REPETITION;
-                break;
-            case "Periodicity":
-                expansionChosen = Expansion.PERIODICITY;
-                break;
-            case "Symetry n°1":
-                expansionChosen = Expansion.SYMETRY1;
-                break;
-            case "Symetry n°2":
-                expansionChosen = Expansion.SYMETRY2;
-                break;
-            case "Constant":
-                expansionChosen = Expansion.CONSTANT;
-                break;
-            default:
-                expansionChosen = null;
-        }
-
-        return expansionChosen;
-    }
-    /**
      * Méthode permettant de changer la police de chaque composant d'une JFrame
      * @param component le composant root qui contient tous les autres composants
      */

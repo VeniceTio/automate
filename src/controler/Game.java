@@ -1,8 +1,7 @@
 package controler;
 
 import model.*;
-import view.Facade;
-
+import utils.EnumUtils;
 import static java.lang.Thread.sleep;
 
 public class Game {
@@ -20,8 +19,8 @@ public class Game {
     private static Game _instance = null;
 
     /**
-     * Méthode permettant de récupérer l'instance de la classe
-     * @return
+     * Méthode permettant de récupérer l'unique instance de la classe
+     * @return _instance
      */
     public static Game getInstance(){
         if(_instance == null){
@@ -44,7 +43,7 @@ public class Game {
         _gameSpeed = gameSpeed*1000;
         _maxturn = turnNum;
         GridController GC = GridController.getInstance();
-        ExpansionStrategy<Expansion> expansionType = getExpansionType(expansion);
+        ExpansionStrategy<Expansion> expansionType = EnumUtils.getExpansionType(expansion);
         Rule<State> autoType;
         System.out.println("Game.java: createGameWindow()");
         System.out.println("size : " + gridSize);
@@ -53,33 +52,24 @@ public class Game {
         System.out.println("cellNum : " + cellNum);
         System.out.println("expansion : " + expansion);
         for (Automaton auto:players) {
-            autoType = getAutomaton(auto);
+            autoType = EnumUtils.getAutomaton(auto);
             GC.initGrid(gridSize,autoType,expansionType);
             System.out.println("player : " + auto);
         }
+        GC.add(ViewController.getInstance());
     }
 
     /**
      * Méthode permettant de faire tourner le jeu
-     * @throws InterruptedException
      */
-    public void automatonGame() throws InterruptedException {
+    public void automatonGame(){
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
         ViewController VC = ViewController.getInstance();
-        Thread MajView = new Thread(VC:: clockForward);
-        Thread MajGrids = new Thread(GC::clockForward);
         while(alive && turn<_maxturn){
             System.out.println("## turn : "+turn+"##");
-            //MajGrids.start();
-            //MajView.start();
-            //VC.clockForward();
-            //new Thread(GC::clockForward).start();
-            synchronized (VC){
                 GC.clockForward();
-                new Thread(VC:: clockForward).start();
-                VC.wait();
                 alive = GC.allAlive();
                 turn++;
                 try {
@@ -87,60 +77,8 @@ public class Game {
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
-            }
         }
         Facade.initEndWindow(turn);
-        //TODO : fin analyse du perdant et lancement de la fenetre de fin
-    }
-
-    /**
-     * Méthode permettant de créer l'instance de l'automate choisi
-     * @param automaton le mode d'évolution choisi
-     * @return l'instance de l'automate choisi
-     */
-    public Rule<State> getAutomaton(Automaton automaton){
-        System.out.println("Game.java: getAutomaton()");
-        Rule<State> autoType;
-        switch (automaton){
-            case FREDKIN1:
-                autoType = new Fredkin1();
-                System.out.println("automate fred1");
-                break;
-            case FREDKIN2:
-                autoType = new Fredkin2();
-                System.out.println("automate fred2");
-                break;
-            case GAMEOFLIFE:
-                autoType = new GameOfLife();
-                System.out.println("automate gameoflife");
-                break;
-            default:
-                autoType = null;
-                System.out.println("automate non trouvé");
-                break;
-        }
-        return autoType;
-    }
-
-    /**
-     * Méthode permettant de créer l'intance de l'extension choisi
-     * @param expansion la méthode d'extension de grille choisi
-     * @return l'instance de l'extension de la grille choisi
-     */
-    public ExpansionStrategy<Expansion> getExpansionType(Expansion expansion){
-        ExpansionStrategy<Expansion> expansionType;
-        switch (expansion){
-            case CONSTANT:
-                expansionType = new Constant();
-                break;
-            case REPETITION:
-                expansionType = new Repetition();
-                break;
-            default:
-                expansionType = null;
-                break;
-        }
-        return expansionType;
     }
 
     public void setGameSpeed(int gameSpeed){
