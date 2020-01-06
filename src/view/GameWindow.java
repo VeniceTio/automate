@@ -232,7 +232,7 @@ public class GameWindow extends JFrame implements Observer{
             winner = 0;
         }
         //System.out.println("## winner : "+winner);
-        //System.out.println(Arrays.toString(player));
+        System.out.println(Arrays.toString(player));
         for (boolean play:player){
             idPlayer++;
             if(play){
@@ -264,8 +264,9 @@ public class GameWindow extends JFrame implements Observer{
                     nbCell++;
                     players[j] = true;
                     //System.out.println("#### cellule vivante pos="+i);
+                }else {
+                    players[j] = false;
                 }
-                players[j] = false;
             }
             if(nbCell==-1){
                 button.setBackground(Color.white);
