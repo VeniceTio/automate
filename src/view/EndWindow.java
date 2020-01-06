@@ -2,6 +2,7 @@ package view;
 
 import controler.GridController;
 import controler.ViewController;
+import utils.ViewUtilities;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -31,49 +32,23 @@ public class EndWindow extends JFrame {
         endWindow.add(createFooter(), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewController.getInstance().changeFont(endWindow);
+        ViewUtilities.changeFont(endWindow);
 
         //Settings the content pane of the end window
         setContentPane(endWindow);
     }
 
-    /**
-     * Méthode permettant de créer un bouton
-     * @param text le texte qu'affichera le bouton
-     * @param width la largeur du bouton
-     * @param height la hauteur du bouton
-     * @param al l'événement du bouton
-     * @return le bouton
-     */
-    private JButton createButton(String text, int width, int height, ActionListener al) {
-        JButton button = new JButton(text);
-
-        button.setPreferredSize(new Dimension(width, height));
-        button.addActionListener(al);
-        return button;
-    }
-
-    /**
-     * Méthode permettant de créer un label
-     * @param text le texte qu'affichera le label
-     * @return le label
-     */
-    private JLabel createLabel(String text) {
-        JLabel lbl = new JLabel(text);
-        lbl.setHorizontalAlignment(JLabel.CENTER);
-        return lbl;
-    }
-
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        header.add(createLabel("The result of the game"));
+        header.add(ViewUtilities.createLabel("The result of the game"));
 
         return header;
     }
 
     private JPanel createMainContents(int turnNumber) {
         JPanel contents = new JPanel(new GridLayout(4, 1, 0, 0));
+        //lbl.setHorizontalAlignment(JLabel.CENTER);
 
         String winningPlayer;
         String winningAutomaton;
@@ -91,10 +66,10 @@ public class EndWindow extends JFrame {
             winningAutomaton = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
         }
 
-        contents.add(createLabel("The winner: " + winningPlayer));
-        contents.add(createLabel("Automaton: " + winningAutomaton.toLowerCase()));
-        contents.add(createLabel("Number of turn: " + turnNumber));
-        contents.add(createLabel("Number of cells: " + cellNumber));
+        contents.add(ViewUtilities.createLabel("The winner: " + winningPlayer));
+        contents.add(ViewUtilities.createLabel("Automaton: " + winningAutomaton.toLowerCase()));
+        contents.add(ViewUtilities.createLabel("Number of turn: " + turnNumber));
+        contents.add(ViewUtilities.createLabel("Number of cells: " + cellNumber));
 
         return contents;
     }
@@ -102,8 +77,8 @@ public class EndWindow extends JFrame {
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        footer.add(createButton("Play again", 100, 30, actionEvent -> playAgain()));
-        footer.add(createButton("Exit", 100, 30, actionEvent -> System.exit(0)));
+        footer.add(ViewUtilities.createButton("Play again", 100, 30, actionEvent -> playAgain()));
+        footer.add(ViewUtilities.createButton("Exit", 100, 30, actionEvent -> System.exit(0)));
 
         return footer;
     }
