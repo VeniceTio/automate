@@ -56,6 +56,7 @@ public class Game {
             GC.initGrid(gridSize,autoType,expansionType);
             System.out.println("player : " + auto);
         }
+        GC.add(ViewController.getInstance());
     }
 
     /**
@@ -77,8 +78,8 @@ public class Game {
             //new Thread(GC::clockForward).start();
             synchronized (VC){
                 GC.clockForward();
-                new Thread(VC:: clockForward).start();
-                VC.wait();
+                //new Thread(VC:: clockForward).start();
+                //VC.wait();
                 alive = GC.allAlive();
                 turn++;
                 try {
