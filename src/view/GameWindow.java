@@ -4,7 +4,7 @@ import controler.Game;
 import controler.GridController;
 import model.State;
 import utils.Observer;
-import utils.ViewUtilities;
+import utils.ViewUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.security.SecureRandom;
@@ -13,15 +13,25 @@ import java.util.ArrayList;
 public class GameWindow extends JFrame implements Observer {
 
 
-
-    //TODO: commentaire à faire
     /**
-     * Le nombre de cellule par joueur
+     * Le nombre de cellule par joueur au depart
      */
     private final int _startCell;
+    /**
+     * est en initialisé
+     */
     private boolean _init = false;
+    /**
+     * couleur des joueurs
+     */
     private final Color[] _players;
+    /**
+     * liste des bouttons representant les cellules
+     */
     private final ArrayList<MyButton> _cells = new ArrayList<>();
+    /**
+     * Nombre aleatoire pour les combat
+     */
     private static final SecureRandom _rand = new SecureRandom();
 
     /**
@@ -55,7 +65,7 @@ public class GameWindow extends JFrame implements Observer {
         windowsContents.add(createFooter(gamespeed), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewUtilities.changeFont(windowsContents);
+        ViewUtils.changeFont(windowsContents);
 
         JOptionPane.showMessageDialog(windowsContents, "Le joueur 2 commence !", "Message", JOptionPane.INFORMATION_MESSAGE);
 

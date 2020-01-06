@@ -2,6 +2,7 @@ package controler;
 
 import model.Automaton;
 import model.Expansion;
+
 import view.EndWindow;
 import view.GameWindow;
 import view.SettingsWindow;

@@ -1,7 +1,7 @@
 package view;
 
 import controler.Facade;
-import utils.ViewUtilities;
+import utils.ViewUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +17,7 @@ public class SettingsWindow extends JFrame {
     //All the options for the game
     private ArrayList<String> _gameOptions;//= new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
     private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
-    private static JLabel _userMessage = ViewUtilities.createLabel("");
+    private static JLabel _userMessage = ViewUtils.createLabel("");
 
     /**
      * Méthode permettant de créer la fenêtre de paramètrage du jeu
@@ -47,7 +47,7 @@ public class SettingsWindow extends JFrame {
         settingsWindow.add(createFooter(), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewUtilities.changeFont(settingsWindow);
+        ViewUtils.changeFont(settingsWindow);
 
         //Settings the content pane of the settings window
         setContentPane(settingsWindow);
@@ -67,7 +67,7 @@ public class SettingsWindow extends JFrame {
      */
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        header.add(ViewUtilities.createLabel("Choose the settings for your game !"));
+        header.add(ViewUtils.createLabel("Choose the settings for your game !"));
         return header;
     }
 
@@ -88,11 +88,11 @@ public class SettingsWindow extends JFrame {
         //Adding the components to the pane
         gbc.gridx = 0;
         gbc.gridy = 0;
-        settingsContents.add(ViewUtilities.createLabel("Grid's size : "), gbc);
+        settingsContents.add(ViewUtils.createLabel("Grid's size : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(ViewUtilities.createTextField(10, 2, 20, "Enter a value between 2 and 20", new FocusAdapter() {
+        settingsContents.add(ViewUtils.createTextField(10, 2, 20, "Enter a value between 2 and 20", new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 gridSizeChanged(e);
@@ -101,28 +101,28 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        settingsContents.add(ViewUtilities.createLabel("Games's extension : "), gbc);
+        settingsContents.add(ViewUtils.createLabel("Games's extension : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        settingsContents.add(ViewUtilities.createComboBox(_expansionOptions.toArray(), null), gbc);
+        settingsContents.add(ViewUtils.createComboBox(_expansionOptions.toArray(), null), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
-        settingsContents.add(ViewUtilities.createLabel("Games's speed : "), gbc);
+        settingsContents.add(ViewUtils.createLabel("Games's speed : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 100, "Enter a value between 1 and 100", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 100, "Enter a value between 1 and 100", null), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        settingsContents.add(ViewUtilities.createLabel("Number of turns : "), gbc);
+        settingsContents.add(ViewUtils.createLabel("Number of turns : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 100,"Enter a value between 1 and 100", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 100,"Enter a value between 1 and 100", null), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -130,11 +130,11 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 5;
-        settingsContents.add(ViewUtilities.createLabel("Number of cells : "), gbc);
+        settingsContents.add(ViewUtils.createLabel("Number of cells : "), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(ViewUtilities.createTextField(10, 1, 200, "Enter a value between 1 and 200", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 200, "Enter a value between 1 and 200", null), gbc);
 
         return settingsContents;
     }
@@ -161,8 +161,8 @@ public class SettingsWindow extends JFrame {
         footer.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttons.add(ViewUtilities.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
-        buttons.add(ViewUtilities.createButton("Validate", 90, 30, actionEvent -> noName()));
+        buttons.add(ViewUtils.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
+        buttons.add(ViewUtils.createButton("Validate", 90, 30, actionEvent -> noName()));
 
         footer.add(_userMessage, BorderLayout.WEST);
         footer.add(buttons, BorderLayout.EAST);
@@ -181,8 +181,8 @@ public class SettingsWindow extends JFrame {
         gamesOptionPanel.setBorder(new EmptyBorder(0, 0,0, 0));
 
         for(int i = 0; i < numPlayer; i++) {
-            gamesOptionPanel.add(ViewUtilities.createLabel("Player n°" + (i + 1) + " : "));
-            gamesOptionPanel.add(ViewUtilities.createComboBox(gameOptions.toArray(), this::updateGameOptions));
+            gamesOptionPanel.add(ViewUtils.createLabel("Player n°" + (i + 1) + " : "));
+            gamesOptionPanel.add(ViewUtils.createComboBox(gameOptions.toArray(), this::updateGameOptions));
         }
 
         return gamesOptionPanel;
@@ -272,7 +272,7 @@ public class SettingsWindow extends JFrame {
             message = messages.get(2);
         }
 
-        ViewUtilities.incorrectValue(message);
+        ViewUtils.incorrectValue(message);
         return (!nullValue && !alreadySelected);
     }
 
@@ -308,7 +308,7 @@ public class SettingsWindow extends JFrame {
         System.out.println(alreadySelected);
 
         if(confirmParameters(nullValue, alreadySelected)) {
-            ViewUtilities.correctValue();
+            ViewUtils.correctValue();
             Facade.initGameWindow(numericParameters, textParameters);
         }
     }

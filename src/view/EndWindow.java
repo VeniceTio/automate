@@ -2,7 +2,7 @@ package view;
 
 import controler.Facade;
 import controler.GridController;
-import utils.ViewUtilities;
+import utils.ViewUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +30,7 @@ public class EndWindow extends JFrame {
         endWindow.add(createFooter(), BorderLayout.SOUTH);
 
         //Setting the font for the window
-        ViewUtilities.changeFont(endWindow);
+        ViewUtils.changeFont(endWindow);
 
         //Settings the content pane of the end window
         setContentPane(endWindow);
@@ -39,7 +39,7 @@ public class EndWindow extends JFrame {
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        header.add(ViewUtilities.createLabel("The result of the game"));
+        header.add(ViewUtils.createLabel("The result of the game"));
 
         return header;
     }
@@ -64,10 +64,10 @@ public class EndWindow extends JFrame {
             winningAutomaton = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
         }
 
-        contents.add(ViewUtilities.createLabel("The winner: " + winningPlayer));
-        contents.add(ViewUtilities.createLabel("Automaton: " + winningAutomaton.toLowerCase()));
-        contents.add(ViewUtilities.createLabel("Number of turn: " + turnNumber));
-        contents.add(ViewUtilities.createLabel("Number of cells: " + cellNumber));
+        contents.add(ViewUtils.createLabel("The winner: " + winningPlayer));
+        contents.add(ViewUtils.createLabel("Automaton: " + winningAutomaton.toLowerCase()));
+        contents.add(ViewUtils.createLabel("Number of turn: " + turnNumber));
+        contents.add(ViewUtils.createLabel("Number of cells: " + cellNumber));
 
         return contents;
     }
@@ -75,8 +75,8 @@ public class EndWindow extends JFrame {
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        footer.add(ViewUtilities.createButton("Play again", 100, 30, actionEvent -> playAgain()));
-        footer.add(ViewUtilities.createButton("Exit", 100, 30, actionEvent -> System.exit(0)));
+        footer.add(ViewUtils.createButton("Play again", 100, 30, actionEvent -> playAgain()));
+        footer.add(ViewUtils.createButton("Exit", 100, 30, actionEvent -> System.exit(0)));
 
         return footer;
     }
