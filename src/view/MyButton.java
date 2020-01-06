@@ -6,7 +6,7 @@ public class MyButton extends JButton {
     /*
     * index correspondant a la cellule quel représente
     */
-    private int _index;
+    private final int _index;
 
     /**
      * Constructor de MyButton
