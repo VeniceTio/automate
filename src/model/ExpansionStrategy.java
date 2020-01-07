@@ -126,5 +126,4 @@ public interface ExpansionStrategy<Expansion> {
             }
         }
     }
-
 }
