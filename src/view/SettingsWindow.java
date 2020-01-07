@@ -92,12 +92,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        settingsContents.add(ViewUtils.createTextField(10, 2, 20, "Enter a value between 2 and 20", new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                gridSizeChanged(e);
-            }
-        }), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 2, 20, "Enter a value between 2 and 20"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -114,7 +109,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        settingsContents.add(ViewUtils.createTextField(10, 1, 100, "Enter a value between 1 and 100", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 100, "Enter a value between 1 and 100"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -122,7 +117,7 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        settingsContents.add(ViewUtils.createTextField(10, 1, 100,"Enter a value between 1 and 100", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 100,"Enter a value between 1 and 100"), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -134,19 +129,9 @@ public class SettingsWindow extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        settingsContents.add(ViewUtils.createTextField(10, 1, 200, "Enter a value between 1 and 200", null), gbc);
+        settingsContents.add(ViewUtils.createTextField(10, 1, 200, "Enter a value between 1 and 200"), gbc);
 
         return settingsContents;
-    }
-
-    private int gridSizeChanged(FocusEvent e) {
-        JTextField text = (JTextField) e.getSource();
-        int res = 200;
-        if(!text.getText().isEmpty()) {
-            int value = Integer.parseInt(text.getText());
-            res = (value * value) / 2;
-        }
-        return res;
     }
 
     /**
