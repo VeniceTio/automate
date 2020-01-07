@@ -1,7 +1,9 @@
 package controler;
 
 import model.*;
+
 import utils.EnumUtils;
+
 import static java.lang.Thread.sleep;
 
 public class Game {
@@ -14,13 +16,13 @@ public class Game {
      */
     private int _gameSpeed;
     /**
-     * L'instance de la classe
+     * L'instance de la classe Game
      */
     private static Game _instance = null;
 
     /**
-     * Méthode permettant de récupérer l'unique instance de la classe
-     * @return _instance
+     * Méthode permettant de récupérer l'instance de la classe
+     * @return l'instance de la classe
      */
     public static Game getInstance(){
         if(_instance == null){
@@ -45,16 +47,9 @@ public class Game {
         GridController GC = GridController.getInstance();
         ExpansionStrategy<Expansion> expansionType = EnumUtils.getExpansionType(expansion);
         Rule<State> autoType;
-        System.out.println("Game.java: createGameWindow()");
-        System.out.println("size : " + gridSize);
-        System.out.println("gameSpeed : " + gameSpeed);
-        System.out.println("turnNum : " + turnNum);
-        System.out.println("cellNum : " + cellNum);
-        System.out.println("expansion : " + expansion);
         for (Automaton auto:players) {
             autoType = EnumUtils.getAutomaton(auto);
             GC.initGrid(gridSize,autoType,expansionType);
-            System.out.println("player : " + auto);
         }
         GC.add(ViewController.getInstance().getGameWin());
     }
@@ -80,8 +75,11 @@ public class Game {
         Facade.initEndWindow(turn);
     }
 
+    /**
+     * Méthode permettant de changer la vitesse de jeu
+     * @param gameSpeed la nouvelle vitesse de jeu
+     */
     public void setGameSpeed(int gameSpeed){
         _gameSpeed = gameSpeed;
-        System.out.println("game speed : "+gameSpeed);
     }
 }

@@ -1,7 +1,9 @@
 package controler;
 
 import model.*;
+
 import utils.Observable;
+
 import java.util.ArrayList;
 
 public class GridController extends Observable {
@@ -33,6 +35,7 @@ public class GridController extends Observable {
     public ArrayList<Grid> getGrids(){
         return _grids;
     }
+
     /**
      * Méthode permettant de supprimer toute les grilles du controller
      */
@@ -41,7 +44,7 @@ public class GridController extends Observable {
     }
 
     /**
-     * Méthode permettant de mettre a jour une cellule d'une grille donnée
+     * Méthode permettant de mettre à jour une cellule d'une grille donnée
      * @param index référence la grille à modifier
      * @param position référence la cellule à modifier
      * @param state l'etat vers lequel la cellule doit évoluer
@@ -53,8 +56,8 @@ public class GridController extends Observable {
     /**
      * Méthode permettant d'initialiser une grille de jeu
      * @param size la taille de la grille
-     * @param strategy //TODO: commentaire à faire
-     * @param expansion la stratégie d'extension que doit utiliser la grille
+     * @param strategy la méthode d'évolution de l'automate
+     * @param expansion la méthode d'extension de la grille
      */
     public void initGrid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
         _grids.add(new Grid(size,strategy,expansion));
@@ -98,12 +101,9 @@ public class GridController extends Observable {
      */
     public void clockForward(){
         for (Grid grid:_grids) {
-            //System.out.println(grid);
             grid.clockForward();
         }
-        System.out.println("turn finish");
         notifyObservers();
-        //new Thread(this::notifyObservers).start();
     }
 
     /**
