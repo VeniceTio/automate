@@ -48,7 +48,7 @@ public class GameWindow extends JFrame implements Observer {
 
         //Game window
         setTitle("Game Window");
-        setSize(500, 400);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
