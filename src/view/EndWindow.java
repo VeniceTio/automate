@@ -36,6 +36,10 @@ public class EndWindow extends JFrame {
         setContentPane(endWindow);
     }
 
+    /**
+     * Méthode permettant de créer le titre de la fenêtre
+     * @return le panel contenant tous les élements de cette partie de la fenêtre
+     */
     private JPanel createHeader() {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -44,9 +48,13 @@ public class EndWindow extends JFrame {
         return header;
     }
 
+    /**
+     * Méthode permettant de créer la fenêtre contenant toutes les informations à propos du gagnant
+     * @param turnNumber le nombre de tours avec laquelle le joueur gagnant a gagné
+     * @return le panel contenants tous les éléments sur la victoire
+     */
     private JPanel createMainContents(int turnNumber) {
         JPanel contents = new JPanel(new GridLayout(4, 1, 0, 0));
-        //lbl.setHorizontalAlignment(JLabel.CENTER);
 
         String winningPlayer;
         String winningAutomaton;
@@ -72,6 +80,10 @@ public class EndWindow extends JFrame {
         return contents;
     }
 
+    /**
+     * Méthode permettant de créer les boutons du bas de la fenêtre
+     * @return le panel contenant bouton/curseur
+     */
     private JPanel createFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -81,6 +93,9 @@ public class EndWindow extends JFrame {
         return footer;
     }
 
+    /**
+     * Méthode permettat de rejouer au jeu
+     */
     private void playAgain() {
         this.dispose();
         Facade.resetGame();
