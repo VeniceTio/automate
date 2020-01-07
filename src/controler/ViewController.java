@@ -41,10 +41,10 @@ public class ViewController {
      */
     public ViewController(){
         for (Expansion exp:Expansion.values()) {
-            _expansions.add(exp.getAbreviation());
+            _expansions.add(exp.getAbbreviation());
         }
         for (Automaton auto:Automaton.values()) {
-            _automatons.add(auto.getAbreviation());
+            _automatons.add(auto.getAbbreviation());
         }
     }
 

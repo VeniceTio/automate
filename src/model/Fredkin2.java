@@ -13,17 +13,17 @@ public class Fredkin2 implements Rule<State> {
     public State getNewState(ArrayList<State> neighbors, State actualState) {
         int nbLivingCel = 0;
         State nextState = actualState;
-        for(int i = 0;i<3;i+=2){
-            if(neighbors.get(i)==State.ALIVE){
+        for(int i = 0; i < 3; i += 2){
+            if(neighbors.get(i) == State.ALIVE){
                 nbLivingCel++;
             }
         }
-        for(int i = 6;i<9;i+=2){
-            if(neighbors.get(i)==State.ALIVE){
+        for(int i = 6; i < 9; i+=2){
+            if(neighbors.get(i) == State.ALIVE){
                 nbLivingCel++;
             }
         }
-        if(nbLivingCel==1 || nbLivingCel==3){
+        if(nbLivingCel == 1 || nbLivingCel == 3){
             nextState = State.ALIVE;
         }else{
             nextState = State.DEAD;

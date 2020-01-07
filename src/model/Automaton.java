@@ -9,21 +9,23 @@ public enum Automaton {
     FREDKIN2("Fredkin n°2");
 
     /**
-     * version string de l'enumeration
+     * L'abréviation représentant l'automate
      */
-    private final String _abreviation;
+    private final String _abbreviation;
 
     /**
-     * Constructeur d'enumeration
-     * @param abreviation version string de l'enumeration
+     * Méthode permettant d'initialiser une instance de la classe Automaton
+     * @param abbreviation l'abréviation de l'automate
      */
-    Automaton(String abreviation){
-        this._abreviation = abreviation;
+    Automaton(String abbreviation){
+        this._abbreviation = abbreviation;
     }
 
     /**
-     * Méthode renvoyant la version string de l'enumeration
-     * @return version string de l'enumeration
+     * Méthode permettant de renvoyer l'abréviation de l'automate
+     * @return l'abréviation de l'automate
      */
-    public String getAbreviation(){return _abreviation;}
+    public String getAbbreviation(){
+        return _abbreviation;
+    }
 }

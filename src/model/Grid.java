@@ -22,7 +22,7 @@ public class Grid {
     final int _size;
 
     /**
-     * Méthode permettant d'initialiser les paramètres de la grid
+     * Méthode permettant d'initialiser les paramètres de la grille
      * @param size la taille de la grille de jeu
      * @param strategy type d'automate
      * @param expansion la méthode d'extension de la grille
@@ -40,8 +40,8 @@ public class Grid {
      */
     public ArrayList<State> initGrid(){
         ArrayList<State> grid = new ArrayList<>();
-        for(int i=0; i<_size;i++){
-            for(int k=0;k<_size;k++){
+        for(int i = 0; i < _size; i++){
+            for(int k = 0; k < _size; k++){
                 grid.add(State.DEAD);
             }
         }
@@ -49,8 +49,8 @@ public class Grid {
     }
 
     /**
-     * Méthode permettant de mettre a jour l'etat d'une cellule
-     * @param index cellule à mettre a jour
+     * Méthode permettant de mettre à jour l'etat d'une cellule
+     * @param index cellule à mettre à jour
      * @param state nouvelle etat de la cellule
      */
     public void setState(int index, State state){
@@ -58,7 +58,7 @@ public class Grid {
     }
 
     /**
-     * Renvoie l'etat d'une cellule de la grid
+     * Renvoie l'état d'une cellule de la grid
      * @param index position de la cellule questionné
      * @return etat de la cellule
      */
@@ -82,7 +82,6 @@ public class Grid {
      */
     public State getNewState(ArrayList<State> neighbors, State actualState){
         return _strategy.getNewState(neighbors,actualState);
-
     }
 
     /**
@@ -90,13 +89,13 @@ public class Grid {
      * @return le nombre de cellule vivante
      */
     public int countAlive(){
-        int nbCelAlive = 0;
+        int aliveCellCount = 0;
         for (State state:_grid) {
             if(state != State.DEAD){
-                nbCelAlive++;
+                aliveCellCount++;
             }
         }
-        return nbCelAlive;
+        return aliveCellCount;
     }
 
     /**
@@ -106,31 +105,31 @@ public class Grid {
         State previousState;
         State newState;
         ArrayList<State> nextGrid = initGrid();
-        for(int i = 0; i< _size; i++){
-            for(int k = 0; k< _size; k++){
-                previousState = _grid.get((i*_size)+k);
-                newState = getNewState(getNeighbors(k,i),previousState);
-                nextGrid.set(((i*_size)+k),newState);
+        for(int i = 0; i < _size; i++){
+            for(int k = 0; k < _size; k++){
+                previousState = _grid.get((i * _size) + k);
+                newState = getNewState(getNeighbors(k, i), previousState);
+                nextGrid.set(((i * _size) + k), newState);
             }
         }
         _grid = nextGrid;
     }
 
     /**
-     * Renvoie le type d'automate controllant la grid
+     * Renvoie le type d'automate controllant la grille
      * @return le nom de l'automate
      */
     public String getStringStrategy() {
         String automaton = "";
 
         if(_strategy instanceof Fredkin1) {
-            automaton = Automaton.FREDKIN1.getAbreviation();
+            automaton = Automaton.FREDKIN1.getAbbreviation();
         }
         else if(_strategy instanceof Fredkin2) {
-            automaton = Automaton.FREDKIN2.getAbreviation();
+            automaton = Automaton.FREDKIN2.getAbbreviation();
         }
         else if(_strategy instanceof GameOfLife) {
-            automaton = Automaton.GAMEOFLIFE.getAbreviation();
+            automaton = Automaton.GAMEOFLIFE.getAbbreviation();
         }
 
         return automaton;
@@ -143,7 +142,7 @@ public class Grid {
     @Override
     public String toString(){
         StringBuilder chaine = new StringBuilder("grid :\n");
-        for(int i = 0; i< _size; i++) {
+        for(int i = 0; i < _size; i++) {
             for (int k = 0; k < _size; k++) {
                 chaine.append(_grid.get(i * _size + k)).append(", ");
             }
