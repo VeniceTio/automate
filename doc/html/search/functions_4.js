@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['gamewindow_187',['GameWindow',['../classview_1_1_game_window.html#a7d546e315e3f55c15cd563c0613314e8',1,'view::GameWindow']]],
+  ['getabbreviation_188',['getAbbreviation',['../enummodel_1_1_automaton.html#aebca1d18cd782af07915c0b36327141e',1,'model.Automaton.getAbbreviation()'],['../enummodel_1_1_expansion.html#a93cdade29793e0908e9774dcb67f3e0c',1,'model.Expansion.getAbbreviation()']]],
+  ['getautomaton_189',['getAutomaton',['../classutils_1_1_enum_utils.html#afae3c299d77cd65ea654d775330a6df4',1,'utils::EnumUtils']]],
+  ['getexpansiontype_190',['getExpansionType',['../classutils_1_1_enum_utils.html#a1fd1c06d96c87b0947ac6e867f146b47',1,'utils::EnumUtils']]],
+  ['getgamewin_191',['getGameWin',['../classcontroler_1_1_view_controller.html#a7c6cb17926a6a05cb3c07d79c0195d1a',1,'controler::ViewController']]],
+  ['getgrids_192',['getGrids',['../classcontroler_1_1_grid_controller.html#ac77fdf6a35366729cdbbee17a106835d',1,'controler::GridController']]],
+  ['getindex_193',['getIndex',['../classview_1_1_my_button.html#a5e46c4ca2f264d99bb1bc3c1b58ad9ef',1,'view::MyButton']]],
+  ['getinstance_194',['getInstance',['../classcontroler_1_1_game.html#ae079c8d3ab85258f721458a534a613ec',1,'controler.Game.getInstance()'],['../classcontroler_1_1_grid_controller.html#af34a4394d4179a62092915a611659677',1,'controler.GridController.getInstance()'],['../classcontroler_1_1_view_controller.html#a1a94cb8f209573cdbd95a09c82bbdff5',1,'controler.ViewController.getInstance()']]],
+  ['getneighbors_195',['getNeighbors',['../classmodel_1_1_grid.html#a6b1b58cb231580104eddeb7ef5fc3751',1,'model::Grid']]],
+  ['getneighborsstate_196',['getNeighborsState',['../interfacemodel_1_1_expansion_strategy.html#a67ae7d06da0f71623c65c4f3dfe68577',1,'model::ExpansionStrategy']]],
+  ['getnewstate_197',['getNewState',['../classmodel_1_1_fredkin1.html#a4009207993da488a48bbcdedb9b446b9',1,'model.Fredkin1.getNewState()'],['../classmodel_1_1_fredkin2.html#af5d43c86b661180f0e3208d782898b5c',1,'model.Fredkin2.getNewState()'],['../classmodel_1_1_game_of_life.html#ae24635739349eeb6f92ddaa717d422c4',1,'model.GameOfLife.getNewState()'],['../classmodel_1_1_grid.html#affeb7add80a5bee2dea1fc4508c90118',1,'model.Grid.getNewState()'],['../interfacemodel_1_1_rule.html#aad8ad3c7efe7e11952b50753f2d7da24',1,'model.Rule.getNewState()']]],
+  ['getstate_198',['getState',['../classcontroler_1_1_grid_controller.html#ae9eab101737ed1ac20fa29a44c51484b',1,'controler.GridController.getState()'],['../classmodel_1_1_grid.html#a85bde1a7860901580555ca1cbf3b727e',1,'model.Grid.getState()']]],
+  ['getstringstrategy_199',['getStringStrategy',['../classmodel_1_1_grid.html#a6078f6d82fd49bf18b1af6ab9a1f0c61',1,'model::Grid']]],
+  ['getusermessage_200',['getUserMessage',['../classview_1_1_settings_window.html#a27cb54f68c0e7bb95bbadbafdbc6fc73',1,'view::SettingsWindow']]],
+  ['getwinner_201',['getWinner',['../classcontroler_1_1_grid_controller.html#a617dc9ab8de7170961a456636e5d2531',1,'controler::GridController']]],
+  ['grid_202',['Grid',['../classmodel_1_1_grid.html#a703ddfaaebd74f7abbd8ddac2fac9b54',1,'model::Grid']]]
+];

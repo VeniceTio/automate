@@ -1,0 +1,150 @@
+\hypertarget{classcontroler_1_1_grid_controller}{}\doxysection{controler.\+Grid\+Controller Class Reference}
+\label{classcontroler_1_1_grid_controller}\index{controler.GridController@{controler.GridController}}
+Inheritance diagram for controler.\+Grid\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcontroler_1_1_grid_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Array\+List$<$ \mbox{\hyperlink{classmodel_1_1_grid}{Grid}} $>$ \mbox{\hyperlink{classcontroler_1_1_grid_controller_ac77fdf6a35366729cdbbee17a106835d}{get\+Grids}} ()
+\item 
+void \mbox{\hyperlink{classcontroler_1_1_grid_controller_a205fb4d26d2c50e3be55a6aacd9ea764}{reset}} ()
+\item 
+void \mbox{\hyperlink{classcontroler_1_1_grid_controller_a5cface32a91e684d89f5e405e76d6df8}{set\+State\+Grid}} (int index, int position, \mbox{\hyperlink{enummodel_1_1_state}{State}} state)
+\item 
+void \mbox{\hyperlink{classcontroler_1_1_grid_controller_a928a5601d5d5a57f854c76875ed15851}{init\+Grid}} (int size, \mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ strategy, \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$ expansion)
+\item 
+boolean \mbox{\hyperlink{classcontroler_1_1_grid_controller_a90f30357e2d1b76b6588b2978666c678}{all\+Alive}} ()
+\item 
+int \mbox{\hyperlink{classcontroler_1_1_grid_controller_af609d92fdedd7a78d4a15567585cf327}{cell\+Count}} (int index)
+\item 
+\mbox{\hyperlink{enummodel_1_1_state}{State}} \mbox{\hyperlink{classcontroler_1_1_grid_controller_ae9eab101737ed1ac20fa29a44c51484b}{get\+State}} (int index, int cell)
+\item 
+void \mbox{\hyperlink{classcontroler_1_1_grid_controller_a259cbac2d4756f607bfbd5fa49b46fe5}{clock\+Forward}} ()
+\item 
+int \mbox{\hyperlink{classcontroler_1_1_grid_controller_a617dc9ab8de7170961a456636e5d2531}{get\+Winner}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classcontroler_1_1_grid_controller}{Grid\+Controller}} \mbox{\hyperlink{classcontroler_1_1_grid_controller_af34a4394d4179a62092915a611659677}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_a90f30357e2d1b76b6588b2978666c678}\label{classcontroler_1_1_grid_controller_a90f30357e2d1b76b6588b2978666c678}} 
+\index{controler.GridController@{controler.GridController}!allAlive@{allAlive}}
+\index{allAlive@{allAlive}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{allAlive()}{allAlive()}}
+{\footnotesize\ttfamily boolean controler.\+Grid\+Controller.\+all\+Alive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de savoir si toutes les cellules sont vivantes ou pas \begin{DoxyReturn}{Returns}
+un booléen vrai si toutes les cellules sont vivantes sinon faux 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_af609d92fdedd7a78d4a15567585cf327}\label{classcontroler_1_1_grid_controller_af609d92fdedd7a78d4a15567585cf327}} 
+\index{controler.GridController@{controler.GridController}!cellCount@{cellCount}}
+\index{cellCount@{cellCount}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{cellCount()}{cellCount()}}
+{\footnotesize\ttfamily int controler.\+Grid\+Controller.\+cell\+Count (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+Méthode permettant de compter le nombre de cellule vivante 
+\begin{DoxyParams}{Parameters}
+{\em index} & la grille sur laquelle on veut compter le nombre de cellule vivante \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le nombre de cellule vivante 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_a259cbac2d4756f607bfbd5fa49b46fe5}\label{classcontroler_1_1_grid_controller_a259cbac2d4756f607bfbd5fa49b46fe5}} 
+\index{controler.GridController@{controler.GridController}!clockForward@{clockForward}}
+\index{clockForward@{clockForward}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{clockForward()}{clockForward()}}
+{\footnotesize\ttfamily void controler.\+Grid\+Controller.\+clock\+Forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de faire évoluer les grilles \mbox{\Hypertarget{classcontroler_1_1_grid_controller_ac77fdf6a35366729cdbbee17a106835d}\label{classcontroler_1_1_grid_controller_ac77fdf6a35366729cdbbee17a106835d}} 
+\index{controler.GridController@{controler.GridController}!getGrids@{getGrids}}
+\index{getGrids@{getGrids}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{getGrids()}{getGrids()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{classmodel_1_1_grid}{Grid}}$>$ controler.\+Grid\+Controller.\+get\+Grids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer toutes les grilles de jeu \begin{DoxyReturn}{Returns}
+une liste contenant toutes les grilles 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_af34a4394d4179a62092915a611659677}\label{classcontroler_1_1_grid_controller_af34a4394d4179a62092915a611659677}} 
+\index{controler.GridController@{controler.GridController}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcontroler_1_1_grid_controller}{Grid\+Controller}} controler.\+Grid\+Controller.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Méthode permettant de récupérer l\textquotesingle{}instance de la classe \begin{DoxyReturn}{Returns}
+l\textquotesingle{}instance de la classe 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_ae9eab101737ed1ac20fa29a44c51484b}\label{classcontroler_1_1_grid_controller_ae9eab101737ed1ac20fa29a44c51484b}} 
+\index{controler.GridController@{controler.GridController}!getState@{getState}}
+\index{getState@{getState}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enummodel_1_1_state}{State}} controler.\+Grid\+Controller.\+get\+State (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{cell }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état d\textquotesingle{}une cellule 
+\begin{DoxyParams}{Parameters}
+{\em index} & la grille sur laquelle se situe la cellule \\
+\hline
+{\em cell} & la cellule en question \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}état de la cellule 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_a617dc9ab8de7170961a456636e5d2531}\label{classcontroler_1_1_grid_controller_a617dc9ab8de7170961a456636e5d2531}} 
+\index{controler.GridController@{controler.GridController}!getWinner@{getWinner}}
+\index{getWinner@{getWinner}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{getWinner()}{getWinner()}}
+{\footnotesize\ttfamily int controler.\+Grid\+Controller.\+get\+Winner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de savoir quel automate est le gagnant de la partie \begin{DoxyReturn}{Returns}
+winner l\textquotesingle{}index de l\textquotesingle{}automate gagnant 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_a928a5601d5d5a57f854c76875ed15851}\label{classcontroler_1_1_grid_controller_a928a5601d5d5a57f854c76875ed15851}} 
+\index{controler.GridController@{controler.GridController}!initGrid@{initGrid}}
+\index{initGrid@{initGrid}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{initGrid()}{initGrid()}}
+{\footnotesize\ttfamily void controler.\+Grid\+Controller.\+init\+Grid (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{\mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{strategy,  }\item[{\mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$}]{expansion }\end{DoxyParamCaption})}
+
+Méthode permettant d\textquotesingle{}initialiser une grille de jeu 
+\begin{DoxyParams}{Parameters}
+{\em size} & la taille de la grille \\
+\hline
+{\em strategy} & la méthode d\textquotesingle{}évolution de l\textquotesingle{}automate \\
+\hline
+{\em expansion} & la méthode d\textquotesingle{}extension de la grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcontroler_1_1_grid_controller_a205fb4d26d2c50e3be55a6aacd9ea764}\label{classcontroler_1_1_grid_controller_a205fb4d26d2c50e3be55a6aacd9ea764}} 
+\index{controler.GridController@{controler.GridController}!reset@{reset}}
+\index{reset@{reset}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void controler.\+Grid\+Controller.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de supprimer toute les grilles du controller \mbox{\Hypertarget{classcontroler_1_1_grid_controller_a5cface32a91e684d89f5e405e76d6df8}\label{classcontroler_1_1_grid_controller_a5cface32a91e684d89f5e405e76d6df8}} 
+\index{controler.GridController@{controler.GridController}!setStateGrid@{setStateGrid}}
+\index{setStateGrid@{setStateGrid}!controler.GridController@{controler.GridController}}
+\doxysubsubsection{\texorpdfstring{setStateGrid()}{setStateGrid()}}
+{\footnotesize\ttfamily void controler.\+Grid\+Controller.\+set\+State\+Grid (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{position,  }\item[{\mbox{\hyperlink{enummodel_1_1_state}{State}}}]{state }\end{DoxyParamCaption})}
+
+Méthode permettant de mettre à jour une cellule d\textquotesingle{}une grille donnée 
+\begin{DoxyParams}{Parameters}
+{\em index} & référence la grille à modifier \\
+\hline
+{\em position} & référence la cellule à modifier \\
+\hline
+{\em state} & l\textquotesingle{}etat vers lequel la cellule doit évoluer \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+controler/\mbox{\hyperlink{_grid_controller_8java}{Grid\+Controller.\+java}}\end{DoxyCompactItemize}

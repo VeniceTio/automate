@@ -1,0 +1,256 @@
+\hypertarget{interfacemodel_1_1_expansion_strategy}{}\doxysection{model.\+Expansion\+Strategy$<$ Expansion $>$ Interface Template Reference}
+\label{interfacemodel_1_1_expansion_strategy}\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+Inheritance diagram for model.\+Expansion\+Strategy$<$ Expansion $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacemodel_1_1_expansion_strategy}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+default Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a67ae7d06da0f71623c65c4f3dfe68577}{get\+Neighbors\+State}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_ac05b04c7ab3a9e0ab28f5e8064b72b14}{left\+Up\+Corner}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_ad2a92cd4300c16a970fe52f2d0a93bf6}{left\+Down\+Corner}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a02ab270f71a296bca7ad11aabba0a9fa}{right\+Up\+Corner}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_aff1ca47414a1d3e9827937607b5fff46}{right\+Down\+Corner}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a3e9734d3856eee387bf6cb1d4637fadb}{right\+Side}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a5d90cda9e3b627e0c5255f597c231ad6}{left\+Side}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a91f79b3e3cde9c88a535a43eb25aa50f}{up\+Side}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a08165dffe4fccdf91e1ef0bb456dcb37}{down\+Side}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\item 
+default void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a001fa5c29e77f5f52f03828688a87af2}{middle}} (int x, int y, Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ grid, int size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy_a108515b30b3a1e734d259dcf3aaa9d43}{\+\_\+neighbors}} = new Array\+List$<$$>$()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a08165dffe4fccdf91e1ef0bb456dcb37}\label{interfacemodel_1_1_expansion_strategy_a08165dffe4fccdf91e1ef0bb456dcb37}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!downSide@{downSide}}
+\index{downSide@{downSide}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{downSide()}{downSide()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.down\+Side (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule sur le coté bas de la grille vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_a8f4876f1c262a649c317105b7bf23cdb}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_a68c3b26ee64c1987e594442ee6eac117}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a67ae7d06da0f71623c65c4f3dfe68577}\label{interfacemodel_1_1_expansion_strategy_a67ae7d06da0f71623c65c4f3dfe68577}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!getNeighborsState@{getNeighborsState}}
+\index{getNeighborsState@{getNeighborsState}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{getNeighborsState()}{getNeighborsState()}}
+{\footnotesize\ttfamily default Array\+List$<$\mbox{\hyperlink{enummodel_1_1_state}{State}}$>$ \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.get\+Neighbors\+State (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la liste contenant l\textquotesingle{}état des voisins de la cellule 
+\end{DoxyReturn}
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_ad2a92cd4300c16a970fe52f2d0a93bf6}\label{interfacemodel_1_1_expansion_strategy_ad2a92cd4300c16a970fe52f2d0a93bf6}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!leftDownCorner@{leftDownCorner}}
+\index{leftDownCorner@{leftDownCorner}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{leftDownCorner()}{leftDownCorner()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.left\+Down\+Corner (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule dans le coin bas gauche vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_aa0906269a644e900c45c08f7802b28c5}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_a4b7c2314faca1f149125a0b797ca6f9f}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a5d90cda9e3b627e0c5255f597c231ad6}\label{interfacemodel_1_1_expansion_strategy_a5d90cda9e3b627e0c5255f597c231ad6}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!leftSide@{leftSide}}
+\index{leftSide@{leftSide}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{leftSide()}{leftSide()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.left\+Side (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule sur le coté gauche de la grille vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_a316b853201444a5ec665bf15f9b1947f}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_a098b2a99ad7103cb5ab8e72ce9b754e6}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_ac05b04c7ab3a9e0ab28f5e8064b72b14}\label{interfacemodel_1_1_expansion_strategy_ac05b04c7ab3a9e0ab28f5e8064b72b14}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!leftUpCorner@{leftUpCorner}}
+\index{leftUpCorner@{leftUpCorner}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{leftUpCorner()}{leftUpCorner()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.left\+Up\+Corner (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule dans le coin haut gauche vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_aa2ef46206190248c5cd3444f5e682073}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_acfe9e53b0cf849b75af512d82b35123e}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a001fa5c29e77f5f52f03828688a87af2}\label{interfacemodel_1_1_expansion_strategy_a001fa5c29e77f5f52f03828688a87af2}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!middle@{middle}}
+\index{middle@{middle}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{middle()}{middle()}}
+{\footnotesize\ttfamily default void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.middle (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule au milieu de la grille vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_aff1ca47414a1d3e9827937607b5fff46}\label{interfacemodel_1_1_expansion_strategy_aff1ca47414a1d3e9827937607b5fff46}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!rightDownCorner@{rightDownCorner}}
+\index{rightDownCorner@{rightDownCorner}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{rightDownCorner()}{rightDownCorner()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.right\+Down\+Corner (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule dans le coin bas droit vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_abf8828fd78b1084e9992a7886cbb633a}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_a51123477e984fa723dee264b42d41211}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a3e9734d3856eee387bf6cb1d4637fadb}\label{interfacemodel_1_1_expansion_strategy_a3e9734d3856eee387bf6cb1d4637fadb}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!rightSide@{rightSide}}
+\index{rightSide@{rightSide}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{rightSide()}{rightSide()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.right\+Side (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule sur le coté droit de la grille vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_a3c4bfc39e4d9889d6e69a6851082405f}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_a65c3560365d799a9319ba3c6bdde1098}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a02ab270f71a296bca7ad11aabba0a9fa}\label{interfacemodel_1_1_expansion_strategy_a02ab270f71a296bca7ad11aabba0a9fa}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!rightUpCorner@{rightUpCorner}}
+\index{rightUpCorner@{rightUpCorner}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{rightUpCorner()}{rightUpCorner()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.right\+Up\+Corner (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule dans le coin haut droit vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_aa16bedf47a7c767301252081715b4b5c}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_af42fff683b0b9940109df06c31570578}{model.\+Repetition}}.
+
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a91f79b3e3cde9c88a535a43eb25aa50f}\label{interfacemodel_1_1_expansion_strategy_a91f79b3e3cde9c88a535a43eb25aa50f}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!upSide@{upSide}}
+\index{upSide@{upSide}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{upSide()}{upSide()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.up\+Side (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{grid,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer l\textquotesingle{}état des voisins d\textquotesingle{}une cellule sur le coté haut de la grille vers \+\_\+neighbors 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x de la cellule \\
+\hline
+{\em y} & la position y de la cellule \\
+\hline
+{\em grid} & la grille de jeu \\
+\hline
+{\em size} & taille de la grille (size$\ast$size) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmodel_1_1_constant_aa7e2d5fcfebfd1701f32cec153dbc1d8}{model.\+Constant}}, and \mbox{\hyperlink{classmodel_1_1_repetition_ae47e6ff6fa31ffbb3c735f503ecaecc2}{model.\+Repetition}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interfacemodel_1_1_expansion_strategy_a108515b30b3a1e734d259dcf3aaa9d43}\label{interfacemodel_1_1_expansion_strategy_a108515b30b3a1e734d259dcf3aaa9d43}} 
+\index{model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}!\_neighbors@{\_neighbors}}
+\index{\_neighbors@{\_neighbors}!model.ExpansionStrategy$<$ Expansion $>$@{model.ExpansionStrategy$<$ Expansion $>$}}
+\doxysubsubsection{\texorpdfstring{\_neighbors}{\_neighbors}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{enummodel_1_1_state}{State}}$>$ \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{model.\+Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$.\+\_\+neighbors = new Array\+List$<$$>$()}
+
+Liste de voisins de la cellule 
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+model/\mbox{\hyperlink{_expansion_strategy_8java}{Expansion\+Strategy.\+java}}\end{DoxyCompactItemize}

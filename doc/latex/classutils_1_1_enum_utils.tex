@@ -1,0 +1,77 @@
+\hypertarget{classutils_1_1_enum_utils}{}\doxysection{utils.\+Enum\+Utils Class Reference}
+\label{classutils_1_1_enum_utils}\index{utils.EnumUtils@{utils.EnumUtils}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$ \mbox{\hyperlink{classutils_1_1_enum_utils_a1fd1c06d96c87b0947ac6e867f146b47}{get\+Expansion\+Type}} (\mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} expansion)
+\item 
+static \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} \mbox{\hyperlink{classutils_1_1_enum_utils_a8020d39a47fad3bd6f008218fde2b5bd}{to\+Expansion}} (String text)
+\item 
+static \mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ \mbox{\hyperlink{classutils_1_1_enum_utils_afae3c299d77cd65ea654d775330a6df4}{get\+Automaton}} (\mbox{\hyperlink{enummodel_1_1_automaton}{Automaton}} automaton)
+\item 
+static \mbox{\hyperlink{enummodel_1_1_automaton}{Automaton}} \mbox{\hyperlink{classutils_1_1_enum_utils_a959f103c1a0334fa5ec39cbeb26527ac}{to\+Automaton}} (String text)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1_enum_utils_afae3c299d77cd65ea654d775330a6df4}\label{classutils_1_1_enum_utils_afae3c299d77cd65ea654d775330a6df4}} 
+\index{utils.EnumUtils@{utils.EnumUtils}!getAutomaton@{getAutomaton}}
+\index{getAutomaton@{getAutomaton}!utils.EnumUtils@{utils.EnumUtils}}
+\doxysubsubsection{\texorpdfstring{getAutomaton()}{getAutomaton()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$\mbox{\hyperlink{enummodel_1_1_state}{State}}$>$ utils.\+Enum\+Utils.\+get\+Automaton (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enummodel_1_1_automaton}{Automaton}}}]{automaton }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Méthode permettant de créer l\textquotesingle{}instance de l\textquotesingle{}automate choisi 
+\begin{DoxyParams}{Parameters}
+{\em automaton} & le mode d\textquotesingle{}évolution choisi \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}instance de l\textquotesingle{}automate choisi 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1_enum_utils_a1fd1c06d96c87b0947ac6e867f146b47}\label{classutils_1_1_enum_utils_a1fd1c06d96c87b0947ac6e867f146b47}} 
+\index{utils.EnumUtils@{utils.EnumUtils}!getExpansionType@{getExpansionType}}
+\index{getExpansionType@{getExpansionType}!utils.EnumUtils@{utils.EnumUtils}}
+\doxysubsubsection{\texorpdfstring{getExpansionType()}{getExpansionType()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$\mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}}$>$ utils.\+Enum\+Utils.\+get\+Expansion\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}}}]{expansion }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Méthode permettant de créer l\textquotesingle{}intance de l\textquotesingle{}extension choisi 
+\begin{DoxyParams}{Parameters}
+{\em expansion} & la méthode d\textquotesingle{}extension de grille choisi \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}instance de l\textquotesingle{}extension de la grille choisi 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1_enum_utils_a959f103c1a0334fa5ec39cbeb26527ac}\label{classutils_1_1_enum_utils_a959f103c1a0334fa5ec39cbeb26527ac}} 
+\index{utils.EnumUtils@{utils.EnumUtils}!toAutomaton@{toAutomaton}}
+\index{toAutomaton@{toAutomaton}!utils.EnumUtils@{utils.EnumUtils}}
+\doxysubsubsection{\texorpdfstring{toAutomaton()}{toAutomaton()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{enummodel_1_1_automaton}{Automaton}} utils.\+Enum\+Utils.\+to\+Automaton (\begin{DoxyParamCaption}\item[{String}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Méthode permettant de convertir un type d\textquotesingle{}évolution (string) en type d\textquotesingle{}énumération 
+\begin{DoxyParams}{Parameters}
+{\em text} & le type d\textquotesingle{}évolution choisi par les joueurs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le type d\textquotesingle{}évolution en type énuméré 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1_enum_utils_a8020d39a47fad3bd6f008218fde2b5bd}\label{classutils_1_1_enum_utils_a8020d39a47fad3bd6f008218fde2b5bd}} 
+\index{utils.EnumUtils@{utils.EnumUtils}!toExpansion@{toExpansion}}
+\index{toExpansion@{toExpansion}!utils.EnumUtils@{utils.EnumUtils}}
+\doxysubsubsection{\texorpdfstring{toExpansion()}{toExpansion()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} utils.\+Enum\+Utils.\+to\+Expansion (\begin{DoxyParamCaption}\item[{String}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Méthode permettant de convertir une méthode d\textquotesingle{}extension(string) en type d\textquotesingle{}énumération 
+\begin{DoxyParams}{Parameters}
+{\em text} & la méthode d\textquotesingle{}extension de la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la méthode d\textquotesingle{}évolution de la grille en type énuméré 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+utils/\mbox{\hyperlink{_enum_utils_8java}{Enum\+Utils.\+java}}\end{DoxyCompactItemize}

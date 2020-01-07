@@ -1,0 +1,152 @@
+\hypertarget{classmodel_1_1_grid}{}\doxysection{model.\+Grid Class Reference}
+\label{classmodel_1_1_grid}\index{model.Grid@{model.Grid}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmodel_1_1_grid_a703ddfaaebd74f7abbd8ddac2fac9b54}{Grid}} (int size, \mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ strategy, \mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$ expansion)
+\item 
+Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ \mbox{\hyperlink{classmodel_1_1_grid_a03e5a56dac6d4ab7686bf92c6ac1260b}{init\+Grid}} ()
+\item 
+void \mbox{\hyperlink{classmodel_1_1_grid_a86f86c5852fc613ad9c21060cd180741}{set\+State}} (int index, \mbox{\hyperlink{enummodel_1_1_state}{State}} state)
+\item 
+\mbox{\hyperlink{enummodel_1_1_state}{State}} \mbox{\hyperlink{classmodel_1_1_grid_a85bde1a7860901580555ca1cbf3b727e}{get\+State}} (int index)
+\item 
+Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ \mbox{\hyperlink{classmodel_1_1_grid_a6b1b58cb231580104eddeb7ef5fc3751}{get\+Neighbors}} (int x, int y)
+\item 
+\mbox{\hyperlink{enummodel_1_1_state}{State}} \mbox{\hyperlink{classmodel_1_1_grid_affeb7add80a5bee2dea1fc4508c90118}{get\+New\+State}} (Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$ neighbors, \mbox{\hyperlink{enummodel_1_1_state}{State}} actual\+State)
+\item 
+int \mbox{\hyperlink{classmodel_1_1_grid_a032e69fad76644d4c5074e6b6ad89938}{count\+Alive}} ()
+\item 
+void \mbox{\hyperlink{classmodel_1_1_grid_a6aac58c1cfbcb9705ba308b24e1277a3}{clock\+Forward}} ()
+\item 
+String \mbox{\hyperlink{classmodel_1_1_grid_a6078f6d82fd49bf18b1af6ab9a1f0c61}{get\+String\+Strategy}} ()
+\item 
+String \mbox{\hyperlink{classmodel_1_1_grid_aa54b3facfb0bc3caba67119b882cc715}{to\+String}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmodel_1_1_grid_a703ddfaaebd74f7abbd8ddac2fac9b54}\label{classmodel_1_1_grid_a703ddfaaebd74f7abbd8ddac2fac9b54}} 
+\index{model.Grid@{model.Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{Grid()}{Grid()}}
+{\footnotesize\ttfamily model.\+Grid.\+Grid (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{\mbox{\hyperlink{interfacemodel_1_1_rule}{Rule}}$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{strategy,  }\item[{\mbox{\hyperlink{interfacemodel_1_1_expansion_strategy}{Expansion\+Strategy}}$<$ \mbox{\hyperlink{enummodel_1_1_expansion}{Expansion}} $>$}]{expansion }\end{DoxyParamCaption})}
+
+Méthode permettant d\textquotesingle{}initialiser les paramètres de la grille 
+\begin{DoxyParams}{Parameters}
+{\em size} & la taille de la grille de jeu \\
+\hline
+{\em strategy} & type d\textquotesingle{}automate \\
+\hline
+{\em expansion} & la méthode d\textquotesingle{}extension de la grille \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmodel_1_1_grid_a6aac58c1cfbcb9705ba308b24e1277a3}\label{classmodel_1_1_grid_a6aac58c1cfbcb9705ba308b24e1277a3}} 
+\index{model.Grid@{model.Grid}!clockForward@{clockForward}}
+\index{clockForward@{clockForward}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{clockForward()}{clockForward()}}
+{\footnotesize\ttfamily void model.\+Grid.\+clock\+Forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant d\textquotesingle{}avancer dans le jeu \mbox{\Hypertarget{classmodel_1_1_grid_a032e69fad76644d4c5074e6b6ad89938}\label{classmodel_1_1_grid_a032e69fad76644d4c5074e6b6ad89938}} 
+\index{model.Grid@{model.Grid}!countAlive@{countAlive}}
+\index{countAlive@{countAlive}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{countAlive()}{countAlive()}}
+{\footnotesize\ttfamily int model.\+Grid.\+count\+Alive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant de compter le nombre de cellule vivante \begin{DoxyReturn}{Returns}
+le nombre de cellule vivante 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_a6b1b58cb231580104eddeb7ef5fc3751}\label{classmodel_1_1_grid_a6b1b58cb231580104eddeb7ef5fc3751}} 
+\index{model.Grid@{model.Grid}!getNeighbors@{getNeighbors}}
+\index{getNeighbors@{getNeighbors}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{getNeighbors()}{getNeighbors()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{enummodel_1_1_state}{State}}$>$ model.\+Grid.\+get\+Neighbors (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer les voisins d\textquotesingle{}une cellule 
+\begin{DoxyParams}{Parameters}
+{\em x} & la position x d\textquotesingle{}une cellule \\
+\hline
+{\em y} & la position y d\textquotesingle{}une cellule \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la liste des voisins de la cellule 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_affeb7add80a5bee2dea1fc4508c90118}\label{classmodel_1_1_grid_affeb7add80a5bee2dea1fc4508c90118}} 
+\index{model.Grid@{model.Grid}!getNewState@{getNewState}}
+\index{getNewState@{getNewState}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{getNewState()}{getNewState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enummodel_1_1_state}{State}} model.\+Grid.\+get\+New\+State (\begin{DoxyParamCaption}\item[{Array\+List$<$ \mbox{\hyperlink{enummodel_1_1_state}{State}} $>$}]{neighbors,  }\item[{\mbox{\hyperlink{enummodel_1_1_state}{State}}}]{actual\+State }\end{DoxyParamCaption})}
+
+Méthode permettant de récupérer le nouvel état de la cellule T\+O\+DO\+: bonne description? 
+\begin{DoxyParams}{Parameters}
+{\em neighbors} & les voisins de cette cellule \\
+\hline
+{\em actual\+State} & l\textquotesingle{}état actuel de la cellule \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le nouvel état 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_a85bde1a7860901580555ca1cbf3b727e}\label{classmodel_1_1_grid_a85bde1a7860901580555ca1cbf3b727e}} 
+\index{model.Grid@{model.Grid}!getState@{getState}}
+\index{getState@{getState}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enummodel_1_1_state}{State}} model.\+Grid.\+get\+State (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+Renvoie l\textquotesingle{}état d\textquotesingle{}une cellule de la grid 
+\begin{DoxyParams}{Parameters}
+{\em index} & position de la cellule questionné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+etat de la cellule 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_a6078f6d82fd49bf18b1af6ab9a1f0c61}\label{classmodel_1_1_grid_a6078f6d82fd49bf18b1af6ab9a1f0c61}} 
+\index{model.Grid@{model.Grid}!getStringStrategy@{getStringStrategy}}
+\index{getStringStrategy@{getStringStrategy}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{getStringStrategy()}{getStringStrategy()}}
+{\footnotesize\ttfamily String model.\+Grid.\+get\+String\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Renvoie le type d\textquotesingle{}automate controllant la grille \begin{DoxyReturn}{Returns}
+le nom de l\textquotesingle{}automate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_a03e5a56dac6d4ab7686bf92c6ac1260b}\label{classmodel_1_1_grid_a03e5a56dac6d4ab7686bf92c6ac1260b}} 
+\index{model.Grid@{model.Grid}!initGrid@{initGrid}}
+\index{initGrid@{initGrid}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{initGrid()}{initGrid()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{enummodel_1_1_state}{State}}$>$ model.\+Grid.\+init\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode permettant d\textquotesingle{}initialiser une grille de jeu à l\textquotesingle{}etat mort \begin{DoxyReturn}{Returns}
+la grille initialisée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmodel_1_1_grid_a86f86c5852fc613ad9c21060cd180741}\label{classmodel_1_1_grid_a86f86c5852fc613ad9c21060cd180741}} 
+\index{model.Grid@{model.Grid}!setState@{setState}}
+\index{setState@{setState}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void model.\+Grid.\+set\+State (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{enummodel_1_1_state}{State}}}]{state }\end{DoxyParamCaption})}
+
+Méthode permettant de mettre à jour l\textquotesingle{}etat d\textquotesingle{}une cellule 
+\begin{DoxyParams}{Parameters}
+{\em index} & cellule à mettre à jour \\
+\hline
+{\em state} & nouvelle etat de la cellule \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmodel_1_1_grid_aa54b3facfb0bc3caba67119b882cc715}\label{classmodel_1_1_grid_aa54b3facfb0bc3caba67119b882cc715}} 
+\index{model.Grid@{model.Grid}!toString@{toString}}
+\index{toString@{toString}!model.Grid@{model.Grid}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String model.\+Grid.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Renvoie la \mbox{\hyperlink{classmodel_1_1_grid}{Grid}} formaté pour un affichage console \begin{DoxyReturn}{Returns}
+chaine de caractere contenant la grid 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+model/\mbox{\hyperlink{_grid_8java}{Grid.\+java}}\end{DoxyCompactItemize}
