@@ -5,10 +5,11 @@ package model;
  */
 public enum Expansion {
     REPETITION("Repetition"),
+    CONSTANT("Constant");
 //    PERIODICITY("Periodicity"),
 //    SYMETRY1("Symetry n°1"),
 //    SYMETRY2("Symetry n°2"),
-    CONSTANT("Constant");
+
 
     /**
      * version string de l'enumeration
