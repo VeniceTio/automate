@@ -1,0 +1,64 @@
+\hypertarget{classview_1_1_game_window}{}\doxysection{view.\+Game\+Window Class Reference}
+\label{classview_1_1_game_window}\index{view.GameWindow@{view.GameWindow}}
+Inheritance diagram for view.\+Game\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classview_1_1_game_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classview_1_1_game_window_a7d546e315e3f55c15cd563c0613314e8}{Game\+Window}} (int size, String\mbox{[}$\,$\mbox{]} players, int cell\+Num, int gamespeed, Color\mbox{[}$\,$\mbox{]} players\+Color)
+\item 
+void \mbox{\hyperlink{classview_1_1_game_window_aee7b970a587a317b3c816b09e37adc59}{select}} (\mbox{\hyperlink{classview_1_1_my_button}{My\+Button}} button)
+\item 
+void \mbox{\hyperlink{classview_1_1_game_window_a369f515e5094297f9939a1b78d741457}{update}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classview_1_1_game_window_a7d546e315e3f55c15cd563c0613314e8}\label{classview_1_1_game_window_a7d546e315e3f55c15cd563c0613314e8}} 
+\index{view.GameWindow@{view.GameWindow}!GameWindow@{GameWindow}}
+\index{GameWindow@{GameWindow}!view.GameWindow@{view.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow()}{GameWindow()}}
+{\footnotesize\ttfamily view.\+Game\+Window.\+Game\+Window (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{String\mbox{[}$\,$\mbox{]}}]{players,  }\item[{int}]{cell\+Num,  }\item[{int}]{gamespeed,  }\item[{Color\mbox{[}$\,$\mbox{]}}]{players\+Color }\end{DoxyParamCaption})}
+
+Méthode permettant de créer la fenêtre de jeu 
+\begin{DoxyParams}{Parameters}
+{\em size} & la taille de la grille de jeu \\
+\hline
+{\em players} & les méthodes d\textquotesingle{}évolution des joueurs \\
+\hline
+{\em cell\+Num} & le nombre de cellule par joueur \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classview_1_1_game_window_aee7b970a587a317b3c816b09e37adc59}\label{classview_1_1_game_window_aee7b970a587a317b3c816b09e37adc59}} 
+\index{view.GameWindow@{view.GameWindow}!select@{select}}
+\index{select@{select}!view.GameWindow@{view.GameWindow}}
+\doxysubsubsection{\texorpdfstring{select()}{select()}}
+{\footnotesize\ttfamily void view.\+Game\+Window.\+select (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classview_1_1_my_button}{My\+Button}}}]{button }\end{DoxyParamCaption})}
+
+Méthode qui gère le changement de couleur du bouton, selectionné 
+\begin{DoxyParams}{Parameters}
+{\em button} & bouton selectionné \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classview_1_1_game_window_a369f515e5094297f9939a1b78d741457}\label{classview_1_1_game_window_a369f515e5094297f9939a1b78d741457}} 
+\index{view.GameWindow@{view.GameWindow}!update@{update}}
+\index{update@{update}!view.GameWindow@{view.GameWindow}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void view.\+Game\+Window.\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Méthode mettant à jour la grille affiché avec les nouvelles grilles. Lance les combats si conflit entre differente grille 
+
+Implements \mbox{\hyperlink{interfaceutils_1_1_observer_a3af388921f3612e49963538f627b7646}{utils.\+Observer}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+view/\mbox{\hyperlink{_game_window_8java}{Game\+Window.\+java}}\end{DoxyCompactItemize}
