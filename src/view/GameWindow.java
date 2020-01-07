@@ -151,7 +151,7 @@ public class GameWindow extends JFrame implements Observer {
     public void select(MyButton button){
         if(!_init){
             GridController GC = GridController.getInstance();
-            if(GC.count(0)==GC.count(1)){
+            if(GC.cellCount(0)==GC.cellCount(1)){
                 if (button.getBackground()==Color.white) {
                     changeColor(button, 1, true);
                     JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 1");
@@ -159,7 +159,7 @@ public class GameWindow extends JFrame implements Observer {
             }else {
                 if (button.getBackground()==Color.white){
                     changeColor(button,0,true);
-                    if(GC.count(0)==_startCell){
+                    if(GC.cellCount(0)==_startCell){
                         _init = true;
                     }
                     JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 2");

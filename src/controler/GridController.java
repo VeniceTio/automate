@@ -82,7 +82,7 @@ public class GridController extends Observable {
      * @param index la grille sur laquelle on veut compter le nombre de cellule vivante //TODO: index correspond bien à ça ?
      * @return le nombre de cellule vivante
      */
-    public int count(int index){
+    public int cellCount(int index){
         return _grids.get(index).countAlive();
     }
 

@@ -10,7 +10,7 @@ public class Game {
     /**
      * Le nombre de tours maximale de jeu
      */
-    private int _maxturn;
+    private int _maxTurn;
     /**
      * la vitesse de jeu
      */
@@ -43,7 +43,7 @@ public class Game {
     public void createGame(int gridSize, int gameSpeed, int turnNum, int cellNum,
                            Expansion expansion, Automaton[] players){
         _gameSpeed = gameSpeed*1000;
-        _maxturn = turnNum;
+        _maxTurn = turnNum;
         GridController GC = GridController.getInstance();
         ExpansionStrategy<Expansion> expansionType = EnumUtils.getExpansionType(expansion);
         Rule<State> autoType;
@@ -61,7 +61,7 @@ public class Game {
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
-        while(alive && turn<_maxturn){
+        while(alive && turn< _maxTurn){
             System.out.println("## turn : "+turn+"##");
                 GC.clockForward();
                 alive = GC.allAlive();

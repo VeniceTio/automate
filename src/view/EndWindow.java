@@ -60,7 +60,7 @@ public class EndWindow extends JFrame {
         }
         else {
             winningPlayer = "player n°" + (winnerIndex + 1);
-            cellNumber = GridController.getInstance().count(winnerIndex);
+            cellNumber = GridController.getInstance().cellCount(winnerIndex);
             winningAutomaton = GridController.getInstance().getGrids().get(winnerIndex).getStringStrategy();
         }
 
