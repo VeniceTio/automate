@@ -11,21 +11,23 @@ public enum Expansion {
     CONSTANT("Constant");
 
     /**
-     * version string de l'enumeration
+     * L'abréviation représentant la méthode d'extension
      */
-    private final String _abreviation;
+    private final String _abbreviation;
 
     /**
-     * Constructeur d'enumeration
-     * @param abreviation version string de l'enumeration
+     * Méthode permettant d'initialiser une instance de la classe Expansion
+     * @param abbreviation l'abréviation de la méthode d'extension
      */
-    Expansion(String abreviation){
-        this._abreviation = abreviation;
+    Expansion(String abbreviation){
+        this._abbreviation = abbreviation;
     }
 
     /**
      * Méthode renvoyant la version string de l'enumeration
      * @return version string de l'enumeration
      */
-    public String getAbreviation(){return _abreviation;}
+    public String getAbbreviation(){
+        return _abbreviation;
+    }
 }

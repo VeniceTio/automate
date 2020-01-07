@@ -53,8 +53,6 @@ public class EnumUtils {
         return expansionChosen;
     }
 
-    //Enum State
-
     /**
      * Méthode permettant de créer l'instance de l'automate choisi
      * @param automaton le mode d'évolution choisi
