@@ -7,19 +7,19 @@ public class Grid {
     /**
      * La grille de jeu contenant les états des cellules
      */
-    ArrayList<State> _grid;
+    private ArrayList<State> _grid;
     /**
      * strategie d'extention de la grille
      */
-    final Rule<State> _strategy;
+    final private  Rule<State> _strategy;
     /**
      * La méthode d'extension de la grille
      */
-    final ExpansionStrategy<Expansion> _expansion;
+    final private  ExpansionStrategy<Expansion> _expansion;
     /**
      * La taille de la grille de jeu
      */
-    final int _size;
+    final private int _size;
 
     /**
      * Méthode permettant d'initialiser les paramètres de la grille
