@@ -331,8 +331,6 @@ public class SettingsWindow extends JFrame {
 
         if (checkParameters(nullValue, alreadySelected)) {
             ViewUtils.correctValue();
-            System.out.println(nullValue);
-            System.out.println(alreadySelected);
 
             if (checkParameters(nullValue, alreadySelected)) {
                 ViewUtils.correctValue();

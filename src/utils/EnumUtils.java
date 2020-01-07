@@ -59,7 +59,6 @@ public class EnumUtils {
      * @return l'instance de l'automate choisi
      */
     public static Rule<State> getAutomaton(Automaton automaton){
-        System.out.println("Game.java: getAutomaton()");
         Rule<State> autoType;
         switch (automaton){
             case FREDKIN1:
