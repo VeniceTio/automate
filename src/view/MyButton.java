@@ -3,13 +3,14 @@ package view;
 import javax.swing.*;
 
 public class MyButton extends JButton {
-    /*
-    * index correspondant a la cellule quel représente
-    */
+
+    /**
+     * L'index du bouton représentant sur quel cellule il se situe
+     */
     private final int _index;
 
     /**
-     * Constructor de MyButton
+     * Méthode permettant d'initialiser une instance de la classe MyButton
      * @param index cellule représenté
      */
     MyButton(int index){

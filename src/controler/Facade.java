@@ -1,7 +1,9 @@
 package controler;
 
 import model.Automaton;
+
 import utils.EnumUtils;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -19,12 +21,6 @@ public class Facade {
         ViewController.getInstance().createGameWindow(numericParameters.get(0), sPlayers,numericParameters.get(3),numericParameters.get(1),colorPlayer);
         Game.getInstance().createGame(numericParameters.get(0), numericParameters.get(1), numericParameters.get(2),
                 numericParameters.get(3), EnumUtils.toExpansion(textParameters.get(0)), aPlayers);
-
-        System.out.println("Facade.java: initGameWindow()");
-        System.out.println("Les paramètres numériques entrés: " + numericParameters);
-        System.out.println("Méthode d'extension de la grille choisi: " + EnumUtils.toExpansion(textParameters.get(0)));
-        System.out.println("Méthode d'évolution joueur n°1: " + EnumUtils.toAutomaton(textParameters.get(1)));
-        System.out.println("Méthode d'évolution joueur n°2: " + EnumUtils.toAutomaton(textParameters.get(2)));
     }
 
     /**
@@ -42,7 +38,7 @@ public class Facade {
     }
 
     /**
-     * Méthode permettant de remetre à zero les automate du gridController
+     * Méthode permettant de réinitialiser la liste contenant les grilles de jeu
      */
     public static void resetGame() {
         GridController.getInstance().reset();

@@ -85,15 +85,28 @@ public class ViewUtils {
         private int _lowerBound;
         private int _upperBound;
 
+        /**
+         * Méthode permettant d'initialiser une instance de la classe RangeInputVerifier
+         * @param min la valeur minimale
+         * @param max la valeur maximale
+         */
         public RangeInputVerifier(int min, int max) {
             _lowerBound = min;
             _upperBound = max;
         }
 
+        /**
+         * Méthode permettant de récupérer la valeur minimale
+         * @return
+         */
         private int getLowerBound() {
             return _lowerBound;
         }
 
+        /**
+         * Méthode permettant de récupérer la valeur maximale
+         * @return
+         */
         private int getUpperBound() {
             return _upperBound;
         }
@@ -114,6 +127,13 @@ public class ViewUtils {
             return inRange;
         }
 
+        /**
+         * Méthode permettant de tester si une valeur est dans les bornes (min et max)
+         * @param min la borne inférieure
+         * @param max la borne supérieure
+         * @param value la valeur à tester
+         * @return true si la valeur est dans les bornes faux sinon
+         */
         private boolean inRange(int min, int max, int value) {
             return min <= value && value <= max;
         }

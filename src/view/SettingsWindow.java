@@ -15,8 +15,8 @@ import java.util.Collections;
 
 public class SettingsWindow extends JFrame {
     //All the options for the game
-    private ArrayList<String> _gameOptions;//= new ArrayList<>(Arrays.asList("Game of life", "Fredkin n°1", "Fredkin n°2"));
-    private ArrayList<String> _expansionOptions;//= new ArrayList<>(Arrays.asList("Repetition", "Periodicty", "Symetry n°1", "Symetry n°2","Constant"));
+    private ArrayList<String> _gameOptions;
+    private ArrayList<String> _expansionOptions;
     private static JLabel _userMessage = ViewUtils.createLabel("");
 
     /**
@@ -162,7 +162,7 @@ public class SettingsWindow extends JFrame {
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttons.add(ViewUtils.createButton("Exit", 90, 30, actionEvent -> System.exit(0)));
-        buttons.add(ViewUtils.createButton("Validate", 90, 30, actionEvent -> noName()));
+        buttons.add(ViewUtils.createButton("Validate", 90, 30, actionEvent -> validateButton()));
 
         footer.add(_userMessage, BorderLayout.WEST);
         footer.add(buttons, BorderLayout.EAST);
@@ -227,6 +227,11 @@ public class SettingsWindow extends JFrame {
         }
     }
 
+    /**
+     * Méthode permettant de tester si la liste est vide
+     * @param numericList la liste qu'on doit tester
+     * @return vrai si la liste continent une valeur null faux sinon
+     */
     private boolean isNull(ArrayList<Integer> numericList) {
         boolean res = false;
         int i = 0;
@@ -244,6 +249,11 @@ public class SettingsWindow extends JFrame {
         return res;
     }
 
+    /**
+     * Méthode permettant de savoir si une valeur est dupliqué
+     * @param textList la liste qu'on doit tester
+     * @return vrai si la valeur est dupliqué faux sinon
+     */
     private boolean isDuplicated(ArrayList<String> textList) {
         boolean res = false;
         int i = 0;
@@ -258,7 +268,13 @@ public class SettingsWindow extends JFrame {
         return res;
     }
 
-    private boolean confirmParameters(boolean nullValue, boolean alreadySelected) {
+    /**
+     * Méthode permettant de vérifier les paramètres
+     * @param nullValue le booléen représentant si une valeur est nulle
+     * @param alreadySelected le booléen représentant si une valeur est déjà sélectionné
+     * @return le booleen contenant le resultat de des deux autres booleen
+     */
+    private boolean checkParameters(boolean nullValue, boolean alreadySelected) {
         ArrayList<String> messages = new ArrayList<>(Arrays.asList("Incorrect value(s) - Same options chosen", "Incorrect value(s)", "Same options chosen"));
         String message = "";
 
@@ -276,6 +292,12 @@ public class SettingsWindow extends JFrame {
         return (!nullValue && !alreadySelected);
     }
 
+    /**
+     * Méthode permettant de récupérer les différents paramètres des composants
+     * @param component le composant sur lequel les paramètres doivent être récupérer
+     * @param numericList la liste des paramètres numérique
+     * @param textList la liste des paramètres textuels
+     */
     private void retrievingParameters(Component component, ArrayList<Integer> numericList, ArrayList<String> textList) {
         if(component instanceof JTextField) {
             JTextField text = (JTextField) component;
@@ -292,7 +314,10 @@ public class SettingsWindow extends JFrame {
         }
     }
 
-    private void noName() {
+    /**
+     * Méthode qui est lancée par l'appui du bouton "validate"
+     */
+    private void validateButton() {
         JPanel settingsContents = (JPanel) getContentPane().getComponent(1);
         ArrayList<Integer> numericParameters = new ArrayList<>();
         ArrayList<String> textParameters = new ArrayList<>();
@@ -304,12 +329,15 @@ public class SettingsWindow extends JFrame {
         nullValue = isNull(numericParameters);
         alreadySelected = isDuplicated(textParameters);
 
-        System.out.println(nullValue);
-        System.out.println(alreadySelected);
-
-        if(confirmParameters(nullValue, alreadySelected)) {
+        if (checkParameters(nullValue, alreadySelected)) {
             ViewUtils.correctValue();
-            Facade.initGameWindow(numericParameters, textParameters);
+            System.out.println(nullValue);
+            System.out.println(alreadySelected);
+
+            if (checkParameters(nullValue, alreadySelected)) {
+                ViewUtils.correctValue();
+                Facade.initGameWindow(numericParameters, textParameters);
+            }
         }
     }
 }

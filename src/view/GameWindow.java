@@ -2,23 +2,25 @@ package view;
 
 import controler.Game;
 import controler.GridController;
+
 import model.State;
+
 import utils.Observer;
 import utils.ViewUtils;
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class GameWindow extends JFrame implements Observer {
-
-
     /**
      * Le nombre de cellule par joueur au depart
      */
     private final int _startCell;
     /**
-     * est en initialisé
+     * Booléen représentant l'initialisation du jeu (faux tant que les joueurs n'ont pas choisi leurs cellules)
      */
     private boolean _init = false;
     /**
@@ -30,7 +32,7 @@ public class GameWindow extends JFrame implements Observer {
      */
     private final ArrayList<MyButton> _cells = new ArrayList<>();
     /**
-     * Nombre aleatoire pour les combat
+     * Nombre aleatoire pour les combats
      */
     private static final SecureRandom _rand = new SecureRandom();
 
@@ -151,7 +153,7 @@ public class GameWindow extends JFrame implements Observer {
     public void select(MyButton button){
         if(!_init){
             GridController GC = GridController.getInstance();
-            if(GC.count(0)==GC.count(1)){
+            if(GC.cellCount(0)==GC.cellCount(1)){
                 if (button.getBackground()==Color.white) {
                     changeColor(button, 1, true);
                     JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 1");
@@ -159,7 +161,7 @@ public class GameWindow extends JFrame implements Observer {
             }else {
                 if (button.getBackground()==Color.white){
                     changeColor(button,0,true);
-                    if(GC.count(0)==_startCell){
+                    if(GC.cellCount(0)==_startCell){
                         _init = true;
                     }
                     JOptionPane.showMessageDialog(button.getParent().getParent(),"turn : player 2");
@@ -209,8 +211,6 @@ public class GameWindow extends JFrame implements Observer {
         }else {
             winner = 0;
         }
-        //System.out.println("## winner : "+winner);
-        //System.out.println(Arrays.toString(player));
         for (boolean play:player){
             idPlayer++;
             if(play){
@@ -238,12 +238,11 @@ public class GameWindow extends JFrame implements Observer {
         for(int i=0;i<_cells.size();i++) {
             button = _cells.get(i);
             nbCell = -1;
-            players = new boolean[_players.length];//{false, false};
+            players = new boolean[_players.length];
             for (int j = 0; j < _players.length; j++) {
                 if (GC.getState(j, i) != State.DEAD) {
                     nbCell++;
                     players[j] = true;
-                    //System.out.println("#### cellule vivante pos="+i);
                 } else {
                     players[j] = false;
                 }
@@ -251,12 +250,9 @@ public class GameWindow extends JFrame implements Observer {
             if (nbCell == -1) {
                 button.setBackground(Color.white);
             } else {
-                //System.out.println("#### combat pos="+i);
                 Color newColor = fight(players, nbCell, i);
-                //System.out.println("couleur : "+newColor);
                 button.setBackground(newColor);
             }
         }
-
     }
 }
