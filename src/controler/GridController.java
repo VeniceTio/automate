@@ -49,8 +49,8 @@ public class GridController extends Observable {
      * @param position référence la cellule à modifier
      * @param state l'etat vers lequel la cellule doit évoluer
      */
-    public void setStateGrid(int index, int position, State state){ //TODO: commentaire à faire ici
-        _grids.get(index).setState(position,state);
+    public void setStateGrid(int index, int position, State state){
+        _grids.get(index).setState(position, state);
     }
 
     /**
@@ -60,7 +60,7 @@ public class GridController extends Observable {
      * @param expansion la méthode d'extension de la grille
      */
     public void initGrid(int size, Rule<State> strategy, ExpansionStrategy<Expansion> expansion){
-        _grids.add(new Grid(size,strategy,expansion));
+        _grids.add(new Grid(size, strategy, expansion));
     }
 
     /**
@@ -79,7 +79,7 @@ public class GridController extends Observable {
 
     /**
      * Méthode permettant de compter le nombre de cellule vivante
-     * @param index la grille sur laquelle on veut compter le nombre de cellule vivante //TODO: index correspond bien à ça ?
+     * @param index la grille sur laquelle on veut compter le nombre de cellule vivante
      * @return le nombre de cellule vivante
      */
     public int cellCount(int index){
@@ -88,7 +88,7 @@ public class GridController extends Observable {
 
     /**
      * Méthode permettant de récupérer l'état d'une cellule
-     * @param index la grille sur laquelle se situe la cellule //TODO: index correspond bien à ça ?
+     * @param index la grille sur laquelle se situe la cellule
      * @param cell la cellule en question
      * @return l'état de la cellule
      */

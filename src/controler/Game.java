@@ -42,14 +42,14 @@ public class Game {
      */
     public void createGame(int gridSize, int gameSpeed, int turnNum, int cellNum,
                            Expansion expansion, Automaton[] players){
-        _gameSpeed = gameSpeed*1000;
+        _gameSpeed = gameSpeed * 1000;
         _maxTurn = turnNum;
         GridController GC = GridController.getInstance();
         ExpansionStrategy<Expansion> expansionType = EnumUtils.getExpansionType(expansion);
         Rule<State> autoType;
         for (Automaton auto:players) {
             autoType = EnumUtils.getAutomaton(auto);
-            GC.initGrid(gridSize,autoType,expansionType);
+            GC.initGrid(gridSize, autoType, expansionType);
         }
         GC.add(ViewController.getInstance().getGameWin());
     }
@@ -61,8 +61,7 @@ public class Game {
         int turn = 0;
         boolean alive = true;
         GridController GC = GridController.getInstance();
-        while(alive && turn< _maxTurn){
-            System.out.println("## turn : "+turn+"##");
+        while(alive && (turn < _maxTurn)){
                 GC.clockForward();
                 alive = GC.allAlive();
                 turn++;
